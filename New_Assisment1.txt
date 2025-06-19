@@ -1,0 +1,621 @@
+1. What is a Program?
+
+A: A program is a set of instructions written in a programming language that a computer can understand and execute to perform a specific task or solve a problem. It tells the computer what to do and how to do it step by step.
+
+LAB EXERCISE
+Q: Write a simple "Hello World" program in two different programming languages of your choice. Compare the structure and syntax.
+A: code using python:
+		print("hello world");
+  code using c:
+#include<stdio.h>
+int main()
+{
+    printf("hello world");
+}
+
+THEORY EXERCISE
+Q: Explain in your own words what a program is and how it functions.
+A: A program is a set of instructions written in a programming language that tells a computer what to do. It takes inputs, processes them, and provides output. Programs automate tasks and solve specific problems using logical steps.
+
+---
+
+2. What is Programming?
+
+Programming is the process of designing and building executable computer software to accomplish a specific computing result. It involves writing code, debugging errors, testing functionality, and maintaining the software over time.
+
+THEORY EXERCISE
+Q: What are the key steps involved in the programming process?
+A: (1) Understanding the Problem, (2) Designing a Solution code, (3) Coding – Write the actual program,(4) Testing and Debugging, (5) Deployment, (6) Maintenance 
+---
+
+3. Types of Programming Languages
+
+THEORY EXERCISE
+Q: What are the main differences between high-level and low-level programming languages?
+A: High-Level Languages (e.g., Python, Java): Easy to read, write, and understand. Close to human language.
+Low-Level Languages (e.g., Assembly): Close to machine code, harder to understand, but faster and more efficient.
+
+---
+
+4. World Wide Web & How Internet Works
+
+LAB EXERCISE
+Q: Research and create a diagram of how data is transmitted from a client to a server over the internet.
+A: a diagram of how data is transmitted from a client to a server over the internet:
+
+    | Browser (Client) |    | DNS Resolution  |  | Internet Routing|  | Web Server|
+          |          URL Request       |       HTTP/HTTPS Request           |
+          |----------------------------|------------------------------------|
+          v                     HTTP/HTTPS Response                         v
+    | Rendered Web Page |-----------------------------------------------|Sends Data/Page|
+
+THEORY EXERCISE
+Q: Describe the roles of the client and server in web communication.
+A: Client: Requests data or services (e.g., browser requesting a webpage).
+Server: Responds to the client's requests with the appropriate data or service (e.g., a web server sending HTML content).
+---
+5.  Network layers on client and server
+
+LAB EXERCISE
+Q: Design a simple HTTP client-server communication in any language.
+A:  import socket
+Server side
+HOST = '127.0.0.1'     # Localhost
+PORT = 5050            #  Use a port above 1024 to avoid permission issues
+
+# Create socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((HOST, PORT))      # This will now work
+server_socket.listen()
+
+print(f"Server listening on {HOST}:{PORT}...")
+
+# Accept connection
+conn, addr = server_socket.accept()
+print(f"Connected by {addr}")
+
+# Receive request
+request = conn.recv(1024).decode()
+print("Request from client:")
+print(request)
+
+# Send HTTP-like response
+response = "HTTP/1.0 200 OK\nContent-Type: text/plain\n\nHello from Python Server!"
+conn.sendall(response.encode())
+
+conn.close()
+server_socket.close()
+
+client side
+
+import socket
+
+HOST = '127.0.0.1'
+PORT = 5050  # Must match the server
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((HOST, PORT))
+
+client_socket.sendall(b"Hello Server!")
+response = client_socket.recv(1024)
+print("Server says:", response.decode())
+
+client_socket.close()
+
+THEORY EXERCISE
+Q: Explain the function of the TCP/IP model and its layers.
+A: TCP/IP has 4 layers:
+1. Application, (2) Transport (3) Internet (4) Network Access 
+
+---
+6. Client and Servers
+
+THEORY EXERCISE
+Q: Explain Client-Server Communication.
+A: In client-server communication, the client initiates requests and the server processes them and responds. The client could be a browser; the server could be a database or web server. They communicate using protocols like HTTP.
+
+---
+7. Types of Internet Connections
+
+LAB EXERCISE
+Q: Research different types of internet connections (e.g., broadband, fiber, satellite) and list their pros and cons.
+A: Type           Pros                        Cons
+   Broadband:  High speed, reliable          Expensive 
+   Fiber:      Utra-fast, stable             Limited Availability
+   Satellite   Available in remote areas     High latency, weather than fiber
+
+THEORY EXERCISE
+Q: How does broadband differ from fiber-optic internet?
+A: Broadband uses copper cables; it's slower and more affected by distance and interference.
+   Fiber-optic uses light through glass fibers, offering faster, more reliable internet.
+---
+
+8. Protocols
+
+LAB EXERCISE
+Q: Simulate HTTP and FTP requests using command-line tools (e.g., curl).
+A: 
+
+THEORY EXERCISE
+Q: What are the differences between HTTP and HTTPS protocols?
+A:HTTP: Unsecured, data is sent as plain text.
+  HTTPS: Secured using SSL/TLS encryption, protects data during transmission.
+---
+
+9. Application Security
+
+LAB EXERCISE
+Q: Identify and explain three common application security vulnerabilities. Suggest possible solutions.
+A: 1. SQL Injection: Solution: Use parameterized queries.
+2. Cross-Site Scripting (XSS): Solution: Sanitize inputs.
+3. Broken Authentication: Solution: Implement multi-factor authentication and session management.
+
+THEORY EXERCISE
+Q: What is the role of encryption in securing applications?
+A: Encryption secures sensitive data by converting it into unreadable code for unauthorized users. It ensures confidentiality, data integrity, and prevents                    breaches, especially during transmission (HTTPS, VPNs).
+
+---
+10. Software Applications and Its Types
+
+LAB EXERCISE: 
+Q: Identify and classify 5 applications you use daily as either system software or application software.
+A:  Applications          Type
+    Windows 11           System
+    Microsoft word       Application
+    Chrome Browser       Application
+    Antivirus Software   System
+    Photoshop            Application
+
+THEORY EXERCISE
+Q: THEORY EXERCISE: What is the difference between system software and application software?
+A: System software is designed to manage the system hardware and provide a platform for running application software. Examples include operating systems (like Windows or macOS), device         drivers, etc. Application software, on the other hand, is designed to help users perform specific tasks or solve specific problems, such as word processors, browsers, and video games.
+---
+
+11. Software Architecture
+
+LAB EXERCISE: 
+Q: Design a basic three-tier software architecture diagram for a web application.
+A:  [Client UI] 
+        |
+        v
+    [Application Server]
+        |
+        v
+    [Database Server]
+
+
+THEORY EXERCISE: 
+Q: What is the significance of modularity in software architecture?
+A: Modularity in software architecture allows for better maintenance, scalability, and flexibility. It enables developers to update or change parts of the system without affecting the entire system, making it easier to manage and troubleshoot.
+
+---
+
+12. Layers in Software Architecture
+
+LAB EXERCISE: 
+Q: Create a case study on the functionality of the presentation, business logic, and data access layers of a given software system.
+A: Example: Online Food Delivery App
+
+Presentation Layer: React frontend
+Business Logic Layer: Node.js/Flask backend API
+Data Layer: MySQL DB with orders, users, payments
+
+THEORY EXERCISE: 
+Q: Why are layers important in software architecture?
+A: Layers help in organizing and separating concerns in software design. Each layer is responsible for specific tasks, making the system easier to manage, test, and modify.
+---
+
+13. Software Environments
+
+LAB EXERCISE: 
+Q: Explore different types of software environments (development, testing, production). Set up a basic environment in a virtual machine.
+A: Environments:
+Development: Local machine
+Testing: Staging server
+Production: Live server
+
+Setup using VirtualBox:
+Install Ubuntu VM
+Install Python + Flask
+Run development server
+
+THEORY EXERCISE: 
+Q: Explain the importance of a development environment in software production.
+A: A development environment is crucial for writing, testing, and debugging code in a controlled and isolated setup before it is deployed to production. It helps developers work 
+efficiently and ensures that changes don't affect live systems.
+---
+
+14. Source Code
+
+LAB EXERCISE:
+Q: Write and upload your first source code file to GitHub.
+A: # main.py
+
+# Print a message
+print("Hello, GitHub!")
+
+# Simple addition function
+def add(a, b):
+    return a + b
+
+# Example usage
+num1 = 5
+num2 = 3
+result = add(num1, num2)
+
+print(f"The sum of {num1} and {num2} is {result}")
+
+THEORY EXERCISE:
+Q: What is the difference between source code and machine code?
+A: Source code is the human-readable code written by developers in high-level programming languages, while machine code is the low-level binary code that the computer’s processor can directly execute.
+
+---
+
+15. GitHub and Introductions
+
+LAB EXERCISE:
+Q:  Create a GitHub repository and document how to commit and push code changes.
+A:  # Clone the repository
+git clone https://github.com/your-username/my-project.git
+cd my-project
+
+# Create or update files
+touch index.html
+
+# Stage and commit
+git add .
+git commit -m "Added index.html"
+
+# Push to GitHub
+git push origin main
+
+THEORY EXERCISE:
+Q: Why is version control important in software development?
+A: Version control allows developers to track changes, collaborate with others, and roll back to previous versions if needed. It ensures that the development process is organized and reduces the risk of errors.
+
+---
+16. Student Account in GitHub
+
+LAB EXERCISE:
+Q: Create a student account on GitHub and collaborate on a small project with a classmate.
+A:  stack = []
+
+stack.append('A')
+stack.append('B')
+stack.append('C')
+print("stack: ", stack)
+
+topElemnt = stack[1]
+print("Peek: ", topElemnt)
+
+poppedElement = stack.pop()
+print("pop:",poppedElement)
+
+print("Stack after pop:", stack)
+
+isEmpty = not bool(stack)
+print("isEmpty:", isEmpty)
+
+print("Size:",len(stack))
+
+THEORY EXERCISE:
+Q: What are the benefits of using GitHub for students?
+A: GitHub allows students to collaborate on projects, track their coding progress, and develop a portfolio that demonstrates their work to potential employers. It also aids in learning version control and teamwork.
+---
+
+17. Types of Software
+
+LAB EXERCISE:
+Q: Create a list of software you use regularly and classify them into the following categories: system, application, and utility software.
+A:  Software        Type
+    Windows        System
+    Word           Application
+   C Cleaner        Utility
+    Firefox        Application
+Disk Defragmenter  Utility
+
+THEORY EXERCISE:
+Q: What are the differences between open-source and proprietary software?
+A: Open-source software is free to use, modify, and distribute, with its source code publicly available. Proprietary software, on the other hand, is owned by a company or individual and is not freely available for modification or redistribution.
+---
+
+18. GIT and GITHUB Training
+
+LAB EXERCISE:
+Q: Follow a GIT tutorial to practice cloning, branching, and merging repositories.
+A:   # Clone
+git clone https://github.com/your-username/git-practice-project.git
+cd git-practice-project
+
+# Branch
+git checkout -b feature-1
+
+# Make changes
+echo "print('Hello')" > hello.py
+git add hello.py
+git commit -m "Added hello.py"
+
+# Merge
+git checkout main
+git merge feature-1
+
+# Push
+git push origin main
+
+THEORY EXERCISE:
+Q: How does GIT improve collaboration in a software development team?
+A: Git enables multiple developers to work on different parts of the codebase simultaneously, merge changes, and track revisions without interfering with each other's work. This promotes collaboration and ensures the project stays organized.
+---
+
+19. Application software
+LAB EXERCISE:
+Q: Write a report on various types of application software and how they improve productivity?
+A:  Word processors (MS Word)
+    Spreadsheets (Excel)
+    Media players (VLC)
+    Browsers (Chrome)
+    Email clients (Outlook)
+
+THEORY EXERCISE:
+Q: What is the role of application software in business?
+A: Application software helps businesses perform specific tasks such as accounting, project management, communication, and data management. It improves efficiency, supports decision-making, and enhances productivity by automating routine processes. Examples include MS Excel for calculations and CRM software for managing customer relationships.
+---
+
+20. Software development process?
+LAB EXERCISE:
+Q: Create a flow chart representing the Software Development Life Cycle (SDLC).
+A:  [Requirement] 
+        |
+        v
+     [Design]
+        |
+        v
+    [Implementation]
+        |
+        v
+    [Testing]
+        |
+        v
+    [Deployment]
+        |
+        v
+     [Maintenance]
+
+THEORY EXERCISE:
+Q: What are the main stages of the software development process? 
+A:The main stages of the Software Development Process are:
+(1) Requirement Analysis (2) System Design (3) Implementation (Coding) (4) Testing (5) Deployment (6)Maintenance
+---
+
+21. Software Requirement 
+LAB EXERCISE:
+Q: Write a requirement specification for a simple library management system ?
+A:  Functions:
+    Book issue/return
+    Member management
+    Catalog search
+    Fine calculation
+
+THEORY EXERCISE:
+Q: Why is the requirement analysis phase critical in software development? 
+A: The requirement analysis phase is critical because it helps clearly understand the client's needs and expectations. It ensures that the software is designed with the correct features, avoids costly changes later, and reduces the risk of project failure. Accurate analysis leads to better planning, efficient development, and user satisfaction.
+---
+
+22. Software Analysis 
+LAB EXERCISE:
+Q: Perform a functional for online shopping system?
+A:  Modules:
+    User registration
+    Product catalog
+    Shopping cart
+    Order processing
+    Payment gateway integration
+
+THEORY EXERCISE:
+Q: What is the role of software analysis in the development process? 
+A: Software analysis plays a key role in identifying and understanding the requirements of the users. It helps define what the software should do, sets clear objectives, and creates a foundation for design and development. It ensures that the software meets business needs, prevents misunderstandings, and reduces the risk of errors and rework later in the project.
+---
+
+23.  System Designing
+LAB EXERCISE:
+Q: Design a basic architecture for a food delivery app?
+A:  [User App] 
+      |
+      v
+   [API Server]
+      |
+      v
+[Restaurant DB + Order Management]
+
+
+THEORY EXERCISE
+Q: What are the key elements of system designing? 
+A: The key elements of system designing include:
+(1) Architecture Design (2) Data Design, (3) Interface Design,  (4) Process Design 
+---
+
+24. Software Testing
+LAB EXERCISE:
+Q: Develop  test cases for a simple calculator program?
+A:  Test Case: Calculator – Basic Arithmetic Operations:
+Test Case ID	       TC_CALC_001
+Test Case Name         Addition Operator
+Objective	       To verify that the calculator correctly adds two numbers
+Input	               Number1 = 10, Number2 = 5, Operator = '+'
+Expected Output        Result = 15
+Actual Output	      (Depends on program execution)
+Status	               Pass / Fail
+
+
+THEORY EXERCISE
+Q: Why is software testing important? 
+A: Software testing is important because it ensures the software works correctly and meets user requirements. It helps identify and fix bugs or errors before the software is released, improving reliability and performance. Testing also increases user confidence, reduces maintenance costs, and prevents system failures.
+---
+
+25. Maintenance
+LAB EXERCISE:
+Q: Document a real-world case where a software application required critical maintenance.
+A:  Example:
+    System: Banking App
+    Issue: Server crash during transactions
+    Fix: Added load balancing and improved DB queries
+
+THEORY EXERCISE
+Q: What types of software maintenance are there? 
+A: There are four main types of software maintenance:
+1. Corrective Maintenance (2) Adaptive Maintenance (3) Perfective Maintenance (4) Preventive Maintenance
+---
+
+26. Development
+
+THEORY EXERCISE
+Q: What are the different cases between web and desktop applications?
+A: 1. Installation: Web Application: Runs on a web browser; no installation needed. Desktop Application: Must be installed on each device.
+2. Accessibility: Web Application: Accessible from anywhere with internet. Desktop Application: Limited to the installed device.
+3. Updates: Web Application: Updates are automatic on the server side. Desktop Application: Requires manual updates on each system.
+4. Performance: Web Application: Depends on internet speed. Desktop Application: Usually faster and more stable offline.
+---
+
+27. Web application 
+
+THEORY EXERCISE
+Q: What are the advantages of using web applications over desktop applications? 
+A: The advantages of using web applications over desktop applications:
+(1) Accessibility, (2) No Installation Needed, (3) Easy Updates, (4) Cross-Platform Support 
+---
+
+28. Designing
+THEORY EXERCISE
+Q:  What role does UI/UX design play in application development?
+A:  UI/UX design improves user satisfaction by making applications easy to use, visually appealing, and efficient. Good UI/UX helps attract users, reduce errors, and increase usability and engagement.
+---
+
+29. Mobile Application
+THEORY EXERCISE
+Q: What are the differences between native and hybrid mobile apps? 
+A: 1. Platform: Native Apps are developed for a specific platform (e.g., Android or iOS). Hybrid Apps are built using web technologies and run on multiple platforms.
+2. Performance: Native Apps offer better performance and faster speed. Hybrid Apps may have slightly slower performance due to using a web view.
+3. Development Time and Cost: Native Apps take more time and cost since separate code is needed for each platform. Hybrid Apps are faster and cheaper to develop as they use a single codebase.
+4. Access to Device Features: Native Apps have full access to device features like camera, GPS, etc. Hybrid Apps have limited or indirect access via plugins.
+---
+
+30. DFDs(Data Flow Diagrams)
+LAB EXERCISE:
+Q: Create a DFD for a hospital management system.
+A: DFD for a hospital management system:
+                        [ Start ]
+                             |
+                             v
+                        [Patient Registration]
+                             |
+                             v
+                        [ Assign Doctor / Department]
+                             |
+                             v
+                        [ Diagnosis Process ]
+                             |
+                             v
+                        [  Tests? ]
+                         /      \
+                        Yes     No
+                       /          \
+            [Lab test Module]  [Prescription]
+                       \          /
+                   [Generate Prescription]
+                            |
+                            v
+                   [Billing & Payment Process]
+                            |
+                            v
+                       [Discharge]
+                            |
+                            v
+                          [End]
+
+THEORY EXERCISE:
+Q: What is the significance of DFDs in system analysis? 
+A: Data Flow Diagrams (DFDs) are significant in system analysis because they visually represent how data moves through a system. They help analysts understand the system’s processes, data inputs, outputs, and storage. DFDs improve communication between stakeholders, make system requirements clearer, and assist in designing an efficient and error-free system.
+---
+
+31. Desktop applications 
+LAB EXERCISE:
+Q:  Build a simple desktop calculator application using a GUI library?
+A:    import tkinter as tk
+
+def click(event):
+    text = event.widget.cget("text")
+    if text == "=":
+        try:
+            result = str(eval(str(entry.get())))
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, result)
+        except:
+            entry.delete(0, tk.END)
+            entry.insert(tk.END, "Error")
+    elif text == "C":
+        entry.delete(0, tk.END)
+    else:
+        entry.insert(tk.END, text)
+
+# Main window
+root = tk.Tk()
+root.title("Simple Calculator")
+root.geometry("300x400")
+
+# Entry field
+entry = tk.Entry(root, font="Arial 20")
+entry.pack(fill=tk.BOTH, ipadx=8, pady=10, padx=10)
+
+# Buttons
+button_texts = [
+    ["7", "8", "9", "/"],
+    ["4", "5", "6", "*"],
+    ["1", "2", "3", "-"],
+    ["0", "C", "=", "+"]
+]
+
+for row in button_texts:
+    frame = tk.Frame(root)
+    frame.pack()
+    for item in row:
+        btn = tk.Button(frame, text=item, font="Arial 18", width=5, height=2)
+        btn.pack(side=tk.LEFT, padx=5, pady=5)
+        btn.bind("<Button-1>", click)
+
+root.mainloop()
+
+
+THEORY EXERCISE:
+Q: What are the pros and cons of desktop applications compared to web applications?
+
+A: Pros of Desktop Applications:
+(1) Faster Performance, (2) Offline Access, (3) Better Hardware Integration 
+Cons of Desktop Applications:
+(1) Limited Accessibility, (2) Manual Updates, (3) Platform Dependent
+---
+
+32. Flow chart
+LAB EXERCISE:
+Q: Draw a flowchart representing the logic of the basic online registration system.
+A: Flowchart representing the logic of the basic online registration system:
+
+         [Start]
+            |
+            v
+    [User fills form]
+       |
+       v
+    [Validate Inputs]
+       |          |
+       v          v
+   [Valid]      [Invalid]
+       |           |
+       v           v
+ [Store Data] [Show Error]
+           |   |
+           v   v
+          [ End  ]
+
+THEORY EXERCISE:
+Q:How do flowcharts help in programming and system designing? 
+A: Flowcharts help in programming and system designing by providing a clear, visual representation of the logic and flow of a process. They make it easier to understand, plan, and communicate the steps involved in a system or program. Flowcharts also help in identifying errors, improving problem-solving, and ensuring smooth system design before actual coding begins.
