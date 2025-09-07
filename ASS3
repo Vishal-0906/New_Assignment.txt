@@ -1,0 +1,1439 @@
+1. Introduction to SQL
+Theory Questions
+Q: What is SQL and why is it essential in database management?
+A: SQL (Structured Query Language) is a standard language for managing and manipulating relational databases. It's essential because it provides a common way for users and applications to interact with data, allowing them to create, read, update, and delete information efficiently and securely.
+
+Q: Describe the role of SQL in managing relational databases.
+A: SQL's role is to provide the commands and syntax necessary to perform all operations on a relational database. This includes defining the database structure (DDL), manipulating the data within it (DML), and controlling access to it (DCL).
+
+Q: What are the key features of SQL?
+A: Key features of SQL include its non-procedural nature (you state what you want, not how to get it), its support for a wide range of data types, its ability to handle complex queries, and its role as an industry standard.
+
+LAB Questions:
+Lab 1: Create a new database named school_db and a table called students with the attributes student_id (primary key), name, age, and grade.
+
+A:
+mysql> create database school_db;
+use school_db;
+mysql> create table  students(student_id int primary key auto_increment, student_name varchar(100), age int, class int, address varchar(100));
+Query OK, 0 rows affected (0.05 sec)
+
+Lab 2: Insert three records into the students table and retrieve all records using the SELECT statement.
+A:
+INSERT INTO students (student_id, student_name, age, class, address) VALUES
+(1,'Aarav',12,'6A','Ahmedabad'),
+(2,'Isha',11,'5B','Surat'),
+(3,'Kunal',13,'7A','Vadodara'),
+(4,'Priya',10,'4A','Rajkot'),
+(5,'Neel',14,'8B','Bhavnagar');
+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM students;
++------------+--------------+------+-------+-----------+
+| student_id | student_name | age  | class | address   |
++------------+--------------+------+-------+-----------+
+|          1 | Aarav        |   12 | 6A    | Ahmedabad |
+|          2 | Isha         |   11 | 5B    | Surat     |
+|          3 | Kunal        |   13 | 7A    | Vadodara  |
+|          4 | Priya        |   10 | 4A    | Rajkot    |
+|          5 | Neel         |   14 | 8B    | Bhavnagar |
++------------+--------------+------+-------+-----------+
+5 rows in set (0.00 sec)
+
+2. SQL Syntax
+Theory Questions
+Q: What are the basic components of SQL syntax?
+A: The basic components include clauses (e.g., SELECT, FROM, WHERE), operators (=, >), functions (COUNT, SUM), and keywords (AS, IN).
+
+Q: Write the general structure of an SQL SELECT statement. 
+A:
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+Q: Explain the importance of the semicolon (;) in an SQL statement. 
+A: The semicolon terminates an SQL statement. It allows you to write multiple statements in a single line or script and tells the database engine when one command ends and the next begins.
+
+LAB Questions:
+ Lab 1: Write SQL queries to retrieve specific columns (select_name and age) from the students table.
+A:
+mysql> SELECT student_name, age FROM students;
++--------------+------+
+| student_name | age  |
++--------------+------+
+| Aarav        |   12 |
+| Isha         |   11 |
+| Kunal        |   13 |
+| Priya        |   10 |
+| Neel         |   14 |
++--------------+------+
+5 rows in set (0.00 sec)
+
+Lab 2: Write SQL queries to retrieve all students whose age is greater than 18.
+A:
+mysql> SELECT * FROM students WHERE age > 10;
++------------+--------------+------+-------+-----------+
+| student_id | student_name | age  | class | address   |
++------------+--------------+------+-------+-----------+
+|          1 | Aarav        |   12 | 6A    | Ahmedabad |
+|          2 | Isha         |   11 | 5B    | Surat     |
+|          3 | Kunal        |   13 | 7A    | Vadodara  |
+|          5 | Neel         |   14 | 8B    | Bhavnagar |
++------------+--------------+------+-------+-----------+
+4 rows in set (0.00 sec)3. SQL Constraints
+
+3 SQL Constraints
+Theory Questions
+
+Q: What are constraints in SQL? Explain the different types of constraints.
+A: Constraints are rules that limit the type of data that can be inserted or updated in a table. They are used to ensure the accuracy and reliability of the data. Common types include:
+NOT NULL: Ensures a column can't have a NULL value.
+UNIQUE: Ensures all values in a column are different.
+PRIMARY KEY: A combination of NOT NULL and UNIQUE; uniquely identifies each record in a table.
+FOREIGN KEY: A key used to link two tables together.
+CHECK: Ensures all values in a column satisfy a specific condition.
+DEFAULT: Sets a default value for a column when no value is specified.
+
+Q: How do PRIMARY KEY and FOREIGN KEY constraints differ?
+A: A PRIMARY KEY uniquely identifies a record within its own table, while a FOREIGN KEY is a column or set of columns that establishes a link between the data in two tables. The FOREIGN KEY references the PRIMARY KEY of another table.
+
+Q: What is the role of NOT NULL and UNIQUE constraints?
+A: The NOT NULL constraint ensures that a column must always have a value and cannot be empty. The UNIQUE constraint ensures that every value in a column is unique across all rows in the table. Together, they can be used to create a candidate key, which can become a PRIMARY KEY.
+
+LAB QUESTIONS
+ Lab 1: 
+A:
+mysql>  create table teachers( teacher_id int primary key auto_increment, teacher_name varchar(100) NOT NULL , subject varchar(100) NOT NULL, email  varchar(100) UNIQUE) ENGINE = InnoDB;
+Query OK, 0 rows affected (0.05 sec)
+
+Lab 2: Implement a FOREIGN KEY constraint to relate the teachers_id from the teachers table with the students table. 
+A: mysql> ALTER TABLE students
+    ->   ADD CONSTRAINT fk_students_teacher
+    ->   FOREIGN KEY (teacher_id)
+    ->   REFERENCES teachers (teacher_id)
+    -> ;
+Query OK, 5 rows affected (0.10 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+
+
+4. Main SQL Commands and Sub-commands (DDL)
+Theory Questions
+Q: Define the SQL Data Definition Language (DDL). 
+A: DDL is a subset of SQL that deals with the database schema and objects within it. It's used to create, modify, and delete database objects like tables, views, and indexes.
+
+Q: Explain the CREATE command and its syntax.
+A: The CREATE command is used to create new database objects. For example, CREATE TABLE is used to define a new table and its columns, data types, and constraints.
+
+Q: Explain the purpose of annotating data types and constraints during table creation?
+A: Annotating data types (like VARCHAR, INT, DATE) and constraints (PRIMARY KEY, NOT NULL) during table creation is crucial. Data types ensure that the data stored is of the correct format, preventing errors. Constraints maintain data integrity and enforce business rules, ensuring the data is accurate and consistent.
+
+LAB QUESTIONS
+Lab 1: Create a table courses with the following columns: course_id, course_name, credits. Set the course_id as the primary key.
+A: mysql> create table course(course_id int primary key auto_increment, course_name varchar(100), course_credit int );
+Query OK, 0 rows affected (0.03 sec)
+
+Q: Lab 2: Use the CREATE command to create a database university_db.
+A: mysql> create database university_db;
+Query OK, 1 row affected (0.01 sec)
+
+
+5. ALTER Command
+Theory Questions
+Q: What is the use of the ALTER command in SQL?
+A: The ALTER command is used to modify the structure of an existing table. It allows you to add, delete, or modify columns, change data types, and add or drop constraints.
+
+Q: How can you add or drop a new column from a table using ALTER?
+A: To add a column: ALTER TABLE table_name ADD column_name datatype;
+To drop a column: ALTER TABLE table_name DROP COLUMN column_name;
+
+LAB QUESTION
+ Lab 1: Modify the courses table by adding a column course_duration using the ALTER command.
+A: mysql> ALTER TABLE course ADD COLUMN course_duration INT;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Q: Drop the course _credits column from the courses table.
+
+A: mysql> ALTER TABLE course  DROP COLUMN course_credit;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+6. DROP Command
+Theory Questions
+Q: What is the function of the DROP command in SQL?
+A: The DROP command is used to delete an entire database object from the database, such as a table, view, or index.
+
+Q: What are the implications of dropping a table from a database?
+A: Dropping a table permanently deletes the table structure and all the data within it. This action cannot be undone, so it's a very destructive command that should be used with extreme caution.
+
+LAB QUESTIONS:
+Lab 1: Drop the teachers table from the school_db database ?
+A:  mysql> drop table teachers;
+Query OK, 0 rows affected (0.02 sec)
+
+Lab 2: Drop the students table from the school_db database and verify that the table has been removed.
+A: mysql> drop table students;
+Query OK, 0 rows affected (0.02 sec)
+
+7. Data Manipulation Language (DML)
+Theory Questions
+Q: Define the INSERT, UPDATE, and DELETE commands in SQL.
+A: DML commands are used for managing data within the schema objects.
+INSERT: Adds new rows of data into a table.
+UPDATE: Modifies existing data within a table.
+DELETE: Deletes existing rows from a table.
+
+Q: Explain the importance of the WHERE clause in UPDATE and DELETE operations.
+A: The WHERE clause is critical for UPDATE and DELETE commands. Without it, the command would affect every single row in the table, potentially leading to catastrophic data loss. The WHERE clause specifies the condition that determines which rows should be modified or deleted.
+
+LAB QUESTION
+Lab 1: Insert three records into the courses table using the INSERT command.
+A:
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(101,'Maths',60),
+(102,'Science',45),
+(103,'History',30);
+
+Lab 2: Update the course duration of a specific course using the UPDATE command.
+A:
+UPDATE courses SET course_duration = 50 WHERE course_id = 102;
+
+Lab 3: Use the DELETE command to remove a course from the courses table.
+A:
+DELETE FROM courses WHERE course_id = 103;
+
+
+8. Data Query Language (DQL)
+Theory Questions
+Q: What is the SELECT statement, and how is it used to query data?
+A: The SELECT statement is the most common DQL command. Its purpose is to retrieve data from one or more tables. It allows you to specify which columns to retrieve, from which tables, and what conditions the data must meet.
+
+Q: Explain is the use of the ORDER BY and WHERE clauses in SQL queries?
+A: WHERE: Filters the rows returned by the query based on a specified condition. It's used to narrow down the result set.
+ORDER BY: Sorts the result set in ascending or descending order based on one or more columns. It's used to present the data in a more organized way.
+
+LAB QUESTION
+Lab 1: Retrieve all courses from the courses table using the SELECT statement.
+A:
+mysql> SELECT * FROM courses;
++-----------+-------------+-----------------+
+| course_id | course_name | course_duration |
++-----------+-------------+-----------------+
+|       101 | Maths       |              60 |
+|       102 | Science     |              50 |
++-----------+-------------+-----------------+
+2 rows in set (0.00 sec)
+
+Lab 2: Retrieve all courses that have credits greater than 3.
+A:
+mysql> SELECT * FROM courses ORDER BY course_duration DESC;
++-----------+-------------+-----------------+
+| course_id | course_name | course_duration |
++-----------+-------------+-----------------+
+|       101 | Maths       |              60 |
+|       102 | Science     |              50 |
++-----------+-------------+-----------------+
+2 rows in set (0.00 sec)
+
+
+Lab 3: Limit the results of the SELECT query to show only the top two courses using LIMIT.
+A:
+mysql> SELECT * FROM courses ORDER BY course_duration DESC LIMIT 2;
++-----------+-------------+-----------------+
+| course_id | course_name | course_duration |
++-----------+-------------+-----------------+
+|       101 | Maths       |              60 |
+|       102 | Science     |              50 |
++-----------+-------------+-----------------+
+2 rows in set (0.00 sec)
+
+9. Data Control Language (DCL)
+Theory Questions
+Q: What is the purpose of GRANT and REVOKE in SQL?
+A: DCL commands are used to manage database access and permissions.
+GRANT: Gives specific privileges or permissions to a user or role.
+REVOKE: Removes those privileges from a user or role.
+
+Q: How do you manage privileges using these commands?
+A: You manage privileges by using GRANT to give users the ability to perform certain actions (e.g., SELECT, INSERT, UPDATE on a table) and using REVOKE to take those abilities away when they are no longer needed.
+
+LAB QUESTION:
+Lab 1: Create two new users user1 and user2 and grant SELECT permission to user1.
+A:
+START TRANSACTION;
+INSERT INTO students (student_id, student_name, age, class, address) 
+VALUES (6, 'Nisha', 12, '6B', 'Gandhinagar');
+SAVEPOINT first_insert;
+INSERT INTO students (student_id, student_name, age, class, address) 
+VALUES (7, 'Rohan', 13, '7A', 'Surat');
+ROLLBACK TO first_insert;
+COMMIT;
+SELECT * FROM students;
+
+Lab 2: Revoke the SELECT permission from user1 on the students table.
+A:
+START TRANSACTION;
+INSERT INTO students (student_id, student_name, age, class, address)
+VALUES (8, 'Seema', 12, '6B', 'Surat');
+COMMIT;
+START TRANSACTION;
+INSERT INTO students (student_id, student_name, age, class, address)
+VALUES (9, 'Kavita', 11, '5B', 'Ahmedabad');
+ROLLBACK;
+SELECT * FROM students;
+
+10. Transaction Control Language (TCL)
+Theory Questions
+Q: What is the purpose of the COMMIT and ROLLBACK commands in SQL?
+A: TCL commands are used to manage transactions, which are a sequence of SQL operations treated as a single unit.
+COMMIT: Saves all the changes made in the current transaction to the database, making them permanent.
+ROLLBACK: Undoes all the changes made in the current transaction since the last COMMIT or ROLLBACK.
+
+Q: Explain how transactions are managed in SQL databases. Transactions are managed by grouping a set of operations into a single logical unit. If all operations are successful, you COMMIT the transaction. If any operation fails, you can ROLLBACK the entire transaction, ensuring data integrity by leaving the database in its original state.
+
+LAB QUESTION
+Lab 1: Insert a few rows into the courses table and use COMMIT to save the changes.
+A:mysql> SET AUTOCOMMIT = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO courses VALUES 
+(104,'Geography',40),
+(105,'English',35);
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO courses VALUES (106,'Civics',25);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> ROLLBACK; 
+Query OK, 0 rows affected (0.00 sec)
+
+
+Lab 2: Create a SAVEPOINT before updating the courses table, and use it to roll back specific changes.
+A:
+mysql> SAVEPOINT before_update;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> UPDATE courses SET course_duration = course_duration + 5 WHERE course_id IN (101,102);
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> ROLLBACK TO before_update; -- undo that update
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SET AUTOCOMMIT = 1;
+Query OK, 0 rows affected (0.00 sec)
+
+11. SQL Joins
+Theory Questions
+Q: Explain the concept of JOIN in SQL. What is the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN?
+A: A JOIN is used to combine rows from two or more tables based on a related column between them.
+INNER JOIN: Returns only the rows where there is a match in both tables.
+LEFT JOIN (or LEFT OUTER JOIN): Returns all rows from the left table and the matched rows from the right table. If there's no match, the right side will have NULL values.
+RIGHT JOIN (or RIGHT OUTER JOIN): Returns all rows from the right table and the matched rows from the left table. If there's no match, the left side will have NULL values.
+FULL JOIN (or FULL OUTER JOIN): Returns all rows from both tables, with NULL values in the columns where there is no match.
+
+Q:
+A:
+
+Lab Questions
+Lab 1: Create two tables: departments and employees. Perform an INNER JOIN to retrieve employees and their corresponding department names.
+A:   CREATE TABLE departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+INSERT INTO departments VALUES (1, 'Sales'), (2, 'Marketing');
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+INSERT INTO employees VALUES (101, 'John Doe', 1), (102, 'Jane Smith', 2), (103, 'Peter Jones', 1);
+SELECT e.emp_name, d.dept_name FROM employees e INNER JOIN departments d ON e.dept_id = d.dept_id;
+
+
+ Lab 2: Use a LEFT JOIN to show all departments, even those without employees.
+A: 
+  INSERT INTO departments VALUES (3, 'HR');
+SELECT d.dept_name, e.emp_name FROM departments d LEFT JOIN employees e ON d.dept_id = e.dept_id;
+
+12. SQL GROUP BY
+Theory Questions
+Q: What is the purpose of the GROUP BY clause in SQL?
+A: How is it used with aggregate functions? The GROUP BY clause is used to group rows that have the same values in specified columns into summary rows, like "count of customers in each city." It's almost always used with aggregate functions like COUNT(), SUM(), AVG(), MIN(), and MAX(). The aggregate function then performs a calculation on each group.
+
+Q: Explain the difference between GROUP BY and ORDER BY.
+A: GROUP BY groups rows together to perform a calculation on each group.
+ORDER BY sorts the rows in the final result set.
+
+LAB QUESTIONS
+Lab 1: Group employees by department and count the number of employees in each department using COUNT.
+A:
+mysql> SELECT d.dept_name, COUNT(e.emp_id) AS emp_count
+    -> FROM departments d
+    -> LEFT JOIN employees e ON e.dept_id = d.dept_id
+    -> GROUP BY d.dept_name;
++-----------+-----------+
+| dept_name | emp_count |
++-----------+-----------+
+| HR        |         1 |
+| IT        |         2 |
+| Sales     |         0 |
++-----------+-----------+
+3 rows in set (0.00 sec)
+
+ Lab 2: Use an aggregate function to find the average salary of employees in each department. 
+A:
+mysql> SELECT d.dept_name, AVG(e.salary) AS avg_salary
+    -> FROM departments d
+    -> LEFT JOIN employees e ON e.dept_id = d.dept_id
+    -> GROUP BY d.dept_name;
++-----------+--------------+
+| dept_name | avg_salary   |
++-----------+--------------+
+| HR        | 50000.000000 |
+| IT        | 67500.000000 |
+| Sales     |         NULL |
++-----------+--------------+
+3 rows in set (0.00 sec)
+
+
+13. SQL Stored Procedure
+Theory Questions
+Q: What is a stored procedure in SQL, and how does it differ from a standard SQL query?
+A: A stored procedure is a pre-compiled set of one or more SQL statements stored in the database. It differs from a standard query because it's executed as a single unit and can accept parameters, return values, and contain control-flow logic. A standard query is a single, ad-hoc statement.
+
+Q: Explain the advantages of using stored procedures. Advantages include:
+A: Performance: They are pre-compiled and stored, leading to faster execution.
+Security: They can restrict direct table access, enhancing security.
+Reusability: They can be called from different applications.
+Reduced Network Traffic: Executing a single stored procedure is more efficient than sending multiple queries.
+
+LAB QUESTION
+
+Lab 1: Write a stored procedure that retrieves all employees from the employees table based on a given department ID.
+A:
+DELIMITER $$
+CREATE PROCEDURE get_all_employees()
+BEGIN
+  SELECT * FROM employees;
+END$$
+DELIMITER ;
+
+Lab 2: Write a stored procedure that accepts a course ID and returns the course details.
+A:
+DELIMITER $$
+CREATE PROCEDURE get_course_details(IN p_course_id INT)
+BEGIN
+  SELECT * FROM courses WHERE course_id = p_course_id;
+END$$
+DELIMITER ;
+
+
+14. SQL View
+Theory Questions
+Q: What is a view in SQL, and how is it different from a table?
+A: A view is a virtual table based on the result set of an SQL query. It doesn't store data itself but rather presents a dynamic, simplified, or filtered view of the data from one or more underlying tables. A table is a physical structure that stores the data directly.
+
+Q: Explain the advantages of using views.
+A: Security: A view can hide sensitive data by showing only specific columns.
+Simplicity: It can simplify complex queries by pre-joining tables and pre-filtering data.
+Data Integrity: It can enforce business rules without a user knowing the underlying complexity.
+
+LAB QUESTIONS:
+Lab 1: Create a view to show all employees along with their department names.
+A:
+mysql> CREATE VIEW vw_employee_department AS
+mysql> SELECT e.emp_id, e.emp_name, d.dept_name, e.salary
+mysql> FROM employees e JOIN departments d ON d.dept_id = e.dept_id;
+
+Lab 2: Create a view to list books and authors from different tables.
+A:
+mysql> CREATE OR REPLACE VIEW vw_high_paid AS
+mysql>SELECT * FROM vw_employee_department
+mysql> WHERE salary >= 50000;
+
+
+15. SQL Triggers
+Theory Questions
+Q: What is a trigger in SQL?
+A: Describe its types and when they are used. A trigger is a special type of stored procedure that is automatically executed in response to certain events on a table, such as INSERT, UPDATE, or DELETE.
+
+Q: Explain the difference between row-level and statement-level triggers.
+A: Row-level trigger: Fires once for each row affected by the event. It's used when the trigger's logic needs to access or modify data for each individual row.
+Statement-level trigger: Fires only once for the entire SQL statement, regardless of how many rows are affected. It's used when the logic doesn't depend on the individual rows being changed.
+
+LAB QUESTIONS:
+Lab 1: Create a trigger to automatically log changes to the employees table when a new employee is added.
+A:
+mysql> CREATE TABLE emp_audit (
+    ->   audit_id INT AUTO_INCREMENT PRIMARY KEY,
+    ->   action_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ->   action_type VARCHAR(10),
+    ->   emp_id INT,
+    ->   details TEXT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> DELIMITER $$
+mysql> CREATE TRIGGER trg_emp_insert_audit
+    -> AFTER INSERT ON employees
+    -> FOR EACH ROW
+    -> BEGIN
+    ->   INSERT INTO emp_audit (action_type, emp_id, details)
+    ->   VALUES ('INSERT', NEW.emp_id, CONCAT('New employee ', NEW.emp_name));
+    -> END$$
+Query OK, 0 rows affected (0.00 sec)
+
+Lab 2: Create a trigger to update the last_modified_timestamp whenever an employee record is updated.
+A:
+mysql> DELIMITER ;
+mysql>
+mysql> DELIMITER $$
+mysql> CREATE TRIGGER trg_emp_update_timestamp
+    -> BEFORE UPDATE ON employees
+    -> FOR EACH ROW
+    -> BEGIN
+    ->   -- example: bump a change marker (add column if you like)
+    ->   -- ALTER TABLE employees ADD COLUMN last_modified TIMESTAMP NULL;  -- run once
+    ->   SET NEW.salary = NEW.salary; -- placeholder; in MySQL we’d typically set NEW.last_modified = NOW();
+    -> END$$
+
+
+16. Introduction to PL/SQL
+Theory Questions
+Q: What is PL/SQL, and how does it extend SQL's capabilities?
+A: PL/SQL (Procedural Language/Structured Query Language) is a procedural extension to SQL developed by Oracle. It combines the data manipulation power of SQL with the procedural programming capabilities of other languages. It extends SQL by adding features like variables, loops, and conditional statements.
+
+Q: What are the key benefits of using PL/SQL?
+A: Procedural Control: Allows complex logic with loops, IF-THEN-ELSE, etc.
+Performance: Can group multiple SQL statements into one block, reducing network traffic.
+Modularity: Supports the creation of reusable code units like procedures and functions.
+Portability: PL/SQL code is portable across different Oracle environments.
+
+Lab Questions
+Lab 1: Write a PL/SQL block to print the total number of employees from the employees table.
+A:
+SET SERVEROUTPUT ON;
+
+DECLARE
+    total_employees NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO total_employees FROM employees;
+    DBMS_OUTPUT.PUT_LINE('Total Employees: ' || total_employees);
+END;
+/
+
+Lab 2: Create a PL/SQL block that calculates the total sales from an orders table. 
+A:
+SET SERVEROUTPUT ON;
+
+DECLARE
+    total_sales NUMBER;
+BEGIN
+    SELECT SUM(sales_amount) INTO total_sales FROM orders;
+    DBMS_OUTPUT.PUT_LINE('Total Sales: ' || total_sales);
+END;
+/
+
+17. PL/SQL Control Structures
+Theory Questions
+Q: What are control structures in PL/SQL? Explain the IF-THEN and LOOP control structures.
+A: Control structures are programming constructs that control the flow of execution within a PL/SQL block.
+IF-THEN: Used for conditional execution. IF condition THEN ... END IF; executes a block of code only if the condition is true.
+LOOP: Used for repeated execution of a block of code.
+
+Q: How do control structures in PL/SQL help in writing complex queries?
+A: They allow you to add logic and intelligence to your SQL operations. For example, you can use a loop to iterate through a result set and an IF-THEN statement to perform different actions based on the data in each row.
+
+Lab Qustions:
+
+Lab 1: Write a PL/SQL block using an IF-THEN condition to check the department of an employee with a specific ID.
+   DECLARE
+    emp_dept_id NUMBER := 101;
+    emp_dept_name VARCHAR(50);
+BEGIN
+    SELECT dept_name INTO emp_dept_name FROM departments WHERE dept_id = emp_dept_id;
+    IF emp_dept_name = 'Sales' THEN
+        DBMS_OUTPUT.PUT_LINE('Employee is in the Sales Department.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Employee is not in the Sales Department.');
+    END IF;
+END;
+/
+
+ * Lab 2: Use a FOR loop to iterate through employee records and display their names.
+   BEGIN
+    FOR emp_rec IN (SELECT emp_name FROM employees) LOOP
+        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || emp_rec.emp_name);
+    END LOOP;
+END;
+/
+ 
+18. SQL Cursors
+Theory Questions
+Q: What is a cursor in PL/SQL? Explain the difference between implicit and explicit cursors.
+A: A cursor is a control structure that allows you to traverse the records in a result set one by one.
+Implicit cursor: Automatically created and managed by Oracle for every SQL statement. You don't need to define it explicitly.
+Explicit cursor: Defined and controlled manually by the programmer to handle a multi-row result set. You must DECLARE, OPEN, FETCH, and CLOSE it.
+
+Q: When would you use an explicit cursor over an implicit one?
+A: You would use an explicit cursor when you need to process the rows of a multi-row result set one at a time, such as when you need to perform calculations or conditional logic on each row.
+
+Lab Questions
+Lab 1: Write a PL/SQL block using an explicit cursor to retrieve and display employee details.
+A:
+SET SERVEROUTPUT ON;
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT emp_name, dept_id FROM employees;
+
+    emp_name_var VARCHAR2(50);
+    dept_id_var  NUMBER;
+BEGIN
+    OPEN emp_cursor;
+
+    LOOP
+        FETCH emp_cursor INTO emp_name_var, dept_id_var;
+        EXIT WHEN emp_cursor%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE('Employee: ' || emp_name_var || ', Department ID: ' || dept_id_var);
+    END LOOP;
+
+    CLOSE emp_cursor;
+END;
+/
+Lab 2: Create a cursor to retrieve all courses and display them one by one.
+A:
+SET SERVEROUTPUT ON;
+DECLARE
+    CURSOR course_cursor IS
+        SELECT course_name FROM courses;
+
+    course_name_var VARCHAR2(100);
+BEGIN
+    OPEN course_cursor;
+
+    LOOP
+        FETCH course_cursor INTO course_name_var;
+        EXIT WHEN course_cursor%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE('Course: ' || course_name_var);
+    END LOOP;
+
+    CLOSE course_cursor;
+END;
+/
+
+
+19. Rollback and Commit Savepoint
+Theory Questions
+
+Q: Explain the concept of transactions in transaction management. How do rollback and commit interact with savepoints ?
+A: A transaction is a sequence of SQL statements that are treated as a single, atomic unit of work. COMMIT makes the changes permanent, and ROLLBACK undoes them. A SAVEPOINT is a marker within a transaction. You can ROLLBACK to a SAVEPOINT, which means you undo only the changes made since that SAVEPOINT, rather than rolling back the entire transaction.
+
+Q: What is the purpose of savepoints in a database transaction?
+A: A SAVEPOINT allows you to partially roll back a transaction to a specific point without having to undo all the work done since the beginning of the transaction.
+
+Lab Questions
+ Lab 1: Perform a transaction where you create a SAVEPOINT, insert records, then ROLLBACK to the SAVEPOINT.
+A:
+SAVEPOINT S1;
+INSERT INTO students VALUES (4, 'David', 17, 'A');
+SAVEPOINT S2;
+INSERT INTO students VALUES (5, 'Eve', 18, 'B');
+ROLLBACK TO S2;
+COMMIT;
+
+DECLARE
+    PRAGMA AUTONOMOUS_TRANSACTION;
+BEGIN
+    SAVEPOINT S1;
+    INSERT INTO students VALUES (4, 'David', 17, 'A');
+    SAVEPOINT S2;
+    INSERT INTO students VALUES (5, 'Eve', 18, 'B');
+    ROLLBACK TO S2;
+    COMMIT;
+END;
+/
+
+Lab 2: COMMIT part of a transaction after using a SAVEPOINT and then ROLLBACK the remaining part.
+
+A:
+INSERT INTO students VALUES (6, 'Frank', 19, 'C');
+SAVEPOINT first_insert;
+COMMIT;
+INSERT INTO students VALUES (7, 'Grace', 20, 'A');
+ROLLBACK;
+
+
+
+
+EXTRA QUESTION:
+
+1
+Q: Create a database called library_db and a table books with columns book_id, title, author_id, publication_year, and price. Insert five record.
+
+A:
+mysql> create database library_db;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use library_db;
+Database changed
+mysql> create table books(book_id int primary key auto_increment, title varchar(100), author varchar(100), publisher varchar(100), year_of_publication Date, price Decimal(10,2));
+Query OK, 0 rows affected (0.04 sec)
+mysql> describe books;
++---------------------+---------------+------+-----+---------+-------+
+| Field               | Type          | Null | Key | Default | Extra |
++---------------------+---------------+------+-----+---------+-------+
+| book_id             | int           | NO   | PRI | NULL    |       |
+| title               | varchar(200)  | NO   |     | NULL    |       |
+| author              | varchar(120)  | YES  |     | NULL    |       |
+| publisher           | varchar(120)  | YES  |     | NULL    |       |
+| year_of_publication | date          | YES  |     | NULL    |       |
+| price               | decimal(10,2) | YES  |     | NULL    |       |
++---------------------+---------------+------+-----+---------+-------+
+6 rows in set (0.01 sec
+
+mysql> insert into books values
+    -> ('1','Rich Dad Poor Dad','Robert T.Kiyosaki','Warner Books','1997-06-09', 139.99),
+    -> ('2','A Tale of Two Cities','Charles Dickens', 'Atlantics Publishers','1859-09-03',156.99),
+    -> ('3', 'The Little Prince','Antoine de Saint-Exupery','Om Books International','1943-11-09',201.89),
+    -> ('4','Atomic Habbits','James Clear', 'Avery','2018-10-16',276.99),
+    -> ('5','Psychology of money','Morgan Housel', 'Harriman House','2020-10-08',2871.99);
+Query OK, 5 row affected (0.01 sec)
+
+mysql> select * from books;
++---------+----------------------+--------------------------+------------------------+---------------------+---------+
+| book_id | title                | author                   | publisher              | year_of_publication | price   |
++---------+----------------------+--------------------------+------------------------+---------------------+---------+
+|       1 | Rich Dad Poor Dad    | Robert T.Kiyosaki        | Warner Books           | 1997-06-09          |  139.99 |
+|       2 | A Tale of Two Cities | Charles Dickens          | Atlantics Publishers   | 1859-09-03          |  156.99 |
+|       3 | The Little Prince    | Antoine de Saint-Exupery | Om Books International | 1943-11-09          |  201.89 |
+|       4 | Atomic Habbits       | James Clear              | Avery                  | 2018-10-16          |  276.99 |
+|       5 | Psychology of money  | Morgan Housel            | Harriman House         | 2020-10-08          | 2871.99 |
++---------+----------------------+--------------------------+------------------------+---------------------+---------+
+5 rows in set (0.00 sec)
+
+Q:  Create a table members with columns member_id, name, address, and email. Insert five record
+A:
+mysql> CREATE TABLE members (
+    ->   member_id int PRIMARY KEY,
+    -> member_name VARCHAR(100),
+    -> date_of_membership DATE,
+    -> email VARCHAR(100)
+    -> );
+mysql> INSERT INTO members (member_id,member_name,date_of_membership,email) VALUES
+    -> (1,'Asha',  DATE'2019-03-01',asha@example.com'),
+    -> (2,'Ravi', DATE '2020-07-10','ravi@example.com'),
+    -> (3,'Meera',DATE '2018-12-22','meera@example.com'),
+    -> (4,'Ishan',DATE '2023-01-05','ishan@example.com'),
+    -> (5,'Kiran',DATE '2021-05-17','kiran@example.com');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from members;
++-----------+-------------+--------------------+-------------------+
+| member_id | member_name | date_of_membership | email             |
++-----------+-------------+--------------------+-------------------+
+|         1 | Asha        | 2019-03-01         | asha@example.com  |
+|         2 | Ravi        | 2020-07-10         | ravi@example.com  |
+|         3 | Meera       | 2018-12-22         | meera@example.com |
+|         4 | Ishan       | 2023-01-05         | ishan@example.com |
+|         5 | Kiran       | 2021-05-17         | kiran@example.com |
++-----------+-------------+--------------------+-------------------+
+5 rows in set (0.00 sec)
+
+2. SQL Syntax
+Q: Retrieve all members who joined the library before 2022. Use appropriate SQL syntax with WHERE and ORDER BY.
+A:
+mysql> SELECT * FROM members WHERE date_of_membership < DATE '2022-01-01' ORDER BY member_name;
++-----------+-------------+--------------------+-------------------+
+| member_id | member_name | date_of_membership | email             |
++-----------+-------------+--------------------+-------------------+
+|         1 | Asha        | 2019-03-01         | asha@example.com  |
+|         5 | Kiran       | 2021-05-17         | kiran@example.com |
+|         3 | Meera       | 2018-12-22         | meera@example.com |
+|         2 | Ravi        | 2020-07-10         | ravi@example.com  |
++-----------+-------------+--------------------+-------------------+
+4 rows in set (0.00 sec)
+
+Q: Write SQL queries to display the titles of books published by a specific author. Sort the results by year_of_publication in descending order.
+A:
+mysql> SELECT title FROM books WHERE author = 'Author 1' ORDER BY year_of_publication DESC;
+Empty set (0.00 sec)
+
+3. SQL Contraints
+Q: Add a Check constraint to ensure that the price of books in the books table is greater than 0.
+A:
+mysql> ALTER TABLE books ADD CONSTRAINT chk_price CHECK (price > 0);
+Query OK, 10 rows affected (0.07 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+Q: Modify the members table to add a Unique constrain on the email column, ensuring the each member has a unique email address.
+A:
+mysql> ALTER TABLE member_backup ADD CONSTRAINT unq_email UNIQUE (email);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+4. Main SQL Commands and Sub-commands (DDL)
+
+Q: Create a table authors with the following columns: author_id, author_name, and country. Set the author_id  as the primary key.
+A:
+mysql> CREATE TABLE authors (author_id INT PRIMARY KEY, first_name VARCHAR(50), last_name VARCHAR(50), country VARCHAR(50));
+Query OK, 0 rows affected (0.06 sec)
+
+Q:Create a table publishers with columns: publisher_id, publisher_name, contact_number and address. Set the publisher_id  as the primary key and contact_number as unique.
+A:
+mysql> CREATE TABLE publishers ( publisher_id INT PRIMARY KEY, publisher_name VARCHAR(100), contact_number VARCHAR(20) UNIQUE, address VARCHAR(200));
+Query OK, 0 rows affected (0.06 sec)
+
+5. ALTER Command
+
+Q: Add a new column genre to the books table. Update the genre for all existing books.
+A:
+mysql> ALTER TABLE books ADD COLUMN genre VARCHAR(50);
+mysql> UPDATE books SET genre = 'Fiction' WHERE book_id IN (1,2);
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+mysql> UPDATE books SET genre = 'Science' WHERE book_id IN (3,4,5);
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+
+Q: Modify the members table to increase the length of the email column to 100 characters.
+A:
+mysql> ALTER TABLE members MODIFY COLUMN email VARCHAR(100);
+Query OK, 1 row affected (0.01 sec)
+
+6. DROP Command
+Q: Drop the members_records table from the database after verifying its structure.
+A:
+mysql> DROP TABLE publishers;
+Query OK, 0 rows affected (0.02 sec)
+
+Q: Create a backup of the members table and then drop the original members table.
+A:
+mysql> CREATE TABLE members_backup AS SELECT * FROM members;
+mysql> DROP TABLE members;
+
+7. Data Manipulation Language (DML)
+Q:  Insert three new recordsinto the authors into the authors table, then update the last name of one of the authors.
+
+A:
+mysql> INSERT INTO authors VALUES
+    -> (1, 'Ravi', 'Sharma', 'India'),
+    -> (2, 'John', 'Smith', 'USA'),
+    -> (3, 'Sara', 'Lee', 'UK');
+mysql> UPDATE authors SET last_name = 'Johnson' WHERE author_id = 2;
+
+Q: Delete a book from the books table where the price is higher than $100.
+A:
+mysql> DELETE FROM books WHERE price > 100;
+
+8. UPDATE Command
+Q:  Update the year_of_publication of a book with a specific book_id.
+A:
+mysql> UPDATE books SET year_of_publication = '2022-09-01' WHERE book_id = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Q:  Increase the price of all books published before 2015 by 10%.
+
+A:
+mysql> SELECT year_of_publication FROM books WHERE year_of_publication < '1997-06-09';
++---------------------+
+| year_of_publication |
++---------------------+
+| 1859-09-03          |
+| 1943-11-09          |
++---------------------+
+2 rows in set (0.00 sec)
+
+9.  DELETE Command
+Q: Remove all members who joined before 2020 from the members table.
+A:
+mysql> DELETE FROM members WHERE date_of_membership < '2020-01-01';
+Query OK, 0 rows affected (0.00 sec)
+
+Q:  Delete all books that have a price greater than a certain amount.
+A:
+mysql> DELETE FROM books WHERE author IS NULL;
+Query OK, 0 rows affected (0.00 sec)
+
+10. Data Query Language (DQL)
+Q: Write a query to retrieve all books write price between $50 and $100.
+A:
+SELECT * FROM books WHERE price BETWEEN 50 AND 100;
+
+Q: Retrieve the list of books sorted by author in ascending order and limit the result to the top 3 entries.
+A:
+mysql> SELECT * FROM books
+    -> ORDER BY author ASC
+    -> LIMIT 3;
++---------+----------------------+--------------------------+------------------------+---------------------+--------+-----------+
+| book_id | title                | author                   | publisher              | year_of_publication | price  | genre     |
++---------+----------------------+--------------------------+------------------------+---------------------+--------+-----------+
+|       3 | The Little Prince    | Antoine de Saint-Exupery | Om Books International | 1943-11-09          | 201.89 | Fictional |
+|       2 | A Tale of Two Cities | Charles Dickens          | Atlantics Publishers   | 1859-09-03          | 156.99 | Fictional |
+|       4 | Atomic Habbits       | James Clear              | Avery                  | 2018-10-16          | 276.99 | Science   |
++---------+----------------------+--------------------------+------------------------+---------------------+--------+-----------+
+3 rows in set (0.01 sec)
+
+11.  Data Control Language (DCL)
+Q: Grant Select  permission to user named librarian on the books table.
+A:
+mysql> CREATE USER 'librarian'@'localhost' IDENTIFIED BY 'secure_password';
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> GRANT SELECT ON books TO 'librarian'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT SELECT ON books TO 'librarian'@'localhost' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT SELECT ON books TO 'librarian'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+Q: Grant insert and update permissions to the user admin on the members table.
+A:
+mysql> GRANT INSERT, UPDATE ON members TO 'admin'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+12. REVOKE Command
+
+Q: Revoke the select privilege from the user librarian on the books table.
+A:
+mysql> REVOKE INSERT ON books FROM 'librarian'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+Q: Revoke all permissions from user admin on the members table.
+A:
+mysql> REVOKE ALL PRIVILEGES ON members FROM 'admin'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+13:Transaction Control Language (TCL)
+
+Q: Use commit after inserting multiple records into the books table, then make another insertion and performance a rollback 
+A:
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+mysql> INSERT INTO books VALUES (6, 'Book F', 'Author 5', 'Publisher P','2022-06-21', 200, 'Drama');
+Query OK, 1 row affected (0.00 sec)
+mysql> COMMIT;
+Query OK, 0 rows affected (0.01 sec)
+mysql> INSERT INTO books VALUES (7, 'Book G', 'Author 6', 'Publisher Q', '2023-07-05', 350, 'History');
+Query OK, 1 row affected (0.01 sec)
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+Q: Set a SAVEPOINT before making updates to the members table, perform some updates, and then roll back to the SAVEPOINT.
+A:
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+mysql> SAVEPOINT sp1;
+Query OK, 0 rows affected (0.00 sec)
+mysql> UPDATE members SET member_name = 'Rahul' WHERE member_id = 1;
+Query OK, 0 rows affected (0.00 sec)
+mysql> ROLLBACK TO sp1;
+Query OK, 0 rows affected (0.00 sec)
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+14. SQL Joins
+Q: Perform an INNER JOIN between books and authors tables to display the title of books and their respective authors' names.
+A:
+mysql> SELECT b.title, a.first_name, a.last_name
+    -> FROM books b
+    -> INNER JOIN authors a ON b.author = CONCAT(a.first_name,' ',a.last_name);
+
+Q: Use a FULL OUTER JOIN to retrieve all reports from the books and authors tables, including those with no matching entries in the other table.
+A:
+mysql> SELECT b.title, a.frist_name, a.last_name
+    -> FROM books b
+    -> LEFT JOIN authors a ON b.author = CONCAT(a.frist_name, ' ', a.last_name);
++----------------------+------------+-----------+
+| title                | frist_name | last_name |
++----------------------+------------+-----------+
+| Rich Dad Poor Dad    | NULL       | NULL      |
+| A Tale of Two Cities | NULL       | NULL      |
+| The Little Prince    | NULL       | NULL      |
+| Atomic Habbits       | NULL       | NULL      |
+| Psychology of money  | NULL       | NULL      |
+| Book F               | NULL       | NULL      |
+| Book G               | NULL       | NULL      |
++----------------------+------------+-----------+
+7 rows in set (0.01 sec)
+
+15. SQL Group By
+Q: Group books by genre and display the total number of books in each genre.
+A:
+mysql> SELECT genre, COUNT(*) AS total_books
+    -> FROM books
+    -> GROUP BY genre;
++-----------+-------------+
+| genre     | total_books |
++-----------+-------------+
+| Fictional |           3 |
+| Science   |           2 |
+| Drama     |           1 |
+| History   |           1 |
++-----------+-------------+
+4 rows in set (0.01 sec)
+
+Q: Group  members by the year they joined and limit number of members who joined each year.
+A:
+mysql> SELECT YEAR(date_of_membership) AS year, COUNT(*) AS total_members
+    -> FROM members
+    -> GROUP BY YEAR(date_of_membership);
+
+
+16. SQL Stored Procedure
+Q: Write a stored procedure to retrieve all books by a particular author.
+A:
+mysql> CREATE PROCEDURE GetBooksByAuthor(IN authorName VARCHAR(100))
+    -> BEGIN
+    ->     SELECT * FROM books WHERE author = authorName;
+    -> END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER ;
+mysql>
+mysql> CALL GetBooksByAuthor('Author 1');
+Empty set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Q: Write a stored procedure that takes a book_id as an argument and returns the price of the book.
+A:
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE GetBookPrice(IN bookId INT)
+    -> BEGIN
+    ->     SELECT price FROM books WHERE book_id = bookId;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql>
+mysql> CALL GetBookPrice(2);
++--------+
+| price  |
++--------+
+| 156.99 |
++--------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+17. SQL View
+Q: Create a view to show only the title, and price of books from the books table.
+
+A:
+mysql> CREATE VIEW book_view AS
+    -> SELECT title, author, price FROM books;
+Query OK, 0 rows affected (0.01 sec)
+
+Q:  Create a view to display members who joined before 2020.
+A:
+mysql> CREATE VIEW old_members AS
+    -> SELECT * FROM members WHERE date_of_membership < '2020-01-01';
+
+18. SQL Trigger
+Q: Create a trigger to automatically log changes to the books table whenever a record is updated.
+A:
+mysql> DELIMITER //
+mysql> CREATE TRIGGER update_book_timestamp
+    -> BEFORE UPDATE ON books
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     SET NEW.year_of_publication = YEAR(CURDATE());
+    -> END//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> DELIMITER ;
+
+Q: : Create a trigger to insert a record into a book_log table whenever a DELETE operation is performed on the books table.
+
+A:
+mysql> DELIMITER //
+mysql> CREATE TRIGGER log_book_delete
+    -> AFTER DELETE ON books
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     INSERT INTO log_changes(action, book_id)
+    ->     VALUES('DELETE', OLD.book_id);
+    -> END//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> DELIMITER ;
+
+
+19.  Introduction to PL/SQL
+Q:  Write a PL/SQL block to insert a new book into the books table and display a success message.
+A:
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE insert_book()
+    -> BEGIN
+    ->     INSERT INTO books (book_id, title, author, publisher, `year_of_publication`, price, genre)
+    ->     VALUES (6, 'The Alchemist', 'Paulo Coelho', 'HarperOne', '1993-05-01', 299.99, 'Fiction');
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+
+Q: Write a PL/SQL block to display the total number of books in the books table.
+A:
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE count_books()
+    -> BEGIN
+    ->     DECLARE v_total INT;
+    ->     SELECT COUNT(*) INTO v_total FROM books;
+    ->     -- You can't print directly, but you can insert into a log table or return the value
+    ->     SELECT CONCAT('Total number of books: ', v_total) AS message;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql> CALL count_books();
++--------------------------+
+| message                  |
++--------------------------+
+| Total number of books: 7 |
++--------------------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+20. PL/SQL Syntax
+Q: Write a PL/SQL block to declare variables for book_id and price, assign values, and display them.
+A:
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE show_book_info()
+    -> BEGIN
+    ->     DECLARE v_book_id INT DEFAULT 1;
+    ->     DECLARE v_price DECIMAL(10,2) DEFAULT 199.99;
+    ->
+    ->     -- MySQL can't print to console, but you can return the values
+    ->     SELECT CONCAT('Book ID: ', v_book_id) AS book_info,
+    ->            CONCAT('Price: ', v_price) AS price_info;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql> CALL show_book_info();
++------------+---------------+
+| book_info  | price_info    |
++------------+---------------+
+| Book ID: 1 | Price: 199.99 |
++------------+---------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Q: Write a PL/SQL block using constants and perform arithmetic operations on book prices.
+A:
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE calculate_discount()
+    -> BEGIN
+    ->     DECLARE c_discount DECIMAL(5,2) DEFAULT 0.10;
+    ->     DECLARE v_price DECIMAL(10,2);
+    ->     DECLARE v_final_price DECIMAL(10,2);
+    ->
+    ->     SELECT price INTO v_price FROM books WHERE book_id = 1;
+    ->
+    ->     SET v_final_price = v_price - (v_price * c_discount);
+    ->
+    ->     SELECT
+    ->         CONCAT('Original Price: ', v_price) AS original_price,
+    ->         CONCAT('Price after discount: ', v_final_price) AS discounted_price;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL calculate_discount();
++------------------------+------------------------------+
+| original_price         | discounted_price             |
++------------------------+------------------------------+
+| Original Price: 139.99 | Price after discount: 125.99 |
++------------------------+------------------------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+
+21. PL/SQL Control Structures
+Q: Write a PL/SQL block using an IF-THEN-ELSE to check if a book's price is above $100 and display a message accordingly.
+A:
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE check_book_price()
+    -> BEGIN
+    ->     DECLARE v_price DECIMAL(10,2);
+    ->
+    ->     SELECT price INTO v_price FROM books WHERE book_id = 1;
+    ->
+    ->     IF v_price > 100 THEN
+    ->         SELECT 'Price is above $100' AS message;
+    ->     ELSE
+    ->         SELECT 'Price is $100 or below' AS message;
+    ->     END IF;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL check_book_price();
++---------------------+
+| message             |
++---------------------+
+| Price is above $100 |
++---------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Q: Use a FOR loop in PL/SQL to display the details of all books one by one.
+A:
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE list_books()
+    -> BEGIN
+    ->     DECLARE done INT DEFAULT FALSE;
+    ->     DECLARE v_book_id INT;
+    ->     DECLARE v_title VARCHAR(255);
+    ->     DECLARE v_author VARCHAR(255);
+    ->     DECLARE v_price DECIMAL(10,2);
+    ->
+    ->     DECLARE book_cursor CURSOR FOR
+    ->         SELECT book_id, title, author, price FROM books;
+    ->
+    ->     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    ->
+    ->     OPEN book_cursor;
+    ->
+    ->     read_loop: LOOP
+    ->         FETCH book_cursor INTO v_book_id, v_title, v_author, v_price;
+    ->         IF done THEN
+    ->             LEAVE read_loop;
+    ->         END IF;
+    ->
+    ->         SELECT CONCAT(
+    ->             'ID: ', v_book_id,
+    ->             ', Title: ', v_title,
+    ->             ', Author: ', v_author,
+    ->             ', Price: ', v_price
+    ->         ) AS book_info;
+    ->     END LOOP;
+    ->
+    ->     CLOSE book_cursor;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL list_books();
++---------------------------------------------------------------------------+
+| book_info                                                                 |
++---------------------------------------------------------------------------+
+| ID: 1, Title: Rich Dad Poor Dad, Author: Robert T.Kiyosaki, Price: 139.99 |
++---------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
++----------------------------------------------------------------------------+
+| book_info                                                                  |
++----------------------------------------------------------------------------+
+| ID: 2, Title: A Tale of Two Cities, Author: Charles Dickens, Price: 156.99 |
++----------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
++----------------------------------------------------------------------------------+
+| book_info                                                                        |
++----------------------------------------------------------------------------------+
+| ID: 3, Title: The Little Prince, Author: Antoine de Saint-Exupery, Price: 201.89 |
++----------------------------------------------------------------------------------+
+1 row in set (0.02 sec)
+
++------------------------------------------------------------------+
+| book_info                                                        |
++------------------------------------------------------------------+
+| ID: 4, Title: Atomic Habbits, Author: James Clear, Price: 276.99 |
++------------------------------------------------------------------+
+1 row in set (0.02 sec)
+
++--------------------------------------------------------------------------+
+| book_info                                                                |
++--------------------------------------------------------------------------+
+| ID: 5, Title: Psychology of money, Author: Morgan Housel, Price: 2871.99 |
++--------------------------------------------------------------------------+
+1 row in set (0.02 sec)
+
++-------------------------------------------------------+
+| book_info                                             |
++-------------------------------------------------------+
+| ID: 6, Title: Book F, Author: Author 5, Price: 200.00 |
++-------------------------------------------------------+
+1 row in set (0.03 sec)
+
++-------------------------------------------------------+
+| book_info                                             |
++-------------------------------------------------------+
+| ID: 7, Title: Book G, Author: Author 6, Price: 350.00 |
++-------------------------------------------------------+
+1 row in set (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+22.  SQL Cursors
+Q: Write a PL/SQL block using an explicit cursor to fetch and display all records from the books table.
+A:
+mysql> CREATE PROCEDURE list_members()
+    -> BEGIN
+    ->     DECLARE done INT DEFAULT FALSE;
+    ->     DECLARE v_member_id INT;
+    ->     DECLARE v_name VARCHAR(255);
+    ->     DECLARE v_join_date DATE;
+    ->
+    ->     DECLARE cur_members CURSOR FOR
+    ->         SELECT member_id, name, join_date FROM members;
+    ->
+    ->     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    ->
+    ->     OPEN cur_members;
+    ->
+    ->     read_loop: LOOP
+    ->         FETCH cur_members INTO v_member_id, v_name, v_join_date;
+    ->         IF done THEN
+    ->             LEAVE read_loop;
+    ->         END IF;
+    ->
+    ->         SELECT CONCAT(
+    ->             'ID: ', v_member_id,
+    ->             ', Name: ', v_name,
+    ->             ', Join Date: ', v_join_date
+    ->         ) AS member_info;
+    ->     END LOOP;
+    ->
+    ->     CLOSE cur_members;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+
+Q: Create a cursor to retrieve books by a particular author and display their titles.
+A:
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE list_dickens_books()
+    -> BEGIN
+    ->     DECLARE done INT DEFAULT FALSE;
+    ->     DECLARE v_title VARCHAR(255);
+    ->
+    ->     DECLARE cur_books CURSOR FOR
+    ->         SELECT title FROM books WHERE author = 'Charles Dickens';
+    ->
+    ->     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    ->
+    ->     OPEN cur_books;
+    ->
+    ->     read_loop: LOOP
+    ->         FETCH cur_books INTO v_title;
+    ->         IF done THEN
+    ->             LEAVE read_loop;
+    ->         END IF;
+    ->
+    ->         SELECT CONCAT('Title: ', v_title) AS book_info;
+    ->     END LOOP;
+    ->
+    ->     CLOSE cur_books;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL list_dickens_books();
++-----------------------------+
+| book_info                   |
++-----------------------------+
+| Title: A Tale of Two Cities |
++-----------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+23. Rollback and Commit Savepoint
+Q: Perform a transaction that includes inserting a new members, setting a SAVEPOINT, and then rolling back to the SAVEPOINT.
+A:
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> SAVEPOINT before_insert;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO members (member_id, name, join_date)
+    -> VALUES (6, 'John Doe', '2023-01-01');
+ERROR 1146 (42S02): Table 'library_db.members' doesn't exist
+mysql>
+mysql> -- Simulate a rollback
+mysql> ROLLBACK TO SAVEPOINT before_insert;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> -- Confirm rollback
+mysql> SELECT 'Rollback successful, member not inserted.' AS message;
++-------------------------------------------+
+| message                                   |
++-------------------------------------------+
+| Rollback successful, member not inserted. |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+Q: Use COMMIT after successfully inserting multiple books into the books table, then use ROLLBACK to undo a subsequent transaction for a new book.
+A:
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO books (book_id, title, author, publisher, year_of_publication, price, genre)
+    -> VALUES (9, 'Think Like a Monk', 'Jay Shetty', 'Simon & Schuster', '2020-09-08', 399.99, 'Self-help');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO books (book_id, title, author, publisher, year_of_publication, price, genre)
+    -> VALUES (10, 'Ikigai', 'Héctor García', 'Penguin', '2016-04-27', 249.99, 'Philosophy');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> -- Attempting rollback after commit (will have no effect)
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> -- Display message
+mysql> SELECT 'Books committed successfully, rollback has no effect.' AS message;
++-------------------------------------------------------+
+| message                                               |
++-------------------------------------------------------+
+| Books committed successfully, rollback has no effect. |
++-------------------------------------------------------+
+1 row in set (0.00 sec)
