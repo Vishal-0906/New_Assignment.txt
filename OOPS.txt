@@ -1,0 +1,482 @@
+Module 3: Introduction to OOPS Programming 
+1. Introduction to C++
+Theory Questions:
+Q1: What are the key differences between Procedural Programming and Object-Oriented Programming?
+A: Procedural Programming (POP) follows a top-down design, concentrating on functions and procedures, and treats data and operations separately. Object-Oriented Programming (OOP) follows a bottom-up design, concentrating on objects that combine data and functions, emphasizing concepts like Encapsulation and Inheritance for better security and code reuse.
+
+Q2: List and explain the main advantages of OOP over POP.
+A: The main advantages are Data Security (through Encapsulation, which protects data from unauthorized access), Reusability (via Inheritance, allowing new classes to reuse existing code), and improved Maintainability and Modularity, as programs are built from self-contained objects, making debugging and scaling easier.
+
+Q3: What is the structure of a basic C++ program?
+A: A basic C++ program structure includes Preprocessor Directives (e.g., #include <iostream>) to include necessary libraries, the using namespace std; statement, and the essential main() function (int main() { ... }). The program's execution always begins inside the main() function, typically ending with a return 0;.
+
+Q4: What are the main input/output operations in C++? Provide examples.
+A: The primary I/O operations use the standard stream objects from the <iostream> library: cout for Output (insertion) using the << operator (e.g., cout << "Result: " << x;), and cin for Input (extraction) using the >> operator (e.g., cin >> userInput;).
+
+Lab Questions:
+Q1:
+A:
+#include<iostream>
+int main(){
+    std::cout<<"Hello World"<<std::endl;
+    return 0;
+}
+Q2:
+A: 
+#include<iostream>
+#include<string>
+
+int main(){
+    std::string name;
+    int age;
+    std::cout<<"Enter your name:";
+    std::getline(std::cin, name);
+    std::cout<<"Enter your age";
+    std::cin>>age;
+    std::cout<<"Hello " <<name<<"!Your are"<<age <<"years old" <<std::endl;
+}
+Q3:
+A:
+#include<iostream>
+
+int main(){
+    double lenght, width;
+    std::cout<<"Enter lenght and width:";
+    std::cin>>lenght>>width;
+    double area = lenght * width;
+    std::cout <<"Area(procedural) = "<<area << std:: endl;
+    return 0;
+}
+
+
+#include <iostream>
+
+class Rectangle {
+private:
+    double length, width;
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+    double area() const { return length * width; }
+};
+int main() {
+    double l, w;
+    std::cout << "Enter length and width: ";
+    std::cin >> l >> w;
+    Rectangle r(l, w);
+    std::cout << "Area (OOP) = " << r.area() << std::endl;
+    return 0;
+}
+Q4:
+A: 
+#include <iostream>
+
+int main() {
+    double a, b;
+    std::cout << "Enter two numbers: ";
+    std::cin >> a >> b;
+    std::cout << "Sum = " << (a + b) << std::endl;
+    return 0;
+}
+
+
+
+2. Variables, Data Types, and Operators
+Theory Questions:
+1. List the different data types available in C++. Explain with examples.
+A: C++ has Fundamental (Built-in) Types such as int (for whole numbers, e.g., 42), float or double (for decimal numbers, e.g., 1.57), char (for single characters, e.g., 'Z'), and bool (for truth values, e.g., true). It also includes Derived Types (like Arrays) and User-Defined Types (like Classes and Structs).
+
+2. Explain the difference between implicit and explicit type conversion in C++.
+A: Implicit conversion (Coercion) is performed automatically by the compiler, usually when converting a value from a narrower to a wider type (e.g., int to double) to prevent data loss. Explicit conversion (Type Casting) is done manually by the programmer using a cast operator (e.g., (int)3.9 or static_cast<int>(3.9)), often necessary when converting a wider type to a narrower type.
+
+3. Explain the purpose and use of constants and literals in C++.
+A: Literals are fixed values that appear directly in the source code (e.g., the number 10, the string "Test"). Their purpose is to represent raw data. Constants are identifiers declared with the const keyword (e.g., const float PI = 3.14f;) whose value cannot be changed during program execution, improving code readability and ensuring data integrity.
+
+Lab Questions:
+Q1:
+A:
+ #include<iostream>
+#include<limits>
+int main(){
+    int i = 10;
+    double d = 3.14;
+    char c='A';
+    bool b = true;
+    const double PI = 3.1415;
+    std::cout<<"int"<<i<<"\n"<<"double"<<d<<"\n"<<"char"<<d<<"\n"<<"const PI:" <<PI<<std::endl;
+    return 0;
+}
+
+Q2:
+A:
+#include <iostream>
+
+int main() {
+    int a = 5;
+    double b = 2.0;
+    double result1 = a / b;         // implicit conversion: int -> double
+    int result2 = static_cast<int>(b * 3.7); // explicit cast
+    std::cout << "a/b = " << result1 << std::endl;
+    std::cout << "static_cast<int>(b*3.7) = " << result2 << std::endl;
+    return 0;
+}
+
+Q3:
+A:
+#include<stdio.h>
+#include<iostream>
+int main(){
+    int x =7, y = 3;
+    std::cout<<"Arithmetic: x+y="<< x+y<<",x-y="<<x-y<<",x*y="<<x*y<<",x/y="<<x/y<<",x%y="<<x%y<<std::endl;
+    std::cout<<"Relational: x>y ="<<(x>y)<<",x==y="<<(x==y)<<"x<y ="<<(x<y)<<std::endl;
+    std::cout<<"Logical: (x>y && y>0) = "<<((x>y) && (y>0))<<",!(x==y)="<<!(x==y)<<std::endl;
+    std::cout<<"Bitwise: x&y="<<(x&y)<<",x|y="<<(x|y)<<",x^y="<<(x^y)<<std::endl;
+    return 0;
+}
+
+3. Control Flow Statements
+Theory Questions:
+1. What are conditional statements in C++? Explain the if-else and switch statements.
+A: Conditional statements execute a specific block of code based on whether a condition is met. The if-else statement executes one block if a boolean condition is true and an alternative block if it is false. The switch statement allows for multi-way branching by checking a single variable's value against a list of constant case labels.
+
+2. Explain nested control structures with an example.
+A: Nested control structures involve placing one control flow statement (like an if statement or a loop) entirely inside another. They are used to implement complex, multi-layered logic. The most common example is a nested for loop, where an inner loop executes completely for every single iteration of the outer loop, typically used for processing 2D arrays or printing patterns.
+
+3. How are break and continue statements used in loops? Provide examples.
+A: The break statement is used to immediately terminate the innermost loop (or switch statement), forcing the program to execute the statement following the loop body. The continue statement is used to skip the rest of the code within the current iteration of the loop, immediately jumping to the next iteration's test condition.
+
+Lab Questions:
+Q1:
+A:
+#include<iostream>
+int main(){
+    int marks;
+    std::cout<<"Enter marks(0-100):";
+    std::cin>>marks;
+    if(marks>=90){
+        std::cout<<"Grade A\n";
+    }
+    else if(marks>=75){
+        std::cout<<"Grade B\n";
+    }
+    else if(marks>=60){
+        std::cout<<"Grade C\n";
+    }
+    else if(marks>=40){
+        std::cout<<"Grade D\n";
+    }
+    else{
+        std::cout<<"Grade E\n";
+    }
+}
+
+Q2:
+A:
+
+Q3:
+A:
+#include<iostream>
+int main(){
+    int n;
+    std::cout<<"Enter a number:";
+    std::cin>>n;
+    for(int i=1;i<=10;++i){
+        std::cout<<n<<"x"<<i<<"="<<n*i<<"\n";
+    }
+    return 0;
+}
+
+Q4:
+A:
+#include<iostream>
+int main(){
+    int rows;
+    std::cout<<"Enter the numbers of rows";
+    std::cin>>rows;
+    for(int i=1;i<=rows;++i){
+        for(int j=1;j<=i;++j)
+        std::cout<<"*";
+        std::cout<<"\n";
+        
+    }
+    return 0;
+}
+
+4. Functions and Scope
+Theory Questions:
+
+1. What is a function in C++? Explain the concept of function declaration, definition, and calling.
+A: A function is a named, independent block of code designed to perform a specific task. Declaration (or Prototype) specifies the function's signature (return type, name, parameters) to the compiler. Definition contains the actual executable code of the function. Calling executes the function by invoking its name and supplying arguments.
+
+2. Explain the difference between call by value and call by reference in C++.
+A: In Call by Value, a copy of the actual argument is passed to the function parameter. Changes made to the parameter inside the function do not affect the original variable. In Call by Reference, the memory address (or an alias/reference) of the argument is passed. Changes inside the function directly modify the original variable.
+
+3. What are function prototypes in C++? Why are they used?
+A: A function prototype is the declaration of a function (e.g., int power(int base, int exp);) that appears before the function's full definition or any calls to it. They are essential to inform the compiler about the function's existence, signature, and return type, allowing the compiler to perform correct type-checking and linking, regardless of the function's physical location in the code.
+
+Lab Questions:
+Q1:
+A:
+#include <iostream>
+
+// Function definitions
+double add(double a, double b) { return a + b; }
+double sub(double a, double b) { return a - b; }
+double mul(double a, double b) { return a * b; }
+double div(double a, double b) { return b != 0 ? a / b : 0; }
+
+int main() {
+    double x, y;
+    char op;
+
+    std::cout << "Enter: num op num (e.g 5+3): ";
+    std::cin >> x >> op >> y;
+
+    std::cout << x << " " << op << " " << y << " = ";
+
+    switch(op) {
+        case '+':
+            std::cout << add(x, y) << "\n";
+            break;
+        case '-':
+            std::cout << sub(x, y) << "\n";
+            break;
+        case '*':
+            std::cout << mul(x, y) << "\n";
+            break;
+        case '/':
+            if (y == 0)
+                std::cout << "Division by zero!\n";
+            else
+                std::cout << div(x, y) << "\n";
+            break;
+        default:
+            std::cout << "Unknown operator\n";
+    }
+
+    return 0;
+}
+
+Q2:
+A:
+#include <iostream>
+long long fact(int n){
+    if(n<=1) return 1;
+    return n*fact(n-1);
+}
+
+int main(){
+    int n;
+    std::cout<<"Enter n:";
+    std::cin>>n;
+    std::cout<<"Factorial ="<<fact(n)<<"\n";
+    return 0;
+}
+
+Q3:
+A:
+#include <iostream>
+int globalVar = 100;
+void demo(){
+    int localVar = 10;
+    std::cout<<"Inside demo: local="<<localVar<<"gobal="<<globalVar<<"\n";
+}
+int main(){
+    demo();
+    std::cout<<"In main:global="<<globalVar<<"\n";
+    return 0;
+}
+
+
+5. Arrays and Strings
+Theory Questions:
+
+1. What are arrays in C++? Explain the difference between single-dimensional and multi-dimensional arrays.
+A:  An array is a collection of elements of the same data type stored in contiguous memory locations, accessed using an index. A Single-Dimensional Array is a linear collection of elements (e.g., a list of numbers). A Multi-Dimensional Array is essentially an array of arrays, representing structures like tables or matrices (e.g., an array of rows, each being a 1D array).
+
+2. How is a string represented in C++ with examples?
+A:  A string can be represented as a 1. C-Style String (a character array terminated by a null character, \0) (e.g., char s[] = "C++";). 2. The std::string Class, which is a high-level, dynamic type from the <string> library that manages memory automatically and provides numerous member functions for manipulation (e.g., std::string name = "Gemini";).
+
+3. Explain string operations and functions in C++.
+A:  String operations include tasks like finding length, copying, and concatenation. For C-Style strings, functions from <cstring> like strlen(), strcpy(), and strcat() are used. For std::string objects, operations use the overloaded + operator for concatenation, and methods like .length(), .find(), and .substr() are available.
+
+Lab Questions:
+Q1:
+A:
+#include <iostream>
+#include <vector>
+
+int main() {
+    int n;
+    std::cout<<"How many Numbers? ";
+    std::cin>>n;
+
+    std::vector<int> a(n);
+    long long sum = 0;  // Move sum declaration outside the loop
+
+    for (int i = 0; i < n; ++i) {
+        std::cin>>a[i];
+        sum += a[i];  // Accumulate sum here
+    }
+
+    double avg = n ? static_cast<double>(sum) / n : 0;
+
+    std::cout<"Sum = " << sum << "  Avg = " << avg << "\n";
+
+    return 0;
+}
+
+Q2:
+A:
+#include <iostream>
+using Matrix = int[2][2];
+
+int main() {
+    int a[2][2], b[2][2], c[2][2];
+    std::cout << "Enter matrix A (2*2):\n";
+    for (int i=0;i<2;i++) for (int j=0;j<2;j++) std::cin >> a[i][j];
+    std::cout << "Enter matrix B (2*2):\n";
+    for (int i=0;i<2;i++) for (int j=0;j<2;j++) std::cin >> b[i][j];
+    for (int i=0;i<2;i++) for (int j=0;j<2;j++) c[i][j] = a[i][j] + b[i][j];
+    std::cout << "Sum:\n";
+    for (int i=0;i<2;i++){
+        for (int j=0;j<2;j++) std::cout << c[i][j] << " ";
+        std::cout << "\n";
+    }
+    return 0;
+}
+
+Q3:
+A:
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+    std::string s;
+    std::cout << "Enter string: ";
+    std::getline(std::cin, s);
+    // remove spaces and make lowercase (optional)
+    std::string t;
+    for (char ch : s) if (!isspace((unsigned char)ch)) t.push_back(std::tolower((unsigned char)ch));
+    std::string r = t;
+    std::reverse(r.begin(), r.end());
+    if (t == r) std::cout << "Palindrome\n"; else std::cout << "Not a palindrome\n";
+    return 0;
+}
+
+
+6. Introduction to Object-Oriented Programming
+Theory Questions:
+
+1. Explain the key concepts of Object-Oriented Programming (OOP).
+The key concepts of OOP are: Encapsulation (bundling data and methods together), Inheritance (allowing a new class to acquire properties of an existing class), Polymorphism (allowing a single interface to behave differently based on the context), and Abstraction (showing only essential information and hiding complex implementation details).
+
+2. What are classes and objects in C++? Provide an example.
+A Class is a user-defined blueprint or template that defines the structure (data members) and behavior (member functions) for its instances. An Object is a run-time instance of a class. Example: class Animal is the blueprint, and Animal dog; creates a specific object named dog from that blueprint.
+
+3. Explain constructors and destructors in a class.
+A Constructor is a special member function that is automatically called when an object is created. Its main purpose is to properly initialize the object's data members. A Destructor is a special member function that is automatically called when an object is destroyed (goes out of scope). Its main purpose is to clean up resources, such as de-allocating dynamically allocated memory.
+
+4. What is encapsulation in C++? How is it achieved in classes?
+Encapsulation is the mechanism of data hiding and binding the data (attributes) and the code (methods) that manipulate that data into a single unit (the class). It is achieved by declaring the data members as private to restrict direct access, while providing controlled, typically public access through specific member functions (getters and setters).
+
+Lab Questions:
+Q1:
+A:
+#include <iostream>
+
+class Calculator {
+public:
+    double add(double a, double b) const { return a + b; }
+    double sub(double a, double b) const { return a - b; }
+    double mul(double a, double b) const { return a * b; }
+    double div(double a, double b) const { return b ? a / b : 0; }
+};
+
+int main() {
+    Calculator calc;
+    double x, y; char op;
+    std::cout << "Enter: x op y\n";
+    std::cin >> x >> op >> y;
+    if (op == '+') std::cout << calc.add(x,y) << "\n";
+    else if (op == '-') std::cout << calc.sub(x,y) << "\n";
+    else if (op == '*') std::cout << calc.mul(x,y) << "\n";
+    else if (op == '/') std::cout << (y? calc.div(x,y) : (std::cout<<"Division by zero\n", 0)) << "\n";
+    else std::cout << "Unknown op\n";
+    return 0;
+}
+
+Q2:
+A:
+#include <iostream>
+#include <string>
+
+class BankAccount {
+private:
+    std::string owner;
+    double balance;
+public:
+    BankAccount(const std::string &name, double bal = 0.0) : owner(name), balance(bal) {}
+    void deposit(double amt) { if (amt > 0) balance += amt; }
+    bool withdraw(double amt) { 
+        if (amt > 0 && amt <= balance) { balance -= amt; return true; }
+        return false;
+    }
+    double getBalance() const { return balance; }
+    std::string getOwner() const { return owner; }
+};
+
+int main() {
+    BankAccount acct("Alice", 1000.0);
+    acct.deposit(500);
+    if (acct.withdraw(200)) std::cout << "Withdrawn 200\n";
+    std::cout << "Owner: " << acct.getOwner() << " Balance: " << acct.getBalance() << "\n";
+    return 0;
+}
+
+Q3:
+A:
+#include <iostream>
+#include <string>
+
+class Person {
+protected:
+    std::string name;
+    int age;
+public:
+    Person(std::string n, int a) : name(std::move(n)), age(a) {}
+    virtual void info() const {
+        std::cout << "Name: " << name << " Age: " << age << "\n";
+    }
+};
+
+class Student : public Person {
+    std::string school;
+public:
+    Student(std::string n, int a, std::string s) : Person(n, a), school(std::move(s)) {}
+    void info() const override {
+        Person::info();
+        std::cout << "Student at: " << school << "\n";
+    }
+};
+
+class Teacher : public Person {
+    std::string subject;
+public:
+    Teacher(std::string n, int a, std::string sub) : Person(n,a), subject(std::move(sub)) {}
+    void info() const override {
+        Person::info();
+        std::cout << "Teaches: " << subject << "\n";
+    }
+};
+
+int main() {
+    Student s("Rahul", 16, "Govt High School");
+    Teacher t("Ms. Mehta", 38, "Mathematics");
+    s.info();
+    t.info();
+    return 0;
+}
+
+
+
