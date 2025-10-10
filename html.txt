@@ -1,0 +1,307 @@
+1. HTML Basics
+Theory Assignment
+
+Question 1: Define HTML. What is the purpose of HTML in web development?
+Answer:
+HTML (HyperText Markup Language) is the standard language used to create and structure content on the web.
+Purpose:
+Defines the structure of web pages.
+Displays text, images, videos, and links.
+Provides the foundation for styling (CSS) and interactivity (JavaScript).
+Ensures content is readable by browsers and search engines.
+
+
+Question 2: Explain the basic structure of an HTML document. Identify the mandatory tags and their purposes.
+Answer:
+<!DOCTYPE html>          <!-- Declares document type -->
+<html>                   <!-- Root element -->
+<head>                   <!-- Contains metadata like title, links, etc. -->
+  <title>My Webpage</title>
+</head>
+<body>                   <!-- Visible page content -->
+  <h1>Welcome</h1>
+  <p>This is my webpage.</p>
+</body>
+</html>
+
+Mandatory tags:
+<!DOCTYPE html> → defines HTML5 document.
+<html> → root element.
+<head> → metadata (title, CSS, etc.).
+<body> → visible content.
+
+Question 3: What is the difference between block-level elements and inline elements in HTML? Provide examples.
+Answer:
+Block-level elements: Start on a new line and take full width.
+Examples: <div>, <p>, <h1>–<h6>, <section>, <article>.
+Inline elements: Do not start on a new line; take only required width.
+Examples: <span>, <a>, <strong>, <em>, <img>.
+
+Question 4: Discuss the role of semantic HTML. Why is it important for accessibility and SEO? Provide examples.
+Answer:
+Semantic HTML uses meaningful tags that describe content.
+Importance:
+Helps screen readers and assistive technologies understand the page.
+Improves SEO by giving search engines clear structure.
+Examples:
+<header>, <footer>, <article>, <section>, <nav>, <main>.
+---
+
+
+
+Lab Assignment:
+Question : 
+Task: Create a simple HTML webpage that includes:
+A header (<header>), footer (<footer>), main section (<main>), and aside section (<aside>).
+A paragraph with some basic text.
+A list (both ordered and unordered).
+A link that opens in a new tab.
+
+Answer:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Basic Example</title>
+</head>
+<body>
+    <header>
+    <h1>My Sample Webpage</h1>
+    </header>
+    <main>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+             Maxime et accusantium cupiditate odio quis provident 
+             animi sint asperiores quia eveniet aspernatur doloremque
+              facilis facere ducimus voluptatibus dicta, minima modi
+               esse, libero earum soluta amet.</p>
+
+    <h2> My Favorite Foods</h2>
+    <ol>
+        <li>Pizza</li>
+        <li>Pasta</li>
+        <li>Burger</li>
+    </ol>
+    <ul>
+    <li>Tea</li>
+    <li>Coffee</li>
+    <li>Juice</li>
+    </ul>
+    <a herf="https://www.google.com" target="_blank"> Visit Google</a>
+    </main>
+    <aside>
+        <p>This is an aside Section for extra information.</p>
+    </aside>
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+</body>
+</html>
+---
+2. HTML Forms
+
+Theory Assignment
+
+Question 1: What are HTML forms used for? Describe the purpose of input, textarea, select, and button elements.
+Answer:
+HTML forms are used to collect user input and send it to the server.
+<input> → single-line input (text, email, password, etc.)
+<textarea> → multi-line input (like messages)
+<select> → dropdown menu for options
+<button> → submits or triggers form actions
+
+Question 2: Explain the difference between the GET and POST methods in form submission.
+Answer:
+GET:
+Data is sent via URL.
+Visible in address bar.
+Used for search queries or non-sensitive data.
+POST:
+Data is sent in the request body.
+More secure, not visible in URL.
+Used for sensitive or large data.
+
+Question 3: What is the purpose of the label element in a form, and how does it improve accessibility?
+Answer:
+The <label> element associates text with form controls, improving accessibility.
+
+Screen readers can identify input purpose.
+
+Clicking the label focuses the input.
+Example:
+<label for="email">Email:</label>
+<input type="email" id="email" name="email">
+---
+
+Lab Assignment:
+Question :
+Create a contact form with the following fields:
+Full name (text input)
+Email (email input)
+Phone number (tel input)
+Subject (dropdown menu)
+Message (textarea)
+Submit button
+
+Additional Requirements:
+Use appropriate form validation using required, minlength, maxlength, and pattern.
+Link form labels with their corresponding inputs using the for attribute.
+
+
+
+Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+<body>
+    <h1 style ="text-align: center;"> Contact Us</h1>
+    <form action="">
+        <table cellpadding ="0" cellspacing="8" align="center">
+            <tr>
+                <td><label for="full Name ">Full Name</label></td>
+                <td><input type= "frist text" name=" id="" ></td>
+            </tr>
+            <tr>
+                <td><label for="Email id">Email id</label></td>
+                <td><input type=" Email id" name=" id="" ></td>
+            </tr>
+            <tr>
+                <td><label for="Mobile">Mobile</label></td>
+                <td><select name="" id="">
+                    <option value="">1</option>
+                    <option value="">3</option>
+                    <option value="">778</option>
+                    <option value="">+91</option>
+                    <option value="">89</option>
+                </select>
+                <input type="Mobile" name=" id="">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Subject">Subject</label></td>
+                <td><select name="" id="">
+                    <option value="">Maths</option>
+                    <option value="">Science</option>
+                    <option value="">English</option>
+                    <option value="">S.S</option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="Message">Message</label></td>
+                <td><textarea name="Message" id="" cols="20" rows="4"></textarea></td>
+            </tr>
+            <tr>
+                <td align="center;"><button type="Submit" value="Sumbit">Sumbit</button></td>
+
+            </tr>
+        </form>
+</body>
+</html>
+---
+3. HTML Tables
+
+Theory Assignment
+
+Question 1: Explain the structure of an HTML table and the purpose of each element.
+Answer:
+<table>
+  <thead>   <!-- Table header -->
+    <tr>     <!-- Table row -->
+      <th>Column Name</th> <!-- Table header cell -->
+    </tr>
+  </thead>
+  <tbody>   <!-- Table body -->
+    <tr>
+      <td>Data Cell</td> <!-- Table data cell -->
+    </tr>
+  </tbody>
+</table>
+
+Question 2: What is the difference between colspan and rowspan?
+Answer:
+colspan: Merges multiple columns horizontally.
+Example: <td colspan="2">
+rowspan: Merges multiple rows vertically.
+Example: <td rowspan="3">
+
+
+Question 3: Why should tables be used sparingly for layout purposes? What is a better alternative?
+Answer:
+
+Tables are meant for tabular data, not layout. Using tables for layout causes accessibility and responsiveness issues. Better alternative: Use CSS Grid or Flexbox for layout.
+
+---
+Lab Assignment:
+Question:
+Create a product catalog table that includes the following columns:
+Product Name
+Product Image (use placeholder image URLs)
+Price
+Description
+Availability (in stock, out of stock)
+
+Additional Requirements:
+Use thead for the table header.
+Add a border and some basic styling using inline CSS.
+Use colspan or rowspan to merge cells where applicable.
+
+Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            width: 80%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+        }
+        th,td{
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+        th{
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Product Catalog</h2>
+    <table>
+        <thead>
+            <tr>
+            <th>Product Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Describe</th>
+            <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pizza</td>
+                <td><img src="C:\Users\Vishal\Pictures\pizza-pollo-arrostojpg.webp"></td>
+                <td><p>price: &#8377; 299 </p></td>
+                <td>Delicious cheese pizza</td>
+                <td>In stock</td>
+            </tr>
+            <tr>
+                <td>Burger</td>
+                <td><img src="C:\Users\Vishal\Pictures\download.jpeg"></td>
+                <td><p>price: &#8377; 199 </p></td>
+                <td>Juicy chicken burger</td>
+                <td>Out of stock</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
