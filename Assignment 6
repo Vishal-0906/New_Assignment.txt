@@ -1,0 +1,555 @@
+Module 6: Python Fundamentals – THEORY SOLUTIONS
+1. Introduction to Python
+Theory:
+
+Q1 Introduction to Python and its features (simple, high-level, interpreted language).
+A. Python is a high-level, interpreted, general-purpose programming language created by Guido van Rossum.
+Features of Python:
+Simple and easy to learn
+High-level language
+Interpreted (no need to compile)
+Platform independent
+Large standard library
+Supports object-oriented programming
+Open-source and free.
+
+Q2. History and evolution of Python.
+
+A. Developed by Guido van Rossum in 1991
+Named after the TV show “Monty Python’s Flying Circus”
+Python 2 released in 2000
+Python 3 released in 2008 (current standard)
+
+Q3 Advantages of Python Over Other programming  Languages
+A. Easy syntax
+Faster development
+Large community support
+Used in AI, ML, Web, Data Science
+Fewer lines of code compared to C/C++
+
+Q4 Installing Python and setting up the development environment (Anaconda, PyCharm, or VS Code).
+A. Anaconda
+PyCharm
+VS Code
+Jupyter Notebook
+
+Q.5 Writing and executing your first Python program.
+A. A Python program is written in a .py file and executed using:
+Copy code
+Bash
+python filename.py
+Example:
+Copy code
+Python
+print("Hello World")
+
+Lab:
+Q1:
+A.
+print ("Hello World")
+
+Q2:
+A.
+name = (input("Enter your name"))
+print(name)
+
+2. Programming Style
+Theory:
+
+Q1 Understanding Python’s PEP 8 guidelines.
+A. PEP 8 is the official style guide for Python code.
+Rules:
+Use proper indentation (4 spaces)
+Meaningful variable names
+Line length ≤ 79 characters
+Use comments properly
+
+Q2 Indentation, comments, and naming conventions in Python.
+
+A. Python uses indentation instead of braces
+Comments start with #
+Variables should use snake_case
+Example:
+Copy code
+Python
+total_marks = 90  # storing marks
+
+Q3 Writing readable and maintainable code.
+A. Readable code:
+Easy to understand
+Easy to debug
+Easy to modify
+
+Lab:
+Q1:
+A.
+user_name = "Vishal"
+user_age = 21
+print("Name:",user_name )
+print("Age:",user_age )
+
+3. Core Python Concepts
+Theory:
+
+Q1 Understanding data types: integers, floats, strings, lists, tuples, dictionaries, sets.
+A. Common data types:
+int
+float
+string
+list
+tuple
+dictionary
+set
+
+Q2 Python Variables and Memory Allocation
+A. Variables store references to objects
+Python uses dynamic typing
+Memory is managed automatically
+Example:
+Copy code
+Python
+x = 10
+
+Q3 Python operators: arithmetic, comparison, logical, bitwise.
+A. Types of operators:
+Arithmetic (+, -, *, /)
+Comparison (==, !=, >)
+Logical (and, or, not)
+Bitwise (&, |, ^)
+
+Lab:
+Q1:
+A.
+integer = 10
+floats = 10.5
+string = "Python"
+lists = [1,2,3]
+tuples = (1,2,3)
+dicts = {"Name" : "Vishal", "age" : 21}
+sets = {1,2,3}
+print(integer, floats, string, lists, tuples, dicts, sets)
+
+Q2
+A:
+x = 5
+y =10
+print(x + y)
+
+Q3
+A:
+name = input("Enter the name:")
+print("Hello",name)
+
+4. Conditional Statements
+Theory:
+
+Q1 Introduction to conditional statements: if, else, elif.
+A. Used to make decisions.
+Example:
+Copy code
+Python
+if age > 18:
+    print("Adult")
+else:
+    print("Minor")
+
+Q2 Nested if-else conditions.
+A. An if statement inside another if.
+Used for complex decision making.
+
+Lab:
+Q5:
+A:
+a = int(input("Enter the Number"))
+b = int(input("Enter the Number"))
+if(a>b):
+    print("A is greater than B ")
+elif(a<b):
+    print("B is greater than A ")
+else:
+    print("Both are equal")
+
+Q6:
+A.
+num = int(input("Enter a number: "))
+
+if num > 1:
+    # check for factors
+    for i in range(2, num):
+        if (num % i) == 0:
+            print(num, "is not a prime number")
+            break
+    else:
+        print(num, "is a prime number")
+else:
+    print(num, "is not a prime number")
+
+Q7:
+A.
+Percentage = int(input("Enter the Percentage"))
+if(Percentage>=90):
+    print("Your grade is A")
+elif(Percentage>=80):
+    print("Your grade is B")
+elif(Percentage>=70):
+    print("Your grade is C")
+elif(Percentage>=60):
+    print("Your grade is D")
+elif(Percentage>=50):
+    print("Your grade is E")
+elif(Percentage>=40):
+    print("Your grade is F")
+else:
+    print("You are Fail Better Luck Next Time")
+
+Q8
+A.
+age = int(input("Enter your age"))
+Weight =  int(input("Enter your Weight"))
+if(age>=18):
+    if(Weight>=50):
+        print("You can donate the blood")
+    else:
+        print("You can't donate the blood")
+
+5. Looping (for, while)
+Theory:
+
+Q1 Introduction to for and while loops.
+A. Used to iterate over sequences.
+Example:
+Copy code
+Python
+for i in range(5):
+    print(i)
+
+Q2 How loops work in Python.
+Repeats until condition becomes false.
+Example:
+Copy code
+Python
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+
+Q3 Using loops with collections (lists, tuples, etc.).
+A. Loops work with:
+Lists
+Tuples
+Dictionaries
+
+Lab:
+Q1
+A.
+List1 = ['apple', 'banana', 'mango']
+for item in List1:
+    print(item)
+
+Q2:
+A.
+List1 = ['apple', 'banana', 'mango']
+for item in List1:
+    print(item,":", len(item))
+
+Q3:
+A.
+List1 = ['apple', 'banana', 'mango']
+search_item = input("Enter the string to search: ")
+
+found = False
+for item in List1:
+    if item == search_item:
+        print(search_item, "found in the list!")
+        found = True
+        break
+
+if not found:
+    print(search_item, "not found in the list.")
+Q4:
+A.
+for i in range(1, 6):
+    print("*" * i)
+
+6. Generators and Iterators
+Theory:
+
+Q1 Understanding how generators work in Python.
+A. Generators generate values one at a time using yield.
+Advantages:
+Memory efficient
+Faster execution
+
+Q2 Difference Between yield and return.
+A. return
+yield
+Ends function
+Pauses function
+Returns one value
+Returns multiple values
+Q3 Understanding iterators and creating custom iterators.
+A. Custom iterators use:
+__iter__()
+__next__()
+
+Lab:
+Q1:
+A.
+def print_even_numbers():
+    num = 0   # starting even number
+    count = 0 # how many evens printed so far
+    
+    while count < 10:
+        print(num)
+        num += 2   # move to next even number
+        count += 1
+
+print_even_numbers()
+
+Q2:
+A:
+
+class Mylterator:
+    def __init__(self,data):
+        self.data = data
+        self.index = 0
+
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        if self.index < len(self.data):
+            value = self.data[self.index]
+            self.index +=1
+        else:
+            raise StopIteration
+
+nums = Mylterator([1,2,3,4])
+for n in nums:
+    print(n)
+
+7. Functions and Methods
+Theory:
+
+Q1 Defining and Calling Functions
+A. Functions are defined using def.
+Example:
+Copy code
+Python
+def add(a, b):
+    return a + b
+
+Q2 Function arguments (positional, keyword, default).
+A. Types:
+Positional
+Keyword
+Default
+
+Q3 Scope of Variables in Python.
+A. Local scope
+Global scope
+
+Q4 Built-in methods for strings, lists, etc.
+
+A. Examples:
+upper()
+lower()
+append()
+len()
+
+Lab:
+Q1:
+A.
+def hello():
+    print("Hello")
+hello()
+
+Q4:
+A.
+string = "Vishal"
+def display():
+    print(string[0])
+display()
+
+Q5:
+A.
+string = "Vishal"
+def display():
+    print(string[0: 2])
+display()
+
+Q6:
+A.
+string = "Vishal"
+def display():
+    print(string[0: 5])
+display()
+
+Q7:
+A.
+string1 = "Vishal"
+string2 = "abc"
+
+def combine():
+    result = string1[0] + string2 + string1[-2:]
+    print(result)
+
+combine()
+
+8. Control Statements (Break, Continue, Pass)
+Theory:
+
+Q1 Understanding the role of break, continue, and pass in Python loops.
+break Statement: Stops the loop.
+continue Statement: Skips current iteration.
+pass Statement: Does nothing (placeholder).
+
+Lab:
+Q1:
+A:
+List1 = ['apple', 'banana', 'mango']
+for item in List1:
+    if item == 'banana':
+        continue
+    print(item)
+
+Q2:
+A:
+List1 = ['apple', 'banana', 'mango']
+for item in List1:
+    if item == 'banana':
+        break
+    print(item)
+
+9. String Manipulation
+Theory:
+
+9.1 Understanding the role of break, continue, and pass in Python loops.
+A. Strings can be accessed using index.
+Example:
+Copy code
+Python
+name = "Python"
+print(name[0])
+
+Q2 Basic operations: concatenation, repetition, string methods (upper(), lower(), etc.).
+A. Concatenation
+Repetition
+Slicing
+
+Q3 String slicing.
+A. upper()
+lower()
+strip()
+replace()
+
+Lab:
+Q1:
+A.
+text = "PythonProgramming"
+print(text[0:6])
+
+Q2
+A.
+text = "Python"
+print(text.upper())
+print(text.lower())
+print(text.capitalize())
+
+10 .Advanced Python (map(), reduce(), filter(), Closures and Decorators)
+Theory:
+
+Q1 How functional programming works in Python.
+A. Uses functions as arguments.
+
+Q2 Using map(), reduce(), and filter() functions for processing data.
+A. map():Applies function to each element.
+reduce():Reduces list to a single value.
+filter(): Filters elements based on condition.
+
+Q3. Introduction to closures and decorators.
+A. Function inside another function that remembers variables.
+Functions that modify other functions.
+Assessment (Theory Explanation)
+A mini project combines:
+Conditions
+Loops
+Functions
+Examples:
+Calculator
+Grade management system
+
+Lab:
+Q1
+A.
+numbers = [1, 2, 3, 4]
+squares = list(map(lambda x: x * x, numbers))
+print(squares)
+
+Q2:
+A.
+from functools import reduce
+numbers = [1, 2, 3, 4]
+result = reduce(lambda x,y: x * y, numbers)
+print(result)
+
+Q3.
+A.
+numbers = [1, 2, 3, 4]
+even = list(filter(lambda x:x % 2 == 0, numbers))
+print(even)
+
+Assessment
+
+Q:
+Create a mini-project where students combine conditional statements, loops, and functions to create a basic
+ Python application, such as a simple calculator or a grade management system.
+
+A:
+def cal_grade(score):
+    """Function to determine grade based on
+    score"""
+    if score >=90:
+        return 'A'
+    elif score >=80:
+        return 'B'
+    elif score >=70:
+        return 'C'
+    elif score >=70:
+        return 'D'
+    else: 
+        return 'F'
+
+def grade_management_system():
+    students_data = []
+    print("---Welcome to the Grade Managment System---")
+
+while True:
+    name = input("\n Enter student name (or) type 'exit' to finsh): ").strip()
+
+
+    #using break to exit the loop
+    if name.lower() == 'exit':
+        break
+
+    try:
+        score = float(input(f"Enter score for {name}: "))
+
+        #basic validation using  condition
+        if score< 0 or score > 100:
+            print("Invalid between 0 and 100.")
+            continue  # skip to next iteration
+
+        grade = calculate_grade(score)
+        students_data.append ({"name": name, "score": score, "grade": grade})
+        print(f"Added: {name} Score: {score} Grade: {grade}")
+
+        execpt ValueError:
+                print("Invalid input! Please enter a numberical value for the score")
+
+            # Final Summary using a loop
+        print("\n ---Final Grade Report---")
+        print(f"{student['name']:<15 {student['score']:<6} {student['grade']:<5}}")
+
+        if __name__=="__main__":
+            grade_management_system()
