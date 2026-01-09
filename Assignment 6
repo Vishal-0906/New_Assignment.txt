@@ -44,11 +44,11 @@ Python
 print("Hello World")
 
 Lab:
-Q1:
+Q1: Write a Python program that prints "Hello, World!".
 A.
 print ("Hello World")
 
-Q2:
+Q2: Set up Python on your local machine and write a program to display your name.
 A.
 name = (input("Enter your name"))
 print(name)
@@ -81,7 +81,7 @@ Easy to debug
 Easy to modify
 
 Lab:
-Q1:
+Q1: Write a Python program that demonstrates the correct use of indentation, comments, and variables following PEP 8 guidelines.
 A.
 user_name = "Vishal"
 user_age = 21
@@ -118,7 +118,7 @@ Logical (and, or, not)
 Bitwise (&, |, ^)
 
 Lab:
-Q1:
+Q1: Write Python program to demonstrate the creation of variables and different data types.
 A.
 integer = 10
 floats = 10.5
@@ -129,16 +129,44 @@ dicts = {"Name" : "Vishal", "age" : 21}
 sets = {1,2,3}
 print(integer, floats, string, lists, tuples, dicts, sets)
 
-Q2
-A:
-x = 5
-y =10
-print(x + y)
+Practical Example 1: How does the Python code structure work?
 
-Q3
 A:
-name = input("Enter the name:")
-print("Hello",name)
+# This is a comment
+print("Python code structure example")
+
+if True:
+    print("Indented block executed")
+
+Practical Example 2: How to create variables in Python?
+
+A:
+name = "Python"
+version = 3.12
+is_easy = True
+
+print(name)
+print(version)
+print(is_easy)
+
+Practical Example 3: How to take user input using the input( ) function
+A:
+
+name = input("Enter your name: ")
+age = input("Enter your age: ")
+
+print("Name:", name)
+print("Age:", age)
+
+Practical Example 4: How to check the type of a variable dynamically using type( )
+A:
+x = 10
+y = 10.5
+z = "Hello"
+
+print(type(x))
+print(type(y))
+print(type(z))
 
 4. Conditional Statements
 Theory:
@@ -158,7 +186,7 @@ A. An if statement inside another if.
 Used for complex decision making.
 
 Lab:
-Q5:
+Practical Example 5: Write a Python program to find greater and less than a number using if_else.
 A:
 a = int(input("Enter the Number"))
 b = int(input("Enter the Number"))
@@ -169,7 +197,8 @@ elif(a<b):
 else:
     print("Both are equal")
 
-Q6:
+Practical Example 6: Write a Python program to check if a number is prime using if_else.
+
 A.
 num = int(input("Enter a number: "))
 
@@ -184,7 +213,8 @@ if num > 1:
 else:
     print(num, "is not a prime number")
 
-Q7:
+Practical Example 7: Write a Python program to calculate grades based on percentage using if-else ladder.
+
 A.
 Percentage = int(input("Enter the Percentage"))
 if(Percentage>=90):
@@ -202,7 +232,7 @@ elif(Percentage>=40):
 else:
     print("You are Fail Better Luck Next Time")
 
-Q8
+Practical Example 8: Write a Python program to check if a person is eligible to donate blood using a nested if.
 A.
 age = int(input("Enter your age"))
 Weight =  int(input("Enter your Weight"))
@@ -217,17 +247,13 @@ Theory:
 
 Q1 Introduction to for and while loops.
 A. Used to iterate over sequences.
-Example:
-Copy code
-Python
+
 for i in range(5):
     print(i)
 
 Q2 How loops work in Python.
 Repeats until condition becomes false.
-Example:
-Copy code
-Python
+A:
 i = 1
 while i <= 5:
     print(i)
@@ -240,19 +266,23 @@ Tuples
 Dictionaries
 
 Lab:
-Q1
+Practical Example 1:  Write a Python program to print each fruit in a list using a simple for loop.
+List1 = ['apple', 'banana', 'mango']
+
 A.
 List1 = ['apple', 'banana', 'mango']
 for item in List1:
     print(item)
 
-Q2:
+Practical Example 2:  Write a Python program to find the length of each string in List1.
+
 A.
 List1 = ['apple', 'banana', 'mango']
 for item in List1:
     print(item,":", len(item))
 
-Q3:
+Practical Example 3: Write a Python program to find a specific string in the list using a simple for loop and if condition.
+
 A.
 List1 = ['apple', 'banana', 'mango']
 search_item = input("Enter the string to search: ")
@@ -266,7 +296,16 @@ for item in List1:
 
 if not found:
     print(search_item, "not found in the list.")
-Q4:
+
+Practical Example 4: Print this pattern using nested for loop:
+Copy code
+
+*
+**
+***
+****
+*****
+
 A.
 for i in range(1, 6):
     print("*" * i)
@@ -293,7 +332,8 @@ __iter__()
 __next__()
 
 Lab:
-Q1:
+
+Q1: Write a generator function that generates the first 10 even numbers.
 A.
 def print_even_numbers():
     num = 0   # starting even number
@@ -306,7 +346,7 @@ def print_even_numbers():
 
 print_even_numbers()
 
-Q2:
+Q2: Write a Python program that uses a custom iterator to iterate over a list of integers.
 A:
 
 class Mylterator:
@@ -358,34 +398,58 @@ append()
 len()
 
 Lab:
-Q1:
+
+Practical Example 1: Write a Python program to print "Hello" using a string.
 A.
 def hello():
     print("Hello")
 hello()
 
-Q4:
+Practical Example 2: Write a Python program to allocate a string to a variable and print it.
+A.
+def print_string():
+    string = "Hello"
+    print(string)
+
+print_string()
+
+Practical Example 3: Write a Python program to print a string using triple quotes.
+
+A.
+def triple_quote_string():
+    text = """Hello this
+    is a another string printed
+    using quotes"""
+    print(text)
+
+triple_quote_string()
+
+Practical Example 4: Write a Python program to access the first character of a string using index value.
+
 A.
 string = "Vishal"
 def display():
     print(string[0])
 display()
 
-Q5:
+Practical Example 5: Write a Python program to access the string from the second position onwards using slicing
+
 A.
 string = "Vishal"
 def display():
     print(string[0: 2])
 display()
 
-Q6:
+Practical Example 6: Write a Python program to access a string up to the fifth character.
+
 A.
 string = "Vishal"
 def display():
     print(string[0: 5])
 display()
 
-Q7:
+Practical Example 7: Write a Python program to print the substring between index values 1 and 4.
+
 A.
 string1 = "Vishal"
 string2 = "abc"
@@ -396,6 +460,23 @@ def combine():
 
 combine()
 
+Practical Example 8: Write a Python program to print a string from the last character.
+A.
+def last_character():
+    text = "Python"
+    print(text[-1])
+    
+last_character()
+
+Practical Example 9: Write a Python program to print every alternate character from the string starting from index 1.
+
+A.
+def alternate_characters():
+    text = "PythonProgramming"
+    print(text[1:2])
+
+alternate_characters()
+
 8. Control Statements (Break, Continue, Pass)
 Theory:
 
@@ -405,7 +486,9 @@ continue Statement: Skips current iteration.
 pass Statement: Does nothing (placeholder).
 
 Lab:
-Q1:
+Practical Example 1): Write a Python program to skip 'banana' in a list using the continue statement.
+List1 = ['apple', 'banana', 'mango']
+
 A:
 List1 = ['apple', 'banana', 'mango']
 for item in List1:
@@ -413,7 +496,8 @@ for item in List1:
         continue
     print(item)
 
-Q2:
+Practical Example 2): Write a Python program to stop the loop once 'banana' is found using the break statement.
+
 A:
 List1 = ['apple', 'banana', 'mango']
 for item in List1:
@@ -424,7 +508,7 @@ for item in List1:
 9. String Manipulation
 Theory:
 
-9.1 Understanding the role of break, continue, and pass in Python loops.
+Q1 Understanding the role of break, continue, and pass in Python loops.
 A. Strings can be accessed using index.
 Example:
 Copy code
@@ -444,12 +528,12 @@ strip()
 replace()
 
 Lab:
-Q1:
+Q1: Write a Python program to demonstrate string slicing.
 A.
 text = "PythonProgramming"
 print(text[0:6])
 
-Q2
+Q2: Write a Python program that manipulates and prints strings using various string methods.
 A.
 text = "Python"
 print(text.upper())
@@ -480,20 +564,20 @@ Calculator
 Grade management system
 
 Lab:
-Q1
+Q1. Write a Python program to apply the map ( ) function to square a list of numbers.
 A.
 numbers = [1, 2, 3, 4]
 squares = list(map(lambda x: x * x, numbers))
 print(squares)
 
-Q2:
+Q2. Write a Python program that uses reduce ( ) to find the product of a list of numbers.
 A.
 from functools import reduce
 numbers = [1, 2, 3, 4]
 result = reduce(lambda x,y: x * y, numbers)
 print(result)
 
-Q3.
+Q3. Write a Python program that filters out even numbers using the filter ( ) function.
 A.
 numbers = [1, 2, 3, 4]
 even = list(filter(lambda x:x % 2 == 0, numbers))
