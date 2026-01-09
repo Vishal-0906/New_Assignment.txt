@@ -1,0 +1,462 @@
+Module 7: Python – Collections, Functions and Modules
+
+Accessing List
+Theory question
+Q1. Understanding how to create and access elements in a list?
+A. A list is created using square brackets [].
+ Elements are accessed using index positions starting from 0.
+
+Q2. Indexing in lists (positive and negative indexing)?
+A. Positive indexing starts from 0 from the beginning.
+ Negative indexing starts from -1 from the end of the list.
+
+Q3. Slicing a list: accessing a range of elements?
+A. Slicing is used to access multiple elements using list[start:end].
+ It returns a new list containing the selected range.
+
+
+Lab Question:
+Q1. Write a Python program to create a list with elements of multiple data types (integers, strings, floats, etc.).
+A.
+list = [1, 1.5, "Vishal", True]
+print(list)
+
+Q2. Write a Python program to access elements at different index positions.
+A.
+list = [1,2,3,4,5,6]
+print(list[3])
+print(list[5])
+
+Pratical Example:
+Q1. Write a Python program to create a list of multiple data type elements.
+A.
+list = [12,12.45, "Python",True]
+print(list)
+
+Q2. Write a Python program to find the length of a list using the len() function.
+A.
+list = [12,12.45, "Python",True]
+print(len(list))
+
+
+2. List Operations
+Theory question
+
+Q4. Common list operations: concatenation, repetition, membership?
+A. Concatenation joins lists using +.
+Repetition repeats a list using *.
+Membership checks elements using in or not in.
+
+Q5. List methods: append(), insert(), remove(), pop()?
+A. append() adds an element at the end.
+insert() adds at a specific index.
+remove() deletes a value.
+pop() removes an element by index.
+
+Lab Question:
+
+Q1. Write a Python program to add elements to a list using insert() and append().
+A.
+list = [1,2,3,4,5,6]
+list.insert(6,7)
+print(list)
+list.append(8)
+print(list)
+
+Q2. Write a Python program to remove elements from a list using pop() and remove().
+A.
+list = [1,2,3,4,5,6]
+list.remove(5)
+print(list)
+list.pop(3)
+print(list)
+
+Pratical Example:
+
+Q1. Write a Python program to update a list using insert() and append().
+A.
+list = [1,2,3,4,5,6]
+list.insert(6,7)
+print(list)
+list.append(8)
+print(list)
+
+Q2. Write a Python program to remove elements from a list using pop() and remove().
+A.
+list = [1,2,3,4,5,6]
+list.remove(5)
+print(list)
+list.pop(3)
+print(list)
+
+3. Working with Lists
+Theory question
+
+Q6. Iterating over a list using loops?
+A. Lists are iterated using loops like for.
+Each element is accessed one by one.
+
+Q7. Sorting and reversing a list ?
+A. sort() sorts the list permanently.
+sorted() returns a new sorted list.
+reverse() reverses the list order.
+
+Q8. Basic list manipulations ?
+A. List manipulation includes adding, deleting, updating, and slicing elements.
+It helps modify list data easily.
+
+Lab Question:
+Q1. Write a Python program to iterate over a list using a for loop.
+A.
+list = [1,2,3,4,5,6]
+for item in list:
+    print(item)
+
+Q2. Write a Python program to sort a list using both sort() and sorted().
+A.
+list = [1,2,3,4,5,6]
+for item in list:
+    list.sort()
+    print(item)
+
+new_list = sorted(list, reverse= True)
+print(new_list)
+
+Pratical Example:
+Q1. Write a Python program to iterate through a list and print each element.
+A.
+list = [1,2,3,4,5,6]
+for item in list:
+    print(item)
+
+Q2. Write a Python program to insert elements into an empty list using a for loop and append().
+A.
+list = []
+for i in range(5):
+    list.append(i)
+    print(i)
+
+4. Tuple
+Theory question
+
+Q9. Introduction to tuples, immutability?
+A. A tuple is an ordered collection of elements.
+Tuples are immutable, so values cannot be changed.
+
+Q10. Creating and accessing elements in a tuple
+A. Tuples are created using parentheses ().
+Elements are accessed using index values.
+
+Q11. Basic operations with tuples
+A. Tuple operations include concatenation, repetition, and membership.
+These operations do not change the tuple.
+
+Lab Question:
+
+Q1. Write a Python program to create a tuple with multiple data types.
+A.
+tuple = (10, 2.4, "Python", False)
+print(tuple)
+
+Q2. Write a Python program to concatenate two tuples.
+A.
+tuple = (10, 2.4, "Python", False)
+tup = (7, 6.9, "Programing", True)
+tuples = tuple + tup
+print(tuples)
+
+Pratical Example:
+
+Q1. Write a Python program to convert a list into a tuple.
+A
+list = [1,2,3]
+tup = tuple(list)
+print(tup)
+
+Q2. Write a Python program to create a tuple with multiple data types.
+A.
+tuple = {1,"Vishal",2.34,True}
+print(tuple)
+
+Q3. Write a Python program to concatenate two tuples into one.
+A.
+tup1={1,2,3,4,5}
+tup2={6,7,8,9,10}
+tup3= tup1 + tup2
+print(tup3)
+
+Q4. Write a Python program to access the value of the first index in a tuple.
+A.
+tuple=(1,2,3,4,5)
+print(tuple[0])
+
+
+5. Accessing Tuples
+Theory question
+
+Q12. Accessing tuple elements using positive and negative indexing
+A. Tuple elements are accessed using positive and negative indexing. Indexing works the same as lists.
+
+Q13. Slicing a tuple to access ranges of elements
+A. Tuple slicing extracts a range of elements. It returns a new tuple.
+
+Lab Question:
+Q1.  Write a Python program to access values between index 1 and 5 in a tuple
+A.
+tuple = (1,2,3,4,5,6,7,8,9)
+print(tuple[1:5])
+
+Q2. Write a Python program to access alternate values between index 1 and 5 in a tuple.
+A.
+tuple = (1,2,3,4,5,6,7,8,9)
+print(tuple[::2])
+
+Pratical Example:
+Q1. Write a Python program to access values between index 1 and 5 in a tuple.
+A.
+tuple=(1,2,3,4,5)
+print(tuple[0:4])
+
+Q2. Write a Python program to access the value from the last index in a tuple.
+A.
+tuple=(1,2,3,4,5)
+print(tuple[-1])
+
+6. Dictionaries
+Theory question
+
+Q14. Introduction to dictionaries: key-value pairs
+A. A dictionary stores data as key-value pairs.
+Keys are unique and values can be any type.
+
+Q15. Accessing, adding, updating, and deleting dictionary elements
+A. Elements are accessed using keys.
+Values can be added, updated, or deleted using keys.
+
+Q16. Dictionary methods: keys(), values(), items()
+A. keys() returns all keys.
+values() returns all values.
+items() returns key-value pairs.
+
+Lab Question:
+
+Q1. Write a Python program to create a dictionary with 6 key-value pairs.
+A.
+student = {"name": "Vishal", "age" :21, "course" : "python" }
+print(student)
+
+Q2. Write a Python program to access values using dictionary keys.
+A.
+student = {"name": "Vishal", "age" :21, "course" : "python" }
+print(student["name"])
+print(student["age"])
+print(student["course"])
+
+Pratical Example:
+
+Q1. Write a Python program to create a dictionary of 6 key-value pairs.
+A.
+students = {
+     "id" : 1,
+     "name" : "Vishal",
+     "Course" : "Full stack developer",
+     "age" : 21,
+     "City" : "Vadodara",
+     "marks" : 85
+ }
+ print(students)
+
+Q2. Write a Python program to access values using keys from a dictionary.
+A.
+ students = {
+     "id" : 1,
+     "name" : "Vishal",
+     "Course" : "Full stack developer",
+     "age" : 21,
+     "City" : "Vadodara",
+     "marks" : 85
+ }
+ print(students["name"])
+ print(students["Course"])
+
+7. Working with Dictionaries
+Theory question
+
+Q17. Iterating over a dictionary using loops
+A. Dictionaries are iterated using for loops.
+Keys, values, or both can be accessed.
+
+Q18. Merging two lists into a dictionary
+A. Two lists can be merged using loops or zip().
+One list becomes keys and the other values.
+
+Q19. Counting occurrences of characters in a string
+A. Each character is stored as a key.
+Its count is stored as the value in the dictionary.
+
+Lab Question:
+Q1. Write a Python program to update a value in a dictionary.
+A.
+student["marks"]= 70
+print(student)
+
+Q2. Write a Python program to merge two lists into one dictionary using a loop.
+A.
+keys = ["a","b","c"]
+values =[1, 2, 3]
+
+my_dict ={}
+for i in range(len(keys)):
+    my_dict[keys[i]] = values[i]
+
+print(my_dict)
+
+Pratical Example:
+
+Q1. Write a Python program to update a value of a particular key in a dictionary.
+A.
+students = {
+    "id" : 1,
+    "name" : "Vishal",
+    "Course" : "Full stack developer",
+    "age" : 21,
+    "City" : "Vadodara",
+    "marks" : 85
+}
+students["marks"] = 89
+print(students)
+
+Q2. Write a Python program to separate keys and values from a dictionary using keys() and values() methods.
+A.
+students = {
+    "id" : 1,
+    "name" : "Vishal",
+    "Course" : "Full stack developer",
+    "age" : 21,
+    "City" : "Vadodara",
+    "marks" : 85
+}
+print(students.keys())
+print(students.values())
+
+Q3. Write a Python program to convert two lists into one dictionary using a for loop.
+A.
+keys = ["a", "b","c"]
+value = [1,2,3]
+dict1 = dict(zip(keys, value))
+print(dict1)
+
+Q4. Write a Python program to count how many times each character appears in a string.
+A.
+string = "Python"
+count = {}
+
+num =1
+for ch in string:
+    count[ch] = num
+num +=1
+print(count)
+
+8. Functions
+Theory question
+
+Q20. Defining functions in Python
+A. Functions are defined using the def keyword.
+They are used to perform specific tasks.
+
+Q21. Types of functions
+A. Functions can be with or without parameters.
+Functions can be with or without return values.
+
+Q22. Anonymous functions (lambda functions)
+A. Lambda functions are single-line functions.
+They are defined using the lambda keyword.
+
+Lab Question:
+
+Q1. Write a Python program to create a function that takes a string as input and prints it.
+A.
+def print_string(s):
+    print(s)
+
+print_string("Hello python")
+
+Q2. Write a Python program to create a calculator using functions.
+A.
+def add (a, b):
+    return a + b
+
+def sub (a, b):
+    return a - b
+
+print(add(23, 14))
+print(sub(23, 14))
+
+Pratical Example:
+
+Q1. Write a Python program to print a string using a function.
+A.
+def show(msg):
+    print(msg)
+
+show("Hello Python")
+
+Q2. Write a Python program to create a parameterized function that takes two arguments and prints their sum.
+A.
+def add(a,b):
+    print("Sum=",a+b)
+
+add(10, 20)
+
+Q3. Write a Python program to create a lambda function with one expression. 
+A.
+square = lambda x: x*x
+print(square(5))
+
+Q4. Write a Python program to create a lambda function with two expressions.
+A.
+add = lambda a, b: a+b
+print(add(10,5))
+
+9. Modules
+Theory question
+
+Q23. Introduction to Python modules and importing modules
+A. Modules are files containing Python code.
+They are imported using the import statement.
+
+Q24. Standard library modules: math, random
+A. math provides mathematical functions.
+random is used to generate random values.
+
+Q25. Creating custom modules
+A custom module is a user-defined Python file.
+It can be imported like a built-in module.
+
+Lab Question:
+
+Q1. Write a Python program to import the math module and use functions like sqrt(), ceil(), floor().
+A.
+import math
+print(math.sqrt(9))
+print(math.ceil(9.4))
+print(math.floor(9.7))
+
+Q2. Write a Python program to generate random numbers using the random module.
+A.
+import random
+n = random.randint(1,100)
+print(n)
+
+Pratical Example:
+Q1. Write a Python program to demonstrate the use of functions from the math module.
+A.
+import math
+print(math.sqrt(25))
+print(math.ceil(9.3))
+print(math.floor(7.3))
+
+Q2. Write a Python program to generate random numbers between 1 and 100 using the random module.
+A.
+import random
+print(random.randint(1, 100))
