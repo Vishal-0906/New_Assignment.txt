@@ -1,0 +1,659 @@
+Module 8: Advanced Python Programming
+1. Printing on Screen
+Theory Question 1
+
+Introduction to the print() function in Python.
+
+Answer:
+
+The print() function is used to display output on the screen. It can print text, numbers, variables, or formatted strings.
+
+Example:
+
+print("Hello World")
+Theory Question 2
+
+Formatting outputs using f-strings and format().
+
+Answer:
+
+Formatting is used to insert variables into strings.
+
+Using f-string:
+
+name = "Vishal"
+print(f"My name is {name}")
+
+Using format():
+
+print("My name is {}".format(name))
+Lab Question
+
+Write a Python program to print a formatted string using print() and f-string.
+
+Answer:
+name = "Vishal"
+age = 18
+
+print(f"My name is {name} and I am {age} years old.")
+Practical Example Question 1
+
+Write a Python program to print "Hello, World!" on the screen.
+
+Answer:
+print("Hello, World!")
+2. Reading Data from Keyboard
+Theory Question 1
+
+Using the input() function to read user input from the keyboard.
+
+Answer:
+
+The input() function is used to take input from the user. It returns data as a string.
+
+Example:
+
+name = input("Enter name: ")
+Theory Question 2
+
+Converting user input into different data types (int, float, etc.).
+
+Answer:
+
+Input can be converted using type functions like int(), float(), and str().
+
+Example:
+
+age = int(input("Enter age: "))
+salary = float(input("Enter salary: "))
+Lab Question
+
+Write a Python program to read a name and age from the user and print a formatted output.
+
+Answer:
+name = input("Enter your name: ")
+age = int(input("Enter your age: "))
+
+print(f"Name: {name}, Age: {age}")
+Practical Example Question 2
+
+Write a Python program to read a string, an integer, and a float from the keyboard and display them.
+
+Answer:
+text = input("Enter string: ")
+num = int(input("Enter integer: "))
+dec = float(input("Enter float: "))
+
+print("String:", text)
+print("Integer:", num)
+print("Float:", dec)
+3. Opening and Closing Files
+Theory Question 1
+
+Opening files in different modes ('r', 'w', 'a', 'r+', 'w+').
+
+Answer:
+
+Files are opened using open() function with modes:
+
+r → read
+
+w → write
+
+a → append
+
+r+ → read and write
+
+w+ → write and read
+
+Example:
+
+file = open("test.txt", "w")
+Theory Question 2
+
+Using the open() function to create and access files.
+
+Answer:
+
+The open() function opens or creates files.
+
+Example:
+
+file = open("file.txt", "w")
+Theory Question 3
+
+Closing files using close().
+
+Answer:
+
+The close() function closes the file after use.
+
+Example:
+
+file.close()
+Lab Question
+
+Write a Python program to open a file in write mode, write some text, and then close it.
+
+Answer:
+file = open("data.txt", "w")
+file.write("This is Python file handling.")
+file.close()
+Practical Example Question 3
+
+Write a Python program to create a file and write a string into it.
+
+Answer:
+with open("example.txt", "w") as file:
+    file.write("Hello Python")
+
+4. Reading and Writing Files
+Theory Question 1
+
+Reading from a file using read(), readline(), readlines().
+
+Answer:
+
+These functions are used to read file contents.
+
+read() → reads full file
+
+readline() → reads one line
+
+readlines() → reads all lines as list
+
+Example:
+
+file = open("example.txt", "r")
+print(file.read())
+file.close()
+Theory Question 2
+
+Writing to a file using write() and writelines().
+
+Answer:
+
+These functions are used to write data into files.
+
+write() → writes single string
+
+writelines() → writes multiple strings
+
+Example:
+
+file = open("example.txt", "w")
+file.write("Hello")
+file.close()
+Lab Question 1
+
+Write a Python program to read the contents of a file and print them on the console.
+
+Answer:
+file = open("example.txt", "r")
+data = file.read()
+print(data)
+file.close()
+Lab Question 2
+
+Write a Python program to write multiple strings into a file.
+
+Answer:
+file = open("multi.txt", "w")
+file.writelines(["Line 1\n", "Line 2\n", "Line 3\n"])
+file.close()
+Practical Example Question 4
+
+Write a Python program to create a file and print the string into the file.
+
+Answer:
+file = open("new.txt", "w")
+file.write("Python Programming")
+file.close()
+Practical Example Question 5
+
+Write a Python program to read a file and print the data on the console.
+
+Answer:
+file = open("new.txt", "r")
+print(file.read())
+file.close()
+Practical Example Question 6
+
+Write a Python program to check the current position of the file cursor using tell().
+
+Answer:
+file = open("new.txt", "r")
+print(file.tell())
+file.close()
+5. Exception Handling
+Theory Question 1
+
+Introduction to exceptions and how to handle them using try, except, and finally.
+
+Answer:
+
+Exceptions are errors that occur during program execution. They are handled using try, except, and finally blocks.
+
+Example:
+
+try:
+    print(10/0)
+except:
+    print("Error occurred")
+Theory Question 2
+
+Understanding multiple exceptions and custom exceptions.
+
+Answer:
+
+Multiple exceptions handle different errors. Custom exceptions are user-defined errors.
+
+Example:
+
+try:
+    num = int(input())
+except ValueError:
+    print("Invalid input")
+Lab Question 1
+
+Write a Python program to handle exceptions in a simple calculator (division by zero, invalid input).
+
+Answer:
+try:
+    a = int(input("Enter number: "))
+    b = int(input("Enter number: "))
+    print(a/b)
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+except ValueError:
+    print("Invalid input")
+Lab Question 2
+
+Write a Python program to demonstrate handling multiple exceptions.
+
+Answer:
+try:
+    x = int(input("Enter number: "))
+    print(10/x)
+except ValueError:
+    print("Invalid number")
+except ZeroDivisionError:
+    print("Division by zero")
+Practical Example Question 7
+
+Write a Python program to handle exceptions in a calculator.
+
+Answer:
+try:
+    a = float(input())
+    b = float(input())
+    print(a/b)
+except Exception as e:
+    print("Error:", e)
+Practical Example Question 8
+
+Write a Python program to handle multiple exceptions (file not found, division by zero).
+
+Answer:
+try:
+    file = open("abc.txt", "r")
+    print(10/0)
+except FileNotFoundError:
+    print("File not found")
+except ZeroDivisionError:
+    print("Division by zero")
+Practical Example Question 9
+
+Write a Python program to handle file exceptions and use finally block.
+
+Answer:
+try:
+    file = open("test.txt", "r")
+except FileNotFoundError:
+    print("File not found")
+finally:
+    print("Done")
+Practical Example Question 10
+
+Write a Python program to print custom exceptions.
+
+Answer:
+class MyError(Exception):
+    pass
+
+try:
+    raise MyError("Custom error")
+except MyError as e:
+    print(e)
+6. Class and Object (OOP Concepts)
+Theory Question 1
+
+Understanding the concepts of classes, objects, attributes, and methods in Python.
+
+Answer:
+
+Class is a blueprint for objects. Object is an instance of class. Attributes are variables and methods are functions inside class.
+
+Example:
+
+class Student:
+    name = "Vishal"
+Theory Question 2
+
+Difference between local and global variables.
+
+Answer:
+
+Global variable → declared outside function
+Local variable → declared inside function
+
+Example:
+
+x = 10  # global
+
+def test():
+    y = 5  # local
+Lab Question
+
+Write a Python program to create a class and access its properties using an object.
+
+Answer:
+class Student:
+    name = "Vishal"
+    age = 18
+
+s = Student()
+print(s.name)
+print(s.age)
+Practical Example Question 11
+
+Write a Python program to create a class and access the properties of the class using an object.
+
+Answer:
+class Car:
+    brand = "Toyota"
+
+c = Car()
+print(c.brand)
+Practical Example Question 12
+
+Write a Python program to demonstrate the use of local and global variables in a class.
+
+Answer:
+x = 10
+
+class Test:
+    def show(self):
+        y = 5
+        print("Global:", x)
+        print("Local:", y)
+
+t = Test()
+t.show()
+
+
+7. Inheritance
+Theory Question 1
+
+Understanding inheritance in Python and its types (Single, Multiple, Multilevel, Hierarchical, Hybrid).
+
+Answer:
+
+Inheritance allows a class to acquire properties of another class.
+
+Types of inheritance:
+
+Single inheritance
+
+Multiple inheritance
+
+Multilevel inheritance
+
+Hierarchical inheritance
+
+Hybrid inheritance
+
+Example:
+
+class Parent:
+    pass
+
+class Child(Parent):
+    pass
+Theory Question 2
+
+Using super() function to call parent class methods.
+
+Answer:
+
+The super() function is used to call parent class methods.
+
+Example:
+
+class Parent:
+    def show(self):
+        print("Parent")
+
+class Child(Parent):
+    def show(self):
+        super().show()
+        print("Child")
+Lab Question
+
+Write a Python program to demonstrate single inheritance.
+
+Answer:
+class Parent:
+    def display(self):
+        print("This is parent class")
+
+class Child(Parent):
+    def show(self):
+        print("This is child class")
+
+c = Child()
+c.display()
+c.show()
+Practical Example Question 13
+
+Write a Python program to demonstrate multilevel inheritance.
+
+Answer:
+class A:
+    def showA(self):
+        print("Class A")
+
+class B(A):
+    def showB(self):
+        print("Class B")
+
+class C(B):
+    def showC(self):
+        print("Class C")
+
+obj = C()
+obj.showA()
+obj.showB()
+obj.showC()
+Practical Example Question 14
+
+Write a Python program to demonstrate hierarchical inheritance.
+
+Answer:
+class Parent:
+    def show(self):
+        print("Parent class")
+
+class Child1(Parent):
+    pass
+
+class Child2(Parent):
+    pass
+
+c1 = Child1()
+c2 = Child2()
+
+c1.show()
+c2.show()
+8. Method Overloading and Method Overriding
+Theory Question 1
+
+Understanding method overloading and method overriding in Python.
+
+Answer:
+
+Method Overloading: Same method name with different parameters.
+
+Method Overriding: Child class changes parent class method.
+
+Example:
+
+class A:
+    def show(self):
+        print("Parent")
+
+class B(A):
+    def show(self):
+        print("Child")
+Lab Question
+
+Write a Python program to demonstrate method overriding.
+
+Answer:
+class Parent:
+    def show(self):
+        print("Parent method")
+
+class Child(Parent):
+    def show(self):
+        print("Child method")
+
+c = Child()
+c.show()
+Practical Example Question 15
+
+Write a Python program to demonstrate method overloading.
+
+Answer:
+class Test:
+    def show(self, a=None, b=None):
+        if a and b:
+            print(a + b)
+        elif a:
+            print(a)
+        else:
+            print("No input")
+
+t = Test()
+t.show()
+t.show(10)
+t.show(10, 20)
+9. SQLite3 and PyMySQL Database Connection
+Theory Question 1
+
+Introduction to SQLite3 and PyMySQL for database connectivity in Python.
+
+Answer:
+
+SQLite3 and PyMySQL are used to connect Python with databases. SQLite3 is built-in, PyMySQL is used for MySQL.
+
+Example:
+
+import sqlite3
+conn = sqlite3.connect("test.db")
+Theory Question 2
+
+Creating and executing SQL queries from Python.
+
+Answer:
+
+SQL queries are executed using cursor object.
+
+Example:
+
+cursor.execute("CREATE TABLE student(id INT, name TEXT)")
+Lab Question
+
+Write a Python program to connect to SQLite database and create a table.
+
+Answer:
+import sqlite3
+
+conn = sqlite3.connect("student.db")
+cursor = conn.cursor()
+
+cursor.execute("CREATE TABLE student(id INT, name TEXT)")
+
+conn.commit()
+conn.close()
+Practical Example Question 16
+
+Write a Python program to insert and display data from SQLite database.
+
+Answer:
+import sqlite3
+
+conn = sqlite3.connect("student.db")
+cursor = conn.cursor()
+
+cursor.execute("INSERT INTO student VALUES(1,'Vishal')")
+cursor.execute("SELECT * FROM student")
+
+for row in cursor.fetchall():
+    print(row)
+
+conn.commit()
+conn.close()
+10. Search and Match Functions (Regular Expressions)
+Theory Question 1
+
+Using re.search() and re.match() for pattern matching.
+
+Answer:
+
+re.search() searches entire string.
+re.match() searches only at beginning.
+
+Example:
+
+import re
+
+print(re.search("Python", "I love Python"))
+print(re.match("Python", "Python is easy"))
+Theory Question 2
+
+Understanding regular expressions and pattern matching in Python.
+
+Answer:
+
+Regular expressions are used to search patterns in strings using re module.
+
+Example:
+
+import re
+pattern = "Python"
+Lab Question
+
+Write a Python program to search a pattern in a string using re.search().
+
+Answer:
+import re
+
+text = "I love Python"
+result = re.search("Python", text)
+
+if result:
+    print("Found")
+Practical Example Question 17
+
+Write a Python program to match a pattern at the beginning of a string using re.match().
+
+Answer:
+import re
+
+text = "Python is easy"
+
+result = re.match("Python", text)
+
+if result:
+    print("Match found")
