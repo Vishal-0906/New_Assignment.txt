@@ -1,0 +1,106 @@
+
+
+SESSION 5 – Third-Party API Integrations
+
+Q1. Create a Django REST Framework endpoint /api/music-weather/<city>/ that fetches the current weather for the given city using the OpenWeatherMap API and returns the temperature and weather description as JSON, as if you are showing weather info for a music festival app.  
+Answer:  
+`python
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+OPENWEATHERAPIKEY = "your-openweather-api-key"
+
+class MusicWeatherAPIView(APIView):
+    def get(self, request, city):
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHERAPIKEY}&units=metric"
+        response = requests.get(url).json()
+        data = {
+            "temperature": response["main"]["temp"],
+            "description": response["weather"][0]["description"]
+        }
+        return Response(data)
+`
+
+---
+
+Q2. Build a /api/food-location/ endpoint that takes a restaurant name as a query parameter, uses the Google Maps Geocoding API to find its latitude and longitude, and returns the coordinates in JSON.  
+Answer:  
+`python
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+GOOGLEMAPSAPI_KEY = "your-google-api-key"
+
+class FoodLocationAPIView(APIView):
+    def get(self, request):
+        restaurant = request.query_params.get("name")
+        if not restaurant:
+            return Response({"error": "Restaurant name required"}, status=400)
+
+        url = f"https://maps.googleapis.com/maps/api/geocode/json?address={restaurant}&key={GOOGLEMAPSAPI_KEY}"
+        response = requests.get(url).json()
+
+        if response["status"] != "OK":
+            return Response({"error": "Restaurant not found"}, status=404)
+
+        location = response["results"][0]["geometry"]["location"]
+        return Response({"latitude": location["lat"], "longitude": location["lng"]})
+`
+
+---
+
+Q3. Create a /api/country-info/<country_name>/ endpoint that uses the REST Countries API to fetch and return the population and capital of the given country, formatted as JSON.  
+Answer:  
+`python
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class CountryInfoAPIView(APIView):
+    def get(self, request, country_name):
+        url = f"https://restcountries.com/v3.1/name/{country_name}"
+        response = requests.get(url).json()
+
+        if "status" in response and response["status"] == 404:
+            return Response({"error": "Country not found"}, status=404)
+
+        country = response[0]
+        data = {
+            "capital": country["capital"][0],
+            "population": country["population"]
+        }
+        return Response(data)
+`
+
+---
+
+Q4. Use ChatGPT to generate a Python code snippet that sends a GET request to the GitHub API to fetch public repositories for a given username, then copy and adapt that code into a DRF view called /api/github-repos/<username>/ that returns the list of repository names as JSON.  
+Answer:  
+`python
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class GitHubReposAPIView(APIView):
+    def get(self, request, username):
+        url = f"https://api.github.com/users/{username}/repos"
+        response = requests.get(url).json()
+
+        repos = [repo["name"] for repo in response]
+        return Response({"repositories": repos})
+`
+
+---
+
+Q5. Open your /api/music-weather/<city>/ endpoint in Postman and use Postman AI to generate and run a test that checks if the response contains both 'temperature' and 'description' keys.  
+Answer:  
+- In Postman, send a GET request to /api/music-weather/London.  
+- Use Postman AI to generate a test script:  
+`javascript
+pm.test("Response contains temperature and description", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property("temperature");
+    pm.expect(jsonData).to.have.property("description");
+});
