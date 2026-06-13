@@ -1,0 +1,82 @@
+SESSION 3 – ViewSets, Routers & Pagination (ModelViewSet)
+
+Q1. Create a ModelViewSet for a Restaurant model (fields: name, cuisine, location) and register it with a DefaultRouter.  
+Answer:  
+`python
+from rest_framework import viewsets
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class RestaurantViewSet(viewsets.ModelViewSet):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
+`
+
+`python
+
+urls.py
+from rest_framework.routers import DefaultRouter
+from .views import RestaurantViewSet
+
+router = DefaultRouter()
+router.register(r'restaurants', RestaurantViewSet)
+
+urlpatterns = router.urls
+`
+
+---
+
+Q2. Implement PageNumberPagination for your RestaurantViewSet so that the /api/restaurants/ endpoint returns only 3 restaurants per page.  
+Answer:  
+`python
+
+settings.py
+REST_FRAMEWORK = {
+    'DEFAULTPAGINATIONCLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3
+}
+`
+
+---
+
+Q3. Switch your pagination to LimitOffsetPagination and test /api/restaurants/?limit=2&offset=2.  
+Answer:  
+`python
+
+settings.py
+REST_FRAMEWORK = {
+    'DEFAULTPAGINATIONCLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3
+}
+`
+
+---
+
+Q4. Add ordering support to your RestaurantViewSet.  
+Answer:  
+`python
+from rest_framework import filters
+
+class RestaurantViewSet(viewsets.ModelViewSet):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['name', 'cuisine']
+`
+Usage: /api/restaurants/?ordering=name
+
+---
+
+Q5. Add a filter to your RestaurantViewSet so users can filter restaurants by cuisine type.  
+Answer:  
+`python
+from djangofilters.restframework import DjangoFilterBackend
+
+class RestaurantViewSet(viewsets.ModelViewSet):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['cuisine']
+    ordering_fields = ['name', 'cuisine']
+`
+Usage: /api/restaurants/?cuisine=Italian
