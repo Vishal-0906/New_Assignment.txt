@@ -1,0 +1,127 @@
+SESSION 6 – Advanced Features + Deployment
+
+Q1. Set up a Django REST Framework endpoint called /api/send-email/ that sends a welcome email to a user using the Mailgun API when a POST request is made with the user's email address.  
+Answer:  
+`python
+import requests
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+MAILGUNAPIKEY = "your-mailgun-api-key"
+MAILGUN_DOMAIN = "your-mailgun-domain"
+
+class SendEmailAPIView(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+        if not email:
+            return Response({"error": "Email required"}, status=status.HTTP400BAD_REQUEST)
+
+        response = requests.post(
+            f"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages",
+            auth=("api", MAILGUNAPIKEY),
+            data={
+                "from": "MusicFest <mailgun@yourdomain.com>",
+                "to": [email],
+                "subject": "Welcome!",
+                "text": "Welcome to our app!"
+            }
+        )
+        return Response({"status": response.status_code})
+`
+
+---
+
+Q2. Create a /api/send-sms/ endpoint that accepts a phone number and message, then sends the SMS using Twilio's API.  
+Answer:  
+`python
+from twilio.rest import Client
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+TWILIOACCOUNTSID = "your-twilio-sid"
+TWILIOAUTHTOKEN = "your-twilio-auth-token"
+TWILIOPHONENUMBER = "+1234567890"
+
+class SendSMSAPIView(APIView):
+    def post(self, request):
+        phone = request.data.get("phone")
+        message = request.data.get("message")
+        if not phone or not message:
+            return Response({"error": "Phone and message required"}, status=status.HTTP400BAD_REQUEST)
+
+        client = Client(TWILIOACCOUNTSID, TWILIOAUTHTOKEN)
+        sms = client.messages.create(
+            body=message,
+            from=TWILIOPHONE_NUMBER,
+            to=phone
+        )
+        return Response({"sid": sms.sid})
+`
+
+---
+
+Q3. Add a /api/pay/ endpoint that simulates a payment using Stripe's test API keys — accept amount and currency in the POST body and return a custom JSON response with payment status and transaction ID.  
+Answer:  
+`python
+import stripe
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+stripe.api_key = "your-stripe-test-key"
+
+class PayAPIView(APIView):
+    def post(self, request):
+        amount = request.data.get("amount")
+        currency = request.data.get("currency", "usd")
+
+        try:
+            payment_intent = stripe.PaymentIntent.create(
+                amount=int(amount),
+                currency=currency,
+                paymentmethodtypes=["card"]
+            )
+            return Response({
+                "status": "success",
+                "transactionid": paymentintent.id
+            })
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP400BAD_REQUEST)
+`
+
+---
+
+Q4. Implement Google Login for your Django REST API so users can authenticate using their Google account and receive a JWT token.  
+Answer:  
+- Install packages:  
+`bash
+pip install django-allauth social-auth-app-django djangorestframework-simplejwt
+`
+- Configure settings.py:  
+`python
+INSTALLED_APPS += [
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+]
+
+SITE_ID = 1
+`
+- Use social-auth-app-django or django-allauth to handle Google OAuth login.  
+- After successful login, issue a JWT token using restframeworksimplejwt.
+
+---
+
+Q5. Deploy your Django REST API to PythonAnywhere and verify that the /api/send-email/ endpoint works live by testing it with Postman.  
+Answer:  
+- Steps:  
+  1. Push your project to GitHub.  
+  2. Log in to PythonAnywhere and create a new web app.  
+  3. Clone your project from GitHub.  
+  4. Configure WSGI file to point to your Django project.  
+  5. Run migrations and collect static files.  
+  6. Test /api/send-email/ using Postman with a live URL (e.g., https://yourusername.pythonanywhere.com/api/send-email/).  
