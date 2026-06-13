@@ -1,0 +1,110 @@
+SESSION 4 – Authentication & Permission
+
+Q1. Create a Django REST Framework API endpoint /api/playlists/ for a music app that is protected using BasicAuthentication. Only authenticated users should be able to view the list of playlists.  
+Answer:  
+`python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+class PlaylistAPIView(APIView):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        playlists = [
+            {"id": 1, "name": "Top Hits"},
+            {"id": 2, "name": "Workout Mix"}
+        ]
+        return Response(playlists)
+`
+
+---
+
+Q2. Implement TokenAuthentication for a /api/orders/ endpoint in a Zomato-style food ordering app. Generate an auth token for a user using rest_framework.authtoken and test accessing the endpoint with and without the token.  
+Answer:  
+`python
+
+settings.py
+INSTALLEDAPPS += ['restframework.authtoken']
+
+views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+class OrderAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        orders = [
+            {"id": 1, "item": "Pizza"},
+            {"id": 2, "item": "Burger"}
+        ]
+        return Response(orders)
+`
+
+Generate token:  
+`bash
+python manage.py drfcreatetoken <username>
+`
+
+---
+
+Q3. Set up SessionAuthentication for a /api/cart/ endpoint in a Flipkart-style shopping app. Allow only logged-in users to add items to their cart, and return a 403 Forbidden error for unauthenticated users.  
+Answer:  
+`python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+class CartAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        item = request.data.get("item")
+        return Response({"message": f"{item} added to cart"})
+`
+
+---
+
+Q4. Create a custom permission class IsPremiumUser for a BookMyShow-style ticket booking API. Only users with is_premium=True should be able to access /api/tickets/. Apply this permission to the view and test with both premium and non-premium users.  
+Answer:  
+`python
+from rest_framework.permissions import BasePermission
+
+class IsPremiumUser(BasePermission):
+    def has_permission(self, request, view):
+        return hasattr(request.user, 'ispremium') and request.user.ispremium
+
+views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class TicketAPIView(APIView):
+    permission_classes = [IsPremiumUser]
+
+    def get(self, request):
+        tickets = [
+            {"id": 1, "movie": "Avengers"},
+            {"id": 2, "movie": "Inception"}
+        ]
+        return Response(tickets)
+`
+
+---
+
+Q5. Explain the difference between TokenAuthentication and SessionAuthentication as if you are answering an interview question.  
+Answer:  
+- TokenAuthentication: Each user is assigned a unique token string. The client must send this token with every request (usually in the Authorization header). It is stateless and works well for APIs consumed by mobile apps or external clients.  
+- SessionAuthentication: Relies on Django’s built-in session framework. The server stores session data, and the client maintains a session cookie. It is stateful and works best for web applications where users log in via forms.  
+
+Interview-style response:  
+"TokenAuthentication is stateless and ideal for APIs accessed by mobile or third-party clients, as the token must be included in every request. SessionAuthentication, on the other hand, is stateful and relies on cookies and server-side sessions, making it more suitable for traditional web applications where users log in through a browser."
+
+---
