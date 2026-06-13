@@ -1,0 +1,90 @@
+SESSION 1 – Introduction to REST & DRF Setup
+
+Q1. Install Django and Django REST Framework in a new virtual environment, then create a Django project named foodiehub and an app named api.  
+Answer:  
+`bash
+
+Create virtual environment
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
+
+Install Django + DRF
+pip install django djangorestframework
+
+Create project and app
+django-admin startproject foodiehub
+cd foodiehub
+python manage.py startapp api
+`
+
+---
+
+Q2. Add 'restframework' to the INSTALLEDAPPS list in your foodiehub/settings.py file and verify the app runs without errors by starting the development server.  
+Answer:  
+`python
+INSTALLED_APPS = [
+    ...,
+    'rest_framework',
+    'api',
+]
+`
+Run server:  
+`bash
+python manage.py runserver
+`
+
+---
+
+Q3. Create a new file views.py inside your api app and build a function-based API endpoint hellospotify that returns JSON: {"message": "Hello, Spotify Fans!"} when accessed at /api/hellospotify/.  
+Answer:  
+`python
+from django.http import JsonResponse
+
+def hello_spotify(request):
+    return JsonResponse({"message": "Hello, Spotify Fans!"})
+`
+
+`python
+
+urls.py in api app
+from django.urls import path
+from .views import hello_spotify
+
+urlpatterns = [
+    path('hellospotify/', hellospotify),
+]
+`
+
+---
+
+Q4. Compare JSON and XML by writing a short comment in your views.py file: show a sample response for each format representing a Flipkart product with name and price.  
+Answer:  
+`python
+
+JSON Example:
+
+{"name": "Laptop", "price": 50000}
+
+XML Example:
+
+<product>
+
+<name>Laptop</name>
+
+<price>50000</price>
+
+</product>
+`
+
+---
+
+Q5. Write a basic Serializer class in serializers.py for a Zomato-style Restaurant object with fields: name and cuisine.  
+Answer:  
+`python
+from rest_framework import serializers
+
+class RestaurantSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=100)
+    cuisine = serializers.CharField(max_length=100)
+`
