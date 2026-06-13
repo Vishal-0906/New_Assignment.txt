@@ -1,0 +1,117 @@
+SESSION 2 – Serializers + CRUD API Development
+
+Q1. Create a Django model called Restaurant with fields name, cuisine, and rating, then register it in the admin panel.  
+Answer:  
+`python
+from django.db import models
+
+class Restaurant(models.Model):
+    name = models.CharField(max_length=100)
+    cuisine = models.CharField(max_length=100)
+    rating = models.FloatField()
+
+    def str(self):
+        return self.name
+`
+
+`python
+
+admin.py
+from django.contrib import admin
+from .models import Restaurant
+
+admin.site.register(Restaurant)
+`
+
+---
+
+Q2. Write a ModelSerializer named RestaurantSerializer for the Restaurant model.  
+Answer:  
+`python
+from rest_framework import serializers
+from .models import Restaurant
+
+class RestaurantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant
+        fields = 'all'
+`
+
+---
+
+Q3. Build CRUD API endpoints for the Restaurant model using APIView.  
+Answer:  
+`python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class RestaurantAPIView(APIView):
+    def get(self, request):
+        restaurants = Restaurant.objects.all()
+        serializer = RestaurantSerializer(restaurants, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = RestaurantSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP201CREATED)
+        return Response(serializer.errors, status=status.HTTP400BAD_REQUEST)
+
+    def put(self, request, pk):
+        try:
+            restaurant = Restaurant.objects.get(pk=pk)
+        except Restaurant.DoesNotExist:
+            return Response(status=status.HTTP404NOT_FOUND)
+        serializer = RestaurantSerializer(restaurant, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP400BAD_REQUEST)
+
+    def delete(self, request, pk):
+        try:
+            restaurant = Restaurant.objects.get(pk=pk)
+        except Restaurant.DoesNotExist:
+            return Response(status=status.HTTP404NOT_FOUND)
+        restaurant.delete()
+        return Response(status=status.HTTP204NO_CONTENT)
+`
+
+---
+
+Q4. Return appropriate HTTP status codes in your Restaurant API views.  
+Answer: Already shown above using status.HTTP201CREATED, status.HTTP200OK, status.HTTP404NOTFOUND, and status.HTTP400BADREQUEST.
+
+---
+
+Q5. Use GenericAPIView and mixins to refactor your Restaurant API.  
+Answer:  
+`python
+from rest_framework import generics, mixins
+from .models import Restaurant
+from .serializers import RestaurantSerializer
+
+class RestaurantGenericAPIView(mixins.ListModelMixin,
+                               mixins.CreateModelMixin,
+                               mixins.UpdateModelMixin,
+                               mixins.DestroyModelMixin,
+                               generics.GenericAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
+
+    def get(self, request, args, *kwargs):
+        return self.list(request, args, *kwargs)
+
+    def post(self, request, args, *kwargs):
+        return self.create(request, args, *kwargs)
+
+    def put(self, request, args, *kwargs):
+        return self.update(request, args, *kwargs)
+
+    def delete(self, request, args, *kwargs):
+        return self.destroy(request, args, *kwargs)
+`
