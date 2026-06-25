@@ -1,0 +1,192 @@
+Session 1: Introduction to JavaScript & Environment Setup
+​Task 1
+​Question:
+Create an HTML file named welcome.html, add a <script> tag, and display an alert with the message 'Welcome to your Playlist Builder!' when the page loads.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playlist Builder</title>
+</head>
+<body>
+    <h1>My Playlist Builder</h1>
+
+    <script>
+        alert('Welcome to your Playlist Builder!');
+    </script>
+</body>
+</html>
+Task 2
+​Question:
+Create an HTML file named welcome.html, add a <script> tag, and display an alert with the message 'Welcome to your Playlist Builder!' when the page loads.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Playlist Builder - Task 2</title>
+</head>
+<body>
+    <h1>Playlist Builder Application</h1>
+
+    <script>
+        alert('Welcome to your Playlist Builder!');
+    </script>
+</body>
+</html>
+Task 3
+​Question:
+Create an HTML file named insta-bio.html and use the <script> tag to display an alert with the message 'Welcome to your Insta Bio-Link Page!' when the page loads.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insta Bio-Link</title>
+</head>
+<body>
+    <h1>Insta Bio Page</h1>
+
+    <script>
+        alert('Welcome to your Insta Bio-Link Page!');
+    </script>
+</body>
+</html>
+Task 4
+​Question:
+Open Chrome DevTools on any website you visit daily (like Instagram or Zomato), go to the Console tab, and type console.log('Hello from the console!') to see the output.
+​Answer:
+console.log('Hello from the console!');
+
+Task 5
+​Question:
+Open Chrome DevTools on any website you visit daily (like Instagram or Zomato), go to the Console tab, and type console.log('Hello from the console!') to see the output.
+​Answer:
+console.log('Hello from the console!');
+
+
+Task 6
+​Question:
+Open Chrome DevTools on any website you visit daily (like Zomato or Flipkart), go to the Console tab, and type console.log('JS is running!') to see the output.
+​Answer:
+console.log('JS is running!');
+
+Task 7
+​Question:
+Add a <button> to your HTML file labeled 'Show Bio', and use JavaScript inside a <script> tag to display an alert with your name and favorite app when the button is clicked.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Bio Task</title>
+</head>
+<body>
+    <button onclick="displayBio()">Show Bio</button>
+
+    <script>
+        function displayBio() {
+            alert('Name: Vishal\nFavorite App: Instagram');
+        }
+    </script>
+</body>
+</html>
+Task 8
+​Question:
+Add a <button> to your HTML file labeled 'Show Bio', and use JavaScript inside a <script> tag to display an alert with your name and favorite app when the button is clicked.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Bio Repeated Task</title>
+</head>
+<body>
+    <button onclick="triggerBioAlert()">Show Bio</button>
+
+    <script>
+        function triggerBioAlert() {
+            alert('Name: Vishal Rajput\nFavorite App: WhatsApp');
+        }
+    </script>
+</body>
+</html>
+
+Task 9
+​Question:
+Modify your insta-bio.html file to add a <button> labeled 'Show Greeting'. When the button is clicked, use JavaScript to show an alert that says 'Hello from JS!'. Hint: Use document.querySelector and addEventListener to connect the button with your JS code.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insta Bio</title>
+</head>
+<body>
+    <h1>My Bio Page</h1>
+    <button id="greetBtn">Show Greeting</button>
+
+    <script>
+        // Select the button element by its ID
+        const targetBtn = document.querySelector('#greetBtn');
+        
+        // Listen for a click event to fire the alert
+        targetBtn.addEventListener('click', function() {
+            alert('Hello from JS!');
+        });
+    </script>
+</body>
+</html>
+
+Task 10
+​Question:
+Edit your HTML file to include an <h2> tag with the text 'Top 3 Food Apps'. Use JavaScript in a <script> tag to change the color of this heading to green when the page loads. Hint: Use document.querySelector to select the heading and style.color to change its color.
+
+Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food App Heading Styling</title>
+</head>
+<body>
+    <h2 id="food-heading-title">Top 3 Food Apps</h2>
+
+    <script>
+        // Select the heading using querySelector
+        const appHeading = document.querySelector('#food-heading-title');
+        
+        // Apply inline styles via JS to alter color properties
+        appHeading.style.color = 'green';
+    </script>
+</body>
+</html>
+
+Task 11
+​Question:
+Edit your HTML file to include an <h2> tag with the text 'Top 3 Food Apps'. Use JavaScript in a <script> tag to change the color of this heading to green when the page loads. Hint: Use document.querySelector to select the heading and style.color to change its color.
+​Answer:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food App Styling Repeat</title>
+</head>
+<body>
+    <h2 class="target-food-header">Top 3 Food Apps</h2>
+
+    <script>
+        // Selecting via class name alternative
+        const foodHeaderElement = document.querySelector('.target-food-header');
+        foodHeaderElement.style.color = 'green';
+    </script>
+</body>
+</html>
+
+Task 12
+​Question:
+Use VS Code Live Server to open your insta-bio.html file, then change the alert message to include your own name and refresh to see the update.
+​Answer:
+
+alert('Welcome to Vishal\'s Insta Bio-Link Page!');
