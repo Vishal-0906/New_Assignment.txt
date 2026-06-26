@@ -1,0 +1,212 @@
+
+
+📘 Session 3: Operators & Conditions
+
+---
+
+Q1. Create a JavaScript file that declares two variables: likes and comments. Use arithmetic operators to calculate the total engagement (likes + comments) and display the result using console.log.
+Answer:
+`javascript
+let likes = 120;
+let comments = 45;
+
+let totalEngagement = likes + comments;
+console.log("Total Engagement:", totalEngagement); // 165
+`
+
+---
+
+Q2. Create a JavaScript file that declares two variables: likes and comments. Use arithmetic operators to calculate the total engagement (likes + comments) and display the result using console.log.
+Answer:
+`javascript
+let likes = 200;
+let comments = 80;
+
+let totalEngagement = likes + comments;
+console.log("Total Engagement:", totalEngagement); // 280
+`
+
+---
+
+Q3. Create a JavaScript file called likeCounter.js that declares a variable likes with value 0, increments it by 1 using the += operator, and logs the updated likes count to the console.
+Answer:
+`javascript
+let likes = 0;
+likes += 1;
+
+console.log("Updated Likes:", likes); // 1
+`
+
+---
+
+Q4. Write a function showDiscountTag(price) that checks if a product's price is less than 500 using a comparison operator. If true, print 'Special Discount!'; otherwise, print 'Regular Price'.
+Answer:
+`javascript
+function showDiscountTag(price) {
+  if (price < 500) {
+    console.log("Special Discount!");
+  } else {
+    console.log("Regular Price");
+  }
+}
+
+// Test
+showDiscountTag(300); // Special Discount!
+showDiscountTag(700); // Regular Price
+`
+
+---
+
+Q5. Write a function showDiscountTag(price) that checks if a product's price is less than 500 using a comparison operator. If true, print 'Special Discount!'; otherwise, print 'Regular Price'.
+Answer:
+`javascript
+function showDiscountTag(price) {
+  if (price < 500) {
+    console.log("Special Discount!");
+  } else {
+    console.log("Regular Price");
+  }
+}
+
+showDiscountTag(450); // Special Discount!
+`
+
+---
+
+Q6. Write a function isEligibleForDiscount(totalAmount) that returns true if the totalAmount is greater than or equal to 500, otherwise false. Test it with values 300 and 700.
+Answer:
+`javascript
+function isEligibleForDiscount(totalAmount) {
+  return totalAmount >= 500;
+}
+
+// Test
+console.log(isEligibleForDiscount(300)); // false
+console.log(isEligibleForDiscount(700)); // true
+`
+
+---
+
+Q7. Build a mini Instagram-style verification badge logic: declare a variable followers and use a ternary operator to set a variable badge to 'Verified Creator' if followers is more than 1000, or 'Regular User' otherwise. Print the badge value.
+Answer:
+`javascript
+let followers = 1200;
+let badge = followers > 1000 ? "Verified Creator" : "Regular User";
+
+console.log(badge); // Verified Creator
+`
+
+---
+
+Q8. Build a mini Instagram-style verification badge logic: declare a variable followers and use a ternary operator to set a variable badge to 'Verified Creator' if followers is more than 1000, or 'Regular User' otherwise. Print the badge value.
+Answer:
+`javascript
+let followers = 800;
+let badge = followers > 1000 ? "Verified Creator" : "Regular User";
+
+console.log(badge); // Regular User
+`
+
+---
+
+Q9. Build a function getBadge(followers) that returns 'Verified Creator ⭐' if followers is 1000 or more, otherwise returns 'Regular User'. Use the ternary operator to implement this logic.
+Answer:
+`javascript
+function getBadge(followers) {
+  return followers >= 1000 ? "Verified Creator ⭐" : "Regular User";
+}
+
+// Test
+console.log(getBadge(1500)); // Verified Creator ⭐
+console.log(getBadge(500));  // Regular User
+`
+
+---
+
+Q10. Given a variable isPremiumUser and hasActiveSubscription, use logical operators to check if both are true. If so, print 'Access Granted'; otherwise, print 'Upgrade Needed'.
+Answer:
+`javascript
+let isPremiumUser = true;
+let hasActiveSubscription = false;
+
+if (isPremiumUser && hasActiveSubscription) {
+  console.log("Access Granted");
+} else {
+  console.log("Upgrade Needed");
+}
+`
+
+---
+
+Q11. Given a variable isPremiumUser and hasActiveSubscription, use logical operators to check if both are true. If so, print 'Access Granted'; otherwise, print 'Upgrade Needed'.
+Answer:
+`javascript
+let isPremiumUser = true;
+let hasActiveSubscription = true;
+
+if (isPremiumUser && hasActiveSubscription) {
+  console.log("Access Granted");
+} else {
+  console.log("Upgrade Needed");
+}
+`
+
+---
+
+Q12. Given a variable username, write a condition that checks if username is truthy, and if so, logs 'Welcome, [username]!', otherwise logs 'Guest Login'.
+Answer:
+`javascript
+let username = "Priya";
+
+if (username) {
+  console.log(Welcome, ${username}!);
+} else {
+  console.log("Guest Login");
+}
+`
+
+---
+
+Q13. Write a function isTruthy(input) that takes any value and returns 'Truthy' or 'Falsy' based on JavaScript's truthy/falsy evaluation. Test it with "", 0, null, 'hello', and 42. Constraint: Do not use if-else; use the ternary operator.
+Answer:
+`javascript
+function isTruthy(input) {
+  return input ? "Truthy" : "Falsy";
+}
+
+// Test
+console.log(isTruthy(""));     // Falsy
+console.log(isTruthy(0));      // Falsy
+console.log(isTruthy(null));   // Falsy
+console.log(isTruthy("hello"));// Truthy
+console.log(isTruthy(42));     // Truthy
+`
+
+---
+
+Q14. Write a function isTruthy(input) that takes any value and returns 'Truthy' or 'Falsy' based on JavaScript's truthy/falsy evaluation. Test it with "", 0, null, 'hello', and 42. Constraint: Do not use if-else; use the ternary operator.
+Answer:
+`javascript
+function isTruthy(input) {
+  return input ? "Truthy" : "Falsy";
+}
+
+console.log(isTruthy(""));   // Falsy
+console.log(isTruthy(42));   // Truthy
+`
+
+---
+
+Q15. Create a function canOrderFood(isLoggedIn, hasPaymentMethod) that returns true only if both isLoggedIn and hasPaymentMethod are true, using logical operators. Test your function with all possible combinations of true/false.
+Answer:
+`javascript
+function canOrderFood(isLoggedIn, hasPaymentMethod) {
+  return isLoggedIn && hasPaymentMethod;
+}
+
+// Test
+console.log(canOrderFood(true, true));   // true
+console.log(canOrderFood(true, false));  // false
+console.log(canOrderFood(false, true));  // false
+console.log(canOrderFood(false, false)); // false
+`
