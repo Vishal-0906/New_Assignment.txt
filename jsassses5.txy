@@ -1,0 +1,213 @@
+
+
+📘 Session 5: Functions & Reusability
+
+---
+
+Q1. Create a function declaration called createSpotifyButton(label, color) that returns an HTML button element with the given label and background color, and display it on the page.
+
+`javascript
+function createSpotifyButton(label, color) {
+  const button = document.createElement("button");
+  button.textContent = label;
+  button.style.backgroundColor = color;
+  document.body.appendChild(button);
+  return button;
+}
+
+// Example usage
+createSpotifyButton("Play", "green");
+`
+
+---
+
+Q2. Create a function declaration called createSpotifyButton(label, color) that returns an HTML button element with the given label and background color, and display it on the page.
+
+`javascript
+function createSpotifyButton(label, color) {
+  const button = document.createElement("button");
+  button.textContent = label;
+  button.style.backgroundColor = color;
+  document.body.appendChild(button);
+  return button;
+}
+
+// Example usage
+createSpotifyButton("Pause", "blue");
+`
+
+---
+
+Q3. Declare a function expression called getGreeting that takes a user's name as a parameter and returns a message like 'Hello, Rahul!'.
+
+`javascript
+const getGreeting = function(name) {
+  return Hello, ${name}!;
+};
+
+// Example usage
+console.log(getGreeting("Rahul"));
+`
+
+---
+
+Q4. Write a function expression named getDiscountedPrice that takes a price and a discount percent, and returns the final price after applying the discount (e.g., for Flipkart-style sale banners).
+
+`javascript
+const getDiscountedPrice = function(price, discountPercent) {
+  const discount = (price * discountPercent) / 100;
+  return price - discount;
+};
+
+// Example usage
+console.log(getDiscountedPrice(1000, 20)); // 800
+`
+
+---
+
+Q5. Write a function expression named getDiscountedPrice that takes a price and a discount percent, and returns the final price after applying the discount (e.g., for Flipkart-style sale banners).
+
+`javascript
+const getDiscountedPrice = function(price, discountPercent) {
+  const discount = (price * discountPercent) / 100;
+  return price - discount;
+};
+
+// Example usage
+console.log(getDiscountedPrice(500, 10)); // 450
+`
+
+---
+
+Q6. Write an arrow function called formatFollowers that takes a number and returns it formatted as '1.5K' for 1500 or '2M' for 2000000, similar to how Instagram displays follower counts.
+
+`javascript
+const formatFollowers = (count) => {
+  if (count >= 1000000) {
+    return (count / 1000000).toFixed(1) + "M";
+  } else if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "K";
+  }
+  return count.toString();
+};
+
+// Example usage
+console.log(formatFollowers(1500));    // "1.5K"
+console.log(formatFollowers(2000000)); // "2.0M"
+`
+
+---
+
+Q7. Rewrite the following function as an arrow function:
+
+`javascript
+const formatFollowers = (count) => {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "K";
+  }
+  return count;
+};
+`
+
+---
+
+Q8. Rewrite the following function as an arrow function:
+
+`javascript
+const formatFollowers = (count) => {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "K";
+  }
+  return count;
+};
+`
+
+---
+
+Q9. Create a function declaration called createLikeButton(label, color) that returns a styled HTML button element with the given label and background color. Append the button to the document body.
+
+`javascript
+function createLikeButton(label, color) {
+  const button = document.createElement("button");
+  button.textContent = label;
+  button.style.backgroundColor = color;
+  document.body.appendChild(button);
+  return button;
+}
+
+// Example usage
+createLikeButton("Like ❤️", "red");
+`
+
+---
+
+Q10. Build a mini Zomato-style feature: write a function showMenuItem(name, price) that returns a styled HTML div with the food item's name and price, then call it for three different items and display them on the page.
+
+`javascript
+function showMenuItem(name, price) {
+  const itemDiv = document.createElement("div");
+  itemDiv.style.border = "1px solid #ccc";
+  itemDiv.style.padding = "10px";
+  itemDiv.style.margin = "5px";
+  itemDiv.textContent = ${name} - ₹${price};
+  document.body.appendChild(itemDiv);
+  return itemDiv;
+}
+
+// Example usage
+showMenuItem("Pizza", 299);
+showMenuItem("Burger", 199);
+showMenuItem("Pasta", 249);
+`
+
+---
+
+Q11. Build a mini Zomato-style feature: write a function showMenuItem(name, price) that returns a styled HTML div with the food item's name and price, then call it for three different items and display them on the page.
+
+`javascript
+function showMenuItem(name, price) {
+  const itemDiv = document.createElement("div");
+  itemDiv.style.border = "1px solid #ccc";
+  itemDiv.style.padding = "10px";
+  itemDiv.style.margin = "5px";
+  itemDiv.textContent = ${name} - ₹${price};
+  document.body.appendChild(itemDiv);
+  return itemDiv;
+}
+
+// Example usage
+showMenuItem("Sandwich", 149);
+showMenuItem("Fries", 99);
+showMenuItem("Ice Cream", 129);
+`
+
+---
+
+Q12. Refactor the following code to use an arrow function instead of a function declaration:
+
+`javascript
+const double = (x) => x * 2;
+
+// Example usage
+console.log(double(5)); // 10
+`
+
+---
+
+Q13. Build a reusable function called createPlaylistButton(songName, themeColor) that returns a button element styled with the given color and displaying the song name. Use this function to create and display three buttons for your favorite Spotify tracks.
+
+`javascript
+function createPlaylistButton(songName, themeColor) {
+  const button = document.createElement("button");
+  button.textContent = songName;
+  button.style.backgroundColor = themeColor;
+  button.style.color = "white";
+  button.style.margin = "5px";
+  document.body.appendChild(button);
+  return button;
+}
+
+// Example usage
+createPlaylistButton("Shape of You", "purple");
+createPlaylistButton("Blinding Lights", "blue");
+createPlaylistButton("Levitating", "green");
