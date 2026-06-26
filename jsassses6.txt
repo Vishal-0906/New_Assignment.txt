@@ -1,0 +1,591 @@
+
+📘 Session 6: DOM Manipulation – Selecting Elements
+
+---
+
+Q1. Create an HTML page with a <div id="greeting"></div> and use getElementById in your script to set its innerHTML to 'Welcome to the IPL Fan Zone!'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting Example</title>
+</head>
+<body>
+  <div id="greeting"></div>
+
+  <script>
+    document.getElementById("greeting").innerHTML = "Welcome to the IPL Fan Zone!";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q2. Create an HTML page with a <div id="greeting"></div> and use getElementById in your script to set its innerHTML to 'Welcome to the IPL Fan Zone!'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting Example</title>
+</head>
+<body>
+  <div id="greeting"></div>
+
+  <script>
+    document.getElementById("greeting").innerHTML = "Welcome to the IPL Fan Zone!";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q3. Create an HTML file with a <div id="greeting"></div> and use getElementById in a script to set its innerHTML to 'Hello, welcome to your playlist!'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playlist Greeting</title>
+</head>
+<body>
+  <div id="greeting"></div>
+
+  <script>
+    document.getElementById("greeting").innerHTML = "Hello, welcome to your playlist!";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q4. Build a small form with an input box and a button labeled 'Add Song'. When the button is clicked, use querySelector to get the input value and dynamically add a new <li> element with the song name to a <ul id="playlist"> on the page.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playlist</title>
+</head>
+<body>
+  <input type="text" id="song-input" placeholder="Enter song name">
+  <button id="add-song">Add Song</button>
+  <ul id="playlist"></ul>
+
+  <script>
+    document.querySelector("#add-song").addEventListener("click", function() {
+      const songName = document.querySelector("#song-input").value;
+      if (songName.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = songName;
+        document.querySelector("#playlist").appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q5. Build a small form with an input box and a button labeled 'Add Song'. When the button is clicked, use querySelector to get the input value and dynamically add a new <li> element with the song name to a <ul id="playlist"> on the page.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playlist</title>
+</head>
+<body>
+  <input type="text" id="song-input" placeholder="Enter song name">
+  <button id="add-song">Add Song</button>
+  <ul id="playlist"></ul>
+
+  <script>
+    document.querySelector("#add-song").addEventListener("click", function() {
+      const songName = document.querySelector("#song-input").value;
+      if (songName.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = songName;
+        document.querySelector("#playlist").appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q6. Build a simple form with an input for a new friend's name and a button labeled 'Add Friend'; when the button is clicked, use querySelector to read the input value and dynamically add a new <li> with that name to a <ul id="friend-list">.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Friend List</title>
+</head>
+<body>
+  <input type="text" id="friend-input" placeholder="Enter friend's name">
+  <button id="add-friend">Add Friend</button>
+  <ul id="friend-list"></ul>
+
+  <script>
+    document.querySelector("#add-friend").addEventListener("click", function() {
+      const friendName = document.querySelector("#friend-input").value;
+      if (friendName.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = friendName;
+        document.querySelector("#friend-list").appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q7. Select an existing <h2> element with the id 'offer' and use JavaScript to change its text to 'Flat 50% Off on Zomato Today!' and set its color to red using the style property.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offer</title>
+</head>
+<body>
+  <h2 id="offer">Old Offer</h2>
+
+  <script>
+    const offerElement = document.getElementById("offer");
+    offerElement.innerHTML = "Flat 50% Off on Zomato Today!";
+    offerElement.style.color = "red";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q8. Select an existing <h2> element with the id 'offer' and use JavaScript to change its text to 'Flat 50% Off on Zomato Today!' and set its color to red using the style property.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offer</title>
+</head>
+<body>
+  <h2 id="offer">Old Offer</h2>
+
+  <script>
+    const offerElement = document.getElementById("offer");
+    offerElement.innerHTML = "Flat 50% Off on Zomato Today!";
+    offerElement.style.color = "red";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q9. Create a 'Dark Mode' toggle button that, when clicked, uses getElementById to change the background color of the page and updates the button text to 'Light Mode'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dark Mode Toggle</title>
+</head>
+<body>
+  <button id="toggle-mode">Dark Mode</button>
+
+  <script>
+    const button = document.getElementById("toggle-mode");
+    button.addEventListener("click", function() {
+      if (document.body.style.backgroundColor === "black") {
+        document.body.style.backgroundColor = "white";
+        button.textContent = "Dark Mode";
+      } else {
+        document.body.style.backgroundColor = "black";
+        button.textContent = "Light Mode";
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q10. Create a function that updates the background color of a <div id="moodbox"></div> in real-time as the user types a color name (like 'pink' or 'yellow') into an input box.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Box</title>
+</head>
+<body>
+  <input type="text" id="color-input" placeholder="Type a color">
+  <div id="moodbox" style="width:100px; height:100px; border:1px solid black;"></div>
+
+  <script>
+    const input = document.getElementById("color-input");
+    const moodbox = document.getElementById("moodbox");
+
+    input.addEventListener("input", function() {
+      moodbox.style.backgroundColor = input.value;
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q11. Create a function that updates the background color of a <div id="moodbox"></div> in real-time as the user types a color name (like 'pink' or 'yellow') into an input box.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Box</title>
+</head>
+<body>
+  <input type="text" id="color-input" placeholder="Type a color">
+  <div id="moodbox" style="width:100px; height:100px; border:1px solid black;"></div>
+
+  <script>
+    const input = document.getElementById("color-input");
+    const moodbox = document.getElementById("moodbox");
+
+    input.addEventListener("input", function() {
+      moodbox.style.backgroundColor = input.value;
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q12. Build a mini 'Now Playing' display like Spotify: show a song title in a <span id="song-title"></span> and a button 'Change Song'; when the button is clicked, update the innerHTML of the span to a new song name from a predefined array.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Now Playing</title>
+</head>
+<body>
+  <span id="song-title">Song A</span>
+  <button id="change-song">Change Song</button>
+
+  <script>
+    const songs = ["Song A", " script to set its innerHTML to 'Welcome to the IPL Fan Zone!'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting Example</title>
+</head>
+<body>
+  <div id="greeting"></div>
+
+  <script>
+    document.getElementById("greeting").innerHTML = "Welcome to the IPL Fan Zone!";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q2. Create an HTML page with a <div id="greeting"></div> and use getElementById in your script to set its innerHTML to 'Welcome to the IPL Fan Zone!'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting Example</title>
+</head>
+<body>
+  <div id="greeting"></div>
+
+  <script>
+    document.getElementById("greeting").innerHTML = "Welcome to the IPL Fan Zone!";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q3. Create an HTML file with a <div id="greeting"></div> and use getElementById in a script to set its innerHTML to 'Hello, welcome to your playlist!'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playlist Greeting</title>
+</head>
+<body>
+  <div id="greeting"></div>
+
+  <script>
+    document.getElementById("greeting").innerHTML = "Hello, welcome to your playlist!";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q4. Build a small form with an input box and a button labeled 'Add Song'. When the button is clicked, use querySelector to get the input value and dynamically add a new <li> element with the song name to a <ul id="playlist"> on the page.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playlist</title>
+</head>
+<body>
+  <input type="text" id="song-input" placeholder="Enter song name">
+  <button id="add-song">Add Song</button>
+  <ul id="playlist"></ul>
+
+  <script>
+    document.querySelector("#add-song").addEventListener("click", function() {
+      const songName = document.querySelector("#song-input").value;
+      if (songName.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = songName;
+        document.querySelector("#playlist").appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q5. Build a small form with an input box and a button labeled 'Add Song'. When the button is clicked, use querySelector to get the input value and dynamically add a new <li> element with the song name to a <ul id="playlist"> on the page.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playlist</title>
+</head>
+<body>
+  <input type="text" id="song-input" placeholder="Enter song name">
+  <button id="add-song">Add Song</button>
+  <ul id="playlist"></ul>
+
+  <script>
+    document.querySelector("#add-song").addEventListener("click", function() {
+      const songName = document.querySelector("#song-input").value;
+      if (songName.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = songName;
+        document.querySelector("#playlist").appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q6. Build a simple form with an input for a new friend's name and a button labeled 'Add Friend'; when the button is clicked, use querySelector to read the input value and dynamically add a new <li> with that name to a <ul id="friend-list">.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Friend List</title>
+</head>
+<body>
+  <input type="text" id="friend-input" placeholder="Enter friend's name">
+  <button id="add-friend">Add Friend</button>
+  <ul id="friend-list"></ul>
+
+  <script>
+    document.querySelector("#add-friend").addEventListener("click", function() {
+      const friendName = document.querySelector("#friend-input").value;
+      if (friendName.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = friendName;
+        document.querySelector("#friend-list").appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q7. Select an existing <h2> element with the id 'offer' and use JavaScript to change its text to 'Flat 50% Off on Zomato Today!' and set its color to red using the style property.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offer</title>
+</head>
+<body>
+  <h2 id="offer">Old Offer</h2>
+
+  <script>
+    const offerElement = document.getElementById("offer");
+    offerElement.innerHTML = "Flat 50% Off on Zomato Today!";
+    offerElement.style.color = "red";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q8. Select an existing <h2> element with the id 'offer' and use JavaScript to change its text to 'Flat 50% Off on Zomato Today!' and set its color to red using the style property.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offer</title>
+</head>
+<body>
+  <h2 id="offer">Old Offer</h2>
+
+  <script>
+    const offerElement = document.getElementById("offer");
+    offerElement.innerHTML = "Flat 50% Off on Zomato Today!";
+    offerElement.style.color = "red";
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q9. Create a 'Dark Mode' toggle button that, when clicked, uses getElementById to change the background color of the page and updates the button text to 'Light Mode'.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dark Mode Toggle</title>
+</head>
+<body>
+  <button id="toggle-mode">Dark Mode</button>
+
+  <script>
+    const button = document.getElementById("toggle-mode");
+    button.addEventListener("click", function() {
+      if (document.body.style.backgroundColor === "black") {
+        document.body.style.backgroundColor = "white";
+        button.textContent = "Dark Mode";
+      } else {
+        document.body.style.backgroundColor = "black";
+        button.textContent = "Light Mode";
+      }
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q10. Create a function that updates the background color of a <div id="moodbox"></div> in real-time as the user types a color name (like 'pink' or 'yellow') into an input box.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Box</title>
+</head>
+<body>
+  <input type="text" id="color-input" placeholder="Type a color">
+  <div id="moodbox" style="width:100px; height:100px; border:1px solid black;"></div>
+
+  <script>
+    const input = document.getElementById("color-input");
+    const moodbox = document.getElementById("moodbox");
+
+    input.addEventListener("input", function() {
+      moodbox.style.backgroundColor = input.value;
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q11. Create a function that updates the background color of a <div id="moodbox"></div> in real-time as the user types a color name (like 'pink' or 'yellow') into an input box.
+
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Box</title>
+</head>
+<body>
+  <input type="text" id="color-input" placeholder="Type a color">
+  <div id="moodbox" style="width:100px; height:100px; border:1px solid black;"></div>
+
+  <script>
+    const input = document.getElementById("color-input");
+    const moodbox = document.getElementById("moodbox");
+
+    input.addEventListener("input", function() {
+      moodbox.style.backgroundColor = input.value;
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q12. Build a mini 'Now Playing' display like Spotify: show a song title in a <span id="song-title"></span> and a button 'Change Song'; when the button is clicked, update the innerHTML of the span to a new song name from a predefined array.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Now Playing</title>
+</head>
+<body>
+  <h3>🎵 Now Playing:</h3>
+  <span id="song-title">Song A</span>
+  <br><br>
+  <button id="change-song">Change Song</button>
+
+  <script>
+    const songs = ["Song A", "Song B", "Song C", "Song D"];
+    let currentIndex = 0;
+
+    const songTitle = document.getElementById("song-title");
+    const changeButton = document.getElementById("change-song");
+
+    changeButton.addEventListener("click", function() {
+      // Move to the next song in the array
+      currentIndex = (currentIndex + 1) % songs.length;
+      songTitle.innerHTML = songs[currentIndex];
+    });
+  </script>
+</body>
+</html>
