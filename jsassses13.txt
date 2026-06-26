@@ -1,0 +1,274 @@
+
+Session 13: Error Handling in JavaScript
+Question 1
+**Create a function validateSpotifyURL(url) that takes a string and checks if it starts with https://open.spotify.com/. If not, throw a custom error with the message "Invalid Spotify URL".
+Solution
+function validateSpotifyURL(url) {
+    if (!url.startsWith("https://open.spotify.com/")) {
+        throw new Error("Invalid Spotify URL");
+    }
+
+    return "Valid Spotify URL";
+}
+
+try {
+    console.log(validateSpotifyURL("https://open.spotify.com/track/123"));
+}
+catch (error) {
+    console.log(error.message);
+}
+
+
+Question 2
+Create a function validateSpotifyURL(url) that takes a string and checks if it starts with https://open.spotify.com/. If not, throw a custom error with the message "Invalid Spotify URL" and handle it using try...catch.
+Solution
+function validateSpotifyURL(url) {
+    if (!url.startsWith("https://open.spotify.com/")) {
+        throw new Error("Invalid Spotify URL");
+    }
+
+    return "URL is valid";
+}
+
+try {
+    console.log(validateSpotifyURL("https://google.com"));
+}
+catch (error) {
+    console.log(error.message);
+}
+
+
+Question 3
+Create a function validateUsername(username) that checks whether the username contains only letters and numbers. If not, throw an error with the message "Invalid Username" and handle it using try...catch.
+Solution
+function validateUsername(username) {
+
+    let pattern = /^[a-zA-Z0-9]+$/;
+
+    if (!pattern.test(username)) {
+        throw new Error("Invalid Username");
+    }
+
+    return "Valid Username";
+}
+
+try {
+    console.log(validateUsername("Vishal123"));
+}
+catch (error) {
+    console.log(error.message);
+}
+
+
+Question 4
+Write a JavaScript program that reads the following Flipkart product JSON, parses it, and prints the product name, price, and rating.
+Solution
+let productJSON = `{
+    "name":"Laptop",
+    "price":55000,
+    "rating":4.6
+}`;
+
+try {
+
+    let product = JSON.parse(productJSON);
+
+    console.log("Name :", product.name);
+    console.log("Price :", product.price);
+    console.log("Rating :", product.rating);
+
+}
+catch (error) {
+    console.log(error.message);
+}
+
+Question 5
+Write a JavaScript program that reads the following Flipkart product JSON, parses it, and prints the product name, price, and rating. If the JSON is invalid, catch the error and display the error message.
+Solution
+let productJSON = `{
+    "name":"Mobile",
+    "price":25000,
+    "rating":4.4
+}`;
+
+try {
+
+    let product = JSON.parse(productJSON);
+
+    console.log("Name :", product.name);
+    console.log("Price :", product.price);
+    console.log("Rating :", product.rating);
+
+}
+catch (error) {
+    console.log("Error :", error.message);
+}
+Sure! Here are Session 13: Error Handling in JavaScript – Questions 6 to 10.
+Session 13: Error Handling in JavaScript
+Question 6
+Create a function parseUserData(jsonString) that parses a JSON string into an object. If the JSON is invalid, catch the error and display "Invalid JSON Data" instead of crashing the program.
+Solution
+function parseUserData(jsonString) {
+    try {
+        let user = JSON.parse(jsonString);
+        console.log(user);
+    }
+    catch (error) {
+        console.log("Invalid JSON Data");
+    }
+}
+
+parseUserData('{"name":"Vishal","age":20}');
+parseUserData('{name:"Vishal"}');
+
+Write a JavaScript program that divides two numbers. If the denominator is 0, throw an error with the message "Division by zero is not allowed" and handle it using try...catch.
+Solution
+function divide(a, b) {
+    try {
+        if (b === 0) {
+            throw new Error("Division by zero is not allowed");
+        }
+
+        console.log("Result:", a / b);
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+}
+
+divide(20, 5);
+divide(20, 0);
+
+
+Question 8
+Write a JavaScript program to access an array element using an index. If the index is out of range, throw an error with the message "Index Out of Bounds" and handle it using try...catch.
+Solution
+function getElement(arr, index) {
+    try {
+        if (index < 0 || index >= arr.length) {
+            throw new Error("Index Out of Bounds");
+        }
+
+        console.log(arr[index]);
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+}
+
+let numbers = [10, 20, 30, 40, 50];
+
+getElement(numbers, 2);
+getElement(numbers, 10);
+
+
+Question 9
+Write a JavaScript program to check whether a number is positive. If the number is negative, throw an error with the message "Negative Number Not Allowed" and handle it using try...catch.
+Solution
+function checkNumber(num) {
+    try {
+        if (num < 0) {
+            throw new Error("Negative Number Not Allowed");
+        }
+
+        console.log("Valid Number:", num);
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+}
+
+checkNumber(25);
+checkNumber(-8);
+
+Question 10
+Write a JavaScript program to check whether a string is empty. If it is empty, throw an error with the message "String Cannot Be Empty" and handle it using try...catch.
+Solution
+function checkString(str) {
+    try {
+        if (str.trim() === "") {
+            throw new Error("String Cannot Be Empty");
+        }
+
+        console.log("Valid String:", str);
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+}
+
+11. Given this buggy code, debug it so that it properly handles errors when trying to access a property of an undefined object.
+let user = {};
+console.log(user.names.clien);
+catch (e) { don't handle correctly }
+Make sure the error message is user friendly, like "User data not found".
+
+Answer:
+let user = {};
+
+try {
+    console.log(user.names.clien);
+} catch (e) {
+    console.log("User data not found");
+}
+
+12. You are given this buggy code: function formatFollowers (count) { try { if (count < 0) throw "Negative count"; return count + " followers"; } catch(e) { return e.message; } } It should return the error message if count is negative, but it returns undefined. Fix the code so it properly throws and catches an Error object.
+Note: Use Error objects instead of strings for throwing and catching errors.
+
+Answer:
+function formatFollowers(count) {
+    try {
+        if (count < 0) {
+            throw new Error("Negative count");
+        }
+        return count + " followers";
+    } catch (e) {
+        return e.message;
+    }
+}
+
+13. Copy an error stack trace from your browser's console when a thrown error occurs (for example, from a failed JSON.parse or invalid URL check), and paste it into ChatGPT. Ask ChatGPT to explain what the stack trace means and summarize the explanation in your own words.
+
+Answer:
+Example stack trace:
+Uncaught SyntaxError: Unexpected token in JSON at position 10
+    at JSON.parse (<anonymous>)
+    at script.js:8:15
+    at main.js:4:3
+Explanation:
+The error is a SyntaxError caused by invalid JSON format.
+It happened inside JSON.parse.
+The exact location is script.js line 8, column 15.
+main.js called the function that caused the error.
+Summary: The program failed because invalid JSON was passed to JSON.parse, and the error occurred at line 8 in script.js.
+
+14. Copy an error stack trace from your browser's console when a thrown error occurs (for example, from a failed JSON.parse or invalid URL check), and paste it into ChatGPT. Ask ChatGPT to explain what the stack trace means and summarize the explanation in your own words.
+
+Answer:
+Example stack trace:
+TypeError: Cannot read properties of undefined (reading 'name')
+    at getUser (app.js:7:12)
+    at renderPage (app.js:14:5)
+Explanation:
+TypeError occurs when accessing property of undefined.
+Error happens in getUser function at line 7.
+renderPage function calls getUser.
+The root cause is undefined object access.
+Summary: The error happened because code tried to access a property of an undefined object in getUser function.
+
+15. Copy a stack trace from a JavaScript error you generate (for example, by calling a function that throws a custom error), and paste it into ChatGPT. Ask ChatGPT to explain what the error means and which line caused the problem. Summarize ChatGPT's explanation in your own words in a comment above the code.
+
+Answer:
+
+function validateAge(age) {
+    if (age < 0) {
+        throw new Error("Age cannot be negative");
+    }
+    return true;
+}
+
+function registerUser() {
+    validateAge(-5);
+}
+
+registerUser();
