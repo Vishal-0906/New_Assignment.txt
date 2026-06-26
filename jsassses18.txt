@@ -1,0 +1,215 @@
+📘 Session 18: Debugging & Developer Tools
+
+---
+
+Q1
+Question: Open the developer console in your browser and use console.log(), console.warn(), and console.error() to display a mock notification like Instagram: log a successful post upload, warn if the caption is missing, and show an error if the image fails to upload.  
+
+Answer:
+`javascript
+console.log("✅ Post uploaded successfully!");
+console.warn("⚠️ Caption is missing.");
+console.error("❌ Image failed to upload.");
+`
+
+---
+
+Q2
+Question: Same as Q1, solved separately.  
+
+Answer:
+`javascript
+console.log("Post uploaded successfully!");
+console.warn("Caption not provided.");
+console.error("Image upload error!");
+`
+
+---
+
+Q3
+Question: Create a JavaScript file that defines an array of 5 songs (each with title, artist, and duration), then use console.table() to display the array in a formatted table in the browser console.  
+
+Answer:
+`javascript
+const songs = [
+  { title: "Shape of You", artist: "Ed Sheeran", duration: "3:53" },
+  { title: "Blinding Lights", artist: "The Weeknd", duration: "3:20" },
+  { title: "Levitating", artist: "Dua Lipa", duration: "3:23" },
+  { title: "Perfect", artist: "Ed Sheeran", duration: "4:40" },
+  { title: "Stay", artist: "Justin Bieber", duration: "2:21" }
+];
+
+console.table(songs);
+`
+
+---
+
+Q4
+Question: Create an array of 5 food orders (each with orderId, itemName, price) and use console.table() to neatly display all orders in the browser console like a Zomato admin dashboard.  
+
+Answer:
+`javascript
+const orders = [
+  { orderId: 101, itemName: "Pizza", price: 500 },
+  { orderId: 102, itemName: "Burger", price: 200 },
+  { orderId: 103, itemName: "Pasta", price: 350 },
+  { orderId: 104, itemName: "Sandwich", price: 150 },
+  { orderId: 105, itemName: "Fries", price: 100 }
+];
+
+console.table(orders);
+`
+
+---
+
+Q5
+Question: Same as Q4, solved separately.  
+
+Answer:
+`javascript
+const foodOrders = [
+  { orderId: 201, itemName: "Biryani", price: 250 },
+  { orderId: 202, itemName: "Paneer Tikka", price: 300 },
+  { orderId: 203, itemName: "Noodles", price: 180 },
+  { orderId: 204, itemName: "Soup", price: 120 },
+  { orderId: 205, itemName: "Ice Cream", price: 90 }
+];
+
+console.table(foodOrders);
+`
+
+---
+
+Q6
+Question: Write a function addToCart(productName, quantity) that logs a success message using console.log(), a warning if quantity is zero using console.warn(), and an error if quantity is negative using console.error(). Call the function with all three scenarios.  
+
+Answer:
+`javascript
+function addToCart(productName, quantity) {
+  if (quantity > 0) {
+    console.log(✅ Added ${quantity} ${productName}(s) to cart.);
+  } else if (quantity === 0) {
+    console.warn(⚠️ Quantity for ${productName} is zero.);
+  } else {
+    console.error(❌ Invalid quantity for ${productName}.);
+  }
+}
+
+addToCart("Shoes", 2);   // Success
+addToCart("Watch", 0);   // Warning
+addToCart("Bag", -1);    // Error
+`
+
+---
+
+Q7
+Question: Write a JavaScript function addToCart(item, quantity) that accidentally throws an error when quantity is 0. Set a breakpoint in the Sources tab before the error line, run the function with quantity 0, and inspect the values of item and quantity at the breakpoint.  
+
+Answer:
+`javascript
+function addToCart(item, quantity) {
+  if (quantity === 0) {
+    throw new Error("Quantity cannot be zero!");
+  }
+  console.log(Added ${quantity} ${item}(s) to cart.);
+}
+
+addToCart("Shoes", 0); // Trigger error
+
+---
+
+Q8
+Question: Same as Q7, solved separately.  
+
+Answer:
+`javascript
+function addToCart(item, quantity) {
+  if (quantity === 0) {
+    throw new Error("Quantity is zero, cannot proceed!");
+  }
+  console.log(Added ${quantity} ${item}(s) to cart.);
+}
+
+addToCart("Laptop", 0); // Error triggered
+`
+---
+
+Q9
+Question: Open the Sources tab in Chrome DevTools, set a breakpoint inside a loop that prints each friend's name from an array, and step through the code to inspect the value of the loop variable at each iteration.  
+
+Answer:
+`javascript
+const friends = ["Amit", "Priya", "Rahul", "Sneha", "Vikram"];
+
+for (let i = 0; i < friends.length; i++) {
+  console.log(friends[i]);
+}
+`
+
+---
+
+Q10
+Question: Given the following broken function, run it in your browser and use the stack trace in the console to identify which function call caused the error.  
+
+`javascript
+function placeOrder() { confirmOrder(); }
+function confirmOrder() { processPayment(); }
+function processPayment() { throw new Error('Payment failed'); }
+placeOrder();
+`
+
+Answer:  
+- Error: Payment failed  
+- Stack trace shows the error originates in processPayment() at the line with throw new Error(...).
+
+---
+
+Q11
+Question: Same as Q10, solved separately.  
+
+Answer:  
+- Error: Payment failed  
+- Stack trace shows the error originates in processPayment() function.  
+- Call stack: placeOrder() → confirmOrder() → processPayment().
+
+---
+
+Q12
+Question: Given the following buggy code, run it in your browser and use the stack trace in the console to identify which function is causing the error:  
+
+`javascript
+function getUser() { return fetchUser(); }
+function fetchUser() { return JSON.parse(undefined); }
+getUser();
+`
+
+Answer:  
+- Error: SyntaxError: Unexpected token u in JSON at position 0  
+- Stack trace shows the error occurs in fetchUser() at the line JSON.parse(undefined).
+
+---
+
+Q13
+Question: Copy any error message you see in the browser console (from your previous tasks) and paste it into ChatGPT. Ask ChatGPT to explain what the error means and suggest how to fix it, then write down the explanation you received.  
+
+Answer (example explanation):  
+Error: SyntaxError: Unexpected token u in JSON at position 0  
+Explanation: This happens because JSON.parse(undefined) is invalid. To fix it, ensure you pass a valid JSON string (e.g., "{}" or "[]") instead of undefined.
+
+---
+
+Q14
+Question: Same as Q13, solved separately.  
+
+Answer (example explanation):  
+Error: Error: Quantity cannot be zero!  
+Explanation: The function addToCart() throws an error when quantity is 0. To fix it, either allow zero quantities or handle the case with a warning instead of throwing an error.
+
+---
+
+Q15
+Question: Copy a real error message you get from your browser console (from any of the above tasks) and paste it into ChatGPT. Ask ChatGPT to explain what the error means and suggest how to fix it. Write down the explanation in your own words.  
+
+Answer (example explanation):  
+Error: Error: Payment failed  
+Explanation: The error was thrown intentionally in processPayment(). It means the payment process encountered a failure. To fix it, replace the throw new Error(...) with proper error handling logic, such as retrying payment or showing a user-friendly message.
