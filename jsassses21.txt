@@ -1,0 +1,230 @@
+Project 7 – Interactive Social Bio Link Builder
+
+Q1
+
+Question: Create a JavaScript function addPlaylistLink(linkObj) that adds a new music playlist link (with name and URL) to an array and saves the updated array to LocalStorage under the key 'myPlaylists'.
+
+Answer:
+
+function addPlaylistLink(linkObj) {
+  let playlists = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+  playlists.push(linkObj);
+  localStorage.setItem("myPlaylists", JSON.stringify(playlists));
+}
+
+Q2
+
+Question: Create a JavaScript function addPlaylistLink(linkObj) that adds a new music playlist link (with name and URL) to an array and saves the updated array to LocalStorage under the key 'myPlaylists'.
+
+Answer:
+
+function addPlaylistLink(linkObj) {
+  let myPlaylists = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+  myPlaylists.push(linkObj);
+  localStorage.setItem("myPlaylists", JSON.stringify(myPlaylists));
+}
+
+Q3
+
+Question: Create a JavaScript function addPlaylistLink(linkObj) that adds a new music playlist link (with name and URL) to an array and saves the updated array to LocalStorage under the key 'myPlaylists'.
+
+Answer:
+
+function addPlaylistLink(linkObj) {
+  let arr = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+  arr.push(linkObj);
+  localStorage.setItem("myPlaylists", JSON.stringify(arr));
+}
+
+Q4
+
+Question: Build a function validateURL(url) that checks if a given URL starts with 'https://' and contains at least one '.' — return true if valid, otherwise false.
+
+Answer:
+
+function validateURL(url) {
+  return url.startsWith("https://") && url.includes(".");
+}
+
+Q5
+
+Question: Build a function validateURL(url) that checks if a given URL starts with 'https://' and contains at least one '.' — return true if valid, otherwise false.
+
+Answer:
+
+function validateURL(url) {
+  if (url.startsWith("https://") && url.includes(".")) {
+    return true;
+  }
+  return false;
+}
+
+Q6
+
+Question: Build a function editPlaylistLink(index, newLinkObj) that updates the name and URL of a playlist link at a given index in your 'myPlaylists' array, then persists the changes to LocalStorage.
+
+Answer:
+
+function editPlaylistLink(index, newLinkObj) {
+  let playlists = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+  if (playlists[index]) {
+    playlists[index] = newLinkObj;
+    localStorage.setItem("myPlaylists", JSON.stringify(playlists));
+  }
+}
+
+Q7
+
+Question: Implement a toggleTheme() function that switches between light and dark mode by adding or removing a 'dark-mode' class on the body element, and persists the current theme in LocalStorage.
+
+Answer:
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+  let theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+  localStorage.setItem("theme", theme);
+}
+
+Q8
+
+Question: Implement a toggleTheme() function that switches between light and dark mode by adding or removing a 'dark-mode' class on the body element, and persists the current theme in LocalStorage.
+
+Answer:
+
+function toggleTheme() {
+  if (document.body.classList.contains("dark-mode")) {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+  }
+}
+
+Q9
+
+Question: Write a function deletePlaylistLink(index) that removes a playlist link from your 'myPlaylists' array and updates LocalStorage so the link is gone on page reload.
+
+Answer:
+
+function deletePlaylistLink(index) {
+  let playlists = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+  playlists.splice(index, 1);
+  localStorage.setItem("myPlaylists", JSON.stringify(playlists));
+}
+
+Q10
+
+Question: Refactor your link editing logic so that both add and edit operations use a single reusable function manageLink(linkObj, mode), where mode is either 'add' or 'edit'.
+
+Answer:
+
+function manageLink(linkObj, mode, index = null) {
+  let playlists = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+
+  if (mode === "add") {
+    playlists.push(linkObj);
+  } else if (mode === "edit" && index !== null) {
+    playlists[index] = linkObj;
+  }
+
+  localStorage.setItem("myPlaylists", JSON.stringify(playlists));
+}
+
+Q11
+
+Question: Refactor your link editing logic so that both add and edit operations use a single reusable function manageLink(linkObj, mode), where mode is either 'add' or 'edit'.
+
+Answer:
+
+function manageLink(linkObj, mode, index = null) {
+  let arr = JSON.parse(localStorage.getItem("myPlaylists")) || [];
+
+  switch (mode) {
+    case "add":
+      arr.push(linkObj);
+      break;
+    case "edit":
+      if (index !== null) arr[index] = linkObj;
+      break;
+  }
+
+  localStorage.setItem("myPlaylists", JSON.stringify(arr));
+}
+
+Q12
+
+Question: Implement a toggleTheme() function that switches between light and dark mode for your playlist links page, saving the selected mode in LocalStorage and applying it on next visit.
+
+Answer:
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+  let theme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+  localStorage.setItem("theme", theme);
+}
+
+// Apply saved theme on page load
+window.onload = function() {
+  let savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+};
+
+Q13
+
+Question: Use ChatGPT or Copilot to generate a JavaScript code snippet that displays an error message below a form input if the user enters an invalid Instagram profile URL, and explain in 2 lines how you would integrate this snippet into your existing code.
+
+Answer:
+
+function validateInstagramURL(url) {
+  const errorMsg = document.getElementById("instaError");
+  if (!url.startsWith("https://www.instagram.com/")) {
+    errorMsg.textContent = "Invalid Instagram profile URL!";
+  } else {
+    errorMsg.textContent = "";
+  }
+}
+
+Explanation: Call validateInstagramURL() on form submission or input blur event. Add a <span id="instaError"></span> below the input field to show the error.
+
+Q14
+
+Question: Use ChatGPT or Copilot to generate a JavaScript code snippet that displays an error message below a form input if the user enters an invalid Instagram profile URL, and explain in 2 lines how you would integrate this snippet into your existing code.
+
+Answer:
+
+function checkInstagramURL(url) {
+  const error = document.getElementById("errorMsg");
+  if (!url.includes("instagram.com")) {
+    error.textContent = "Please enter a valid Instagram URL.";
+  } else {
+    error.textContent = "";
+  }
+}
+
+Explanation: Attach checkInstagramURL() to the input field’s onblur event. Place <span id="errorMsg"></span> under the input to display the error.
+
+Q15
+
+Question: Build a validateLink(url) function that checks if a playlist URL starts with 'https://' and contains 'spotify.com' or 'youtube.com'. Show an error message if validation fails.
+
+Answer:
+
+function validateLink(url) {
+  const error = document.getElementById("linkError");
+  if (url.startsWith("https://") && (url.includes("spotify.com") || url.includes("youtube.com"))) {
+    error.textContent = "";
+    return true;
+  } else {
+    error.textContent = "Invalid playlist URL. Must be Spotify or YouTube.";
+    return false;
+  }
+}
+
+Usage:
+
+<input type="text" id="playlistURL" placeholder="Enter playlist URL">
+<span id="linkError"></span>
+
