@@ -1,0 +1,410 @@
+📘 Session 19: Mini-Project Preparation & Integration
+
+---
+
+Q1
+Question: Create an HTML file with a simple form that lets a user add a new playlist (name, description) like Spotify's 'Create Playlist' feature, and use JavaScript to store the playlist data in an array.  
+
+Answer:
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Playlist</title>
+</head>
+<body>
+  <h2>Create Playlist</h2>
+  <form id="playlistForm">
+    <input type="text" id="name" placeholder="Playlist Name" required>
+    <input type="text" id="description" placeholder="Description" required>
+    <button type="submit">Add Playlist</button>
+  </form>
+
+  <script>
+    const playlists = [];
+
+    document.getElementById("playlistForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const description = document.getElementById("description").value;
+
+      playlists.push({ name, description });
+      console.log(playlists);
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q2
+Question: Create an HTML file with a simple form that lets a user add a new playlist (name, description) like Spotify's 'Create Playlist' feature, and use JavaScript to store the playlist data in an array.  
+
+Answer:
+`html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spotify Playlist</title>
+</head>
+<body>
+  <h2>Create Playlist</h2>
+  <form id="form">
+    <input type="text" id="playlistName" placeholder="Name" required>
+    <input type="text" id="playlistDesc" placeholder="Description" required>
+    <button type="submit">Add</button>
+  </form>
+
+  <script>
+    const playlistArray = [];
+
+    document.getElementById("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const playlistName = document.getElementById("playlistName").value;
+      const playlistDesc = document.getElementById("playlistDesc").value;
+
+      playlistArray.push({ playlistName, playlistDesc });
+      console.log(playlistArray);
+    });
+  </script>
+</body>
+</html>
+`
+
+---
+
+Q3
+Question: Sketch the architecture for a Flipkart-style Wishlist Manager app on paper or a whiteboard — show how data flows from the Add Item form, to storage (array or localStorage), to the display list, and how edit/delete actions update the data and UI.  
+
+Answer (textual sketch):
+`
+Form Submit ---> Add to Array/LocalStorage ---> Render Display List
+       |                                         |
+       |                                         |
+       v                                         v
+   Edit/Delete -----------------------------> Update Array & Re-render UI
+`
+- Form Submit: Captures item details.  
+- Data Storage: Saves to array/localStorage.  
+- Display List: Renders items dynamically.  
+- Edit/Delete: Updates/removes item in storage and re-renders UI.  
+
+---
+
+Q4
+Question: Display the list of playlists below the form, showing each playlist's name and description, and update the display every time a new playlist is added.  
+
+Answer:
+`html
+<div id="playlistDisplay"></div>
+
+<script>
+  function renderPlaylists() {
+    const display = document.getElementById("playlistDisplay");
+    display.innerHTML = "";
+    playlists.forEach(p => {
+      const div = document.createElement("div");
+      div.textContent = ${p.name} - ${p.description};
+      display.appendChild(div);
+    });
+  }
+
+  document.getElementById("playlistForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const description = document.getElementById("description").value;
+    playlists.push({ name, description });
+    renderPlaylists();
+  });
+</script>
+`
+
+---
+
+Q5
+Question: Display the list of playlists below the form, showing each playlist's name and description, and update the display every time a new playlist is added.  
+
+Answer:
+`html
+<div id="list"></div>
+
+<script>
+  function showPlaylists() {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+    playlistArray.forEach(p => {
+      const item = document.createElement("p");
+      item.textContent = ${p.playlistName} - ${p.playlistDesc};
+      list.appendChild(item);
+    });
+  }
+
+  document.getElementById("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const playlistName = document.getElementById("playlistName").value;
+    const playlistDesc = document.getElementById("playlistDesc").value;
+    playlistArray.push({ playlistName, playlistDesc });
+    showPlaylists();
+  });
+</script>
+`
+
+---
+
+Q6
+Question: Create an HTML file with a Zomato-style 'Add Restaurant' form (name, cuisine, rating), and use JavaScript to collect the form data and store each entry in an array.  
+
+Answer:
+`html
+<form id="restaurantForm">
+  <input type="text" id="resName" placeholder="Restaurant Name" required>
+  <input type="text" id="cuisine" placeholder="Cuisine" required>
+  <input type="number" id="rating" placeholder="Rating" required>
+  <button type="submit">Add Restaurant</button>
+</form>
+
+<script>
+  const restaurants = [];
+
+  document.getElementById("restaurantForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const resName = document.getElementById("resName").value;
+    const cuisine = document.getElementById("cuisine").value;
+    const rating = document.getElementById("rating").value;
+
+    restaurants.push({ resName, cuisine, rating });
+    console.log(restaurants);
+  });
+</script>
+`
+
+---
+
+Q7
+Question: Add 'Edit' and 'Delete' buttons next to each playlist in the displayed list, and implement the JavaScript functions so users can update or remove a playlist from the array and see the changes instantly.  
+
+Answer:
+`javascript
+function renderPlaylists() {
+  const display = document.getElementById("playlistDisplay");
+  display.innerHTML = "";
+  playlists.forEach((p, index) => {
+    const div = document.createElement("div");
+    div.innerHTML = `${p.name} - ${p.description} 
+      <button onclick="editPlaylist(${index})">Edit</button>
+      <button onclick="deletePlaylist(${index})">Delete</button>`;
+    display.appendChild(div);
+  });
+}
+
+function editPlaylist(index) {
+  const playlist = playlists[index];
+  document.getElementById("name").value = playlist.name;
+  document.getElementById("description").value = playlist.description;
+  playlists.splice(index, 1); // remove old entry, will be replaced on submit
+}
+
+function deletePlaylist(index) {
+  playlists.splice(index, 1);
+  renderPlaylists();
+}
+`
+
+---
+
+Q8
+Question: Add 'Edit' and 'Delete' buttons next to each playlist in the displayed list, and implement the JavaScript functions so users can update or remove a playlist from the array and see the changes instantly.  
+
+Answer:
+`javascript
+function showPlaylists() {
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  playlistArray.forEach((p, i) => {
+    const item = document.createElement("div");
+    item.innerHTML = `${p.playlistName} - ${p.playlistDesc}
+      <button onclick="edit(${i})">Edit</button>
+      <button onclick="remove(${i})">Delete</button>`;
+    list.appendChild(item);
+  });
+}
+
+function edit(i) {
+  const pl = playlistArray[i];
+  document.getElementById("playlistName").value = pl.playlistName;
+  document.getElementById("playlistDesc").value = pl.playlistDesc;
+  playlistArray.splice(i, 1);
+}
+
+function remove(i) {
+  playlistArray.splice(i, 1);
+  showPlaylists();
+}
+`
+
+---
+
+Q9
+Question: Display the list of added restaurants below the form, showing name, cuisine, and rating for each, with Edit and Delete buttons next to each entry.  
+
+Answer:
+`javascript
+function renderRestaurants() {
+  const display = document.getElementById("restaurantList");
+  display.innerHTML = "";
+  restaurants.forEach((r, index) => {
+    const div = document.createElement("div");
+    div.innerHTML = `${r.resName} - ${r.cuisine} - ${r.rating}
+      <button onclick="editRestaurant(${index})">Edit</button>
+      <button onclick="deleteRestaurant(${index})">Delete</button>`;
+    display.appendChild(div);
+  });
+}
+
+function editRestaurant(index) {
+  const res = restaurants[index];
+  document.getElementById("resName").value = res.resName;
+  document.getElementById("cuisine").value = res.cuisine;
+  document.getElementById("rating").value = res.rating;
+  restaurants.splice(index, 1);
+}
+
+function deleteRestaurant(index) {
+  restaurants.splice(index, 1);
+  renderRestaurants();
+}
+
+---
+
+Q10
+Question: Draw a diagram (on paper or using an online tool) that shows how data flows between your form, the JavaScript array, and the display area when adding, editing, or deleting a playlist.  
+
+Answer (textual diagram):
+`
+[Form Submit] ---> [Add to Array] ---> [Render Display Area]
+       |                                   |
+       |                                   |
+       v                                   v
+   [Edit Action] ------------------> [Update Array & Re-render]
+   [Delete Action] ----------------> [Remove from Array & Re-render]
+`
+
+- Form Submit: Captures playlist details (name, description).  
+- Array (Model): Stores playlist data.  
+- Display Area (View): Shows playlists dynamically.  
+- Edit/Delete (Controller): Updates/removes data in the array and refreshes the UI.  
+
+---
+
+Q11
+Question: Draw a diagram (on paper or using an online tool) that shows how data flows between your form, the JavaScript array, and the display area when adding, editing, or deleting a playlist.  
+
+Answer (textual diagram):
+`
+User Input (Form) ---> JavaScript Array ---> Display List (UI)
+        |                   |                     |
+        |                   |                     |
+        v                   v                     v
+   Add Playlist        Store in Array        Render in UI
+   Edit Playlist ----> Update Array -----> Refresh Display
+   Delete Playlist --> Remove from Array -> Refresh Display
+`
+
+This is essentially an MVC pattern:  
+- Model: Array storing playlists.  
+- View: HTML display list.  
+- Controller: JavaScript functions handling add/edit/delete.  
+
+---
+
+Q12
+Question: Implement the Delete feature so that when the user clicks the Delete button for any restaurant, it is removed from both the array and the displayed list instantly.  
+
+Answer:
+`html
+<div id="restaurantList"></div>
+
+<script>
+  function renderRestaurants() {
+    const display = document.getElementById("restaurantList");
+    display.innerHTML = "";
+    restaurants.forEach((r, index) => {
+      const div = document.createElement("div");
+      div.innerHTML = `${r.resName} - ${r.cuisine} - ${r.rating}
+        <button onclick="deleteRestaurant(${index})">Delete</button>`;
+      display.appendChild(div);
+    });
+  }
+
+  function deleteRestaurant(index) {
+    restaurants.splice(index, 1); // remove from array
+    renderRestaurants(); // re-render UI
+  }
+</script>
+`
+
+---
+
+Q13
+Question: Add an Edit feature: when the Edit button is clicked for a restaurant, pre-fill the form with that restaurant's details, allow the user to update them, and save the changes back to the array and UI.  
+
+Answer:
+`html
+<form id="restaurantForm">
+  <input type="text" id="resName" placeholder="Restaurant Name" required>
+  <input type="text" id="cuisine" placeholder="Cuisine" required>
+  <input type="number" id="rating" placeholder="Rating" required>
+  <button type="submit">Save Restaurant</button>
+</form>
+
+<div id="restaurantList"></div>
+
+<script>
+  const restaurants = [];
+  let editIndex = null;
+
+  document.getElementById("restaurantForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const resName = document.getElementById("resName").value;
+    const cuisine = document.getElementById("cuisine").value;
+    const rating = document.getElementById("rating").value;
+
+    if (editIndex !== null) {
+      // update existing restaurant
+      restaurants[editIndex] = { resName, cuisine, rating };
+      editIndex = null;
+    } else {
+      // add new restaurant
+      restaurants.push({ resName, cuisine, rating });
+    }
+
+    renderRestaurants();
+    e.target.reset();
+  });
+
+  function renderRestaurants() {
+    const display = document.getElementById("restaurantList");
+    display.innerHTML = "";
+    restaurants.forEach((r, index) => {
+      const div = document.createElement("div");
+      div.innerHTML = `${r.resName} - ${r.cuisine} - ${r.rating}
+        <button onclick="editRestaurant(${index})">Edit</button>
+        <button onclick="deleteRestaurant(${index})">Delete</button>`;
+      display.appendChild(div);
+    });
+  }
+
+  function editRestaurant(index) {
+    const res = restaurants[index];
+    document.getElementById("resName").value = res.resName;
+    document.getElementById("cuisine").value = res.cuisine;
+    document.getElementById("rating").value = res.rating;
+    editIndex = index; // mark index for update
+  }
+
+  function deleteRestaurant(index) {
+    restaurants.splice(index, 1);
+    renderRestaurants();
+  }
+</script>
