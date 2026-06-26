@@ -1,4 +1,4 @@
-📘 Session 8: Arrays & Objects – Data Structures (Q14–Q15)
+📘 Session 8: Arrays & Objects – Data Structures
 
 Q1. Create an array called playlists containing three objects, each representing a Spotify playlist with properties: name, creator, and numberOfSongs. Log the entire array to the console.
 
