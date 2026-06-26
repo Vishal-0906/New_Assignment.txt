@@ -1,0 +1,257 @@
+📘 Session 16: Advanced Array Methods
+
+---
+
+Q1
+Question: Given an array of Flipkart product objects with properties name, price, and isInStock, use the filter() method to create a new array containing only the products that are in stock.  
+
+Answer:
+`javascript
+const products = [
+  { name: "Shoes", price: 2000, isInStock: true },
+  { name: "Watch", price: 5000, isInStock: false },
+  { name: "Bag", price: 1500, isInStock: true }
+];
+
+const inStockProducts = products.filter(product => product.isInStock);
+console.log(inStockProducts);
+`
+
+---
+
+Q2
+Question: Given an array of Flipkart product objects with properties name, price, and isInStock, use the filter() method to create a new array containing only the products that are in stock.  
+
+Answer: (Solved separately again)
+`javascript
+const products = [
+  { name: "Laptop", price: 60000, isInStock: true },
+  { name: "Phone", price: 25000, isInStock: false },
+  { name: "Headphones", price: 2000, isInStock: true }
+];
+
+const availableProducts = products.filter(p => p.isInStock);
+console.log(availableProducts);
+`
+
+---
+
+Q3
+Question: Given an array of playlists from a music app like Spotify, each with a name and isPublic property, use filter() to create a new array containing only the public playlists.  
+
+Answer:
+`javascript
+const playlists = [
+  { name: "Chill Vibes", isPublic: true },
+  { name: "Workout Mix", isPublic: false },
+  { name: "Party Hits", isPublic: true }
+];
+
+const publicPlaylists = playlists.filter(playlist => playlist.isPublic);
+console.log(publicPlaylists);
+`
+
+---
+
+Q4
+Question: Use the map() method to transform an array of Instagram post objects (each with a likes property) into a new array of just the like counts.  
+
+Answer:
+`javascript
+const posts = [
+  { id: 1, likes: 120 },
+  { id: 2, likes: 250 },
+  { id: 3, likes: 75 }
+];
+
+const likeCounts = posts.map(post => post.likes);
+console.log(likeCounts);
+`
+
+---
+
+Q5
+Question: Use the map() method to transform an array of Instagram post objects (each with a likes property) into a new array of just the like counts.  
+
+Answer: (Solved separately again)
+`javascript
+const posts = [
+  { id: 1, likes: 500 },
+  { id: 2, likes: 1200 },
+  { id: 3, likes: 300 }
+];
+
+const likesArray = posts.map(p => p.likes);
+console.log(likesArray);
+`
+
+---
+
+Q6
+Question: Use map() to transform an array of Flipkart product objects (each with name and price) into an array of strings formatted as 'Product: [name], Price: ₹[price]'.  
+
+Answer:
+`javascript
+const products = [
+  { name: "Shoes", price: 2000 },
+  { name: "Watch", price: 5000 },
+  { name: "Bag", price: 1500 }
+];
+
+const productStrings = products.map(p => Product: ${p.name}, Price: ₹${p.price});
+console.log(productStrings);
+`
+
+---
+
+Q7
+Question: Given an array of Zomato order objects with a clicks property, use reduce() to calculate the total number of clicks across all orders.  
+
+Answer:
+`javascript
+const orders = [
+  { id: 1, clicks: 10 },
+  { id: 2, clicks: 25 },
+  { id: 3, clicks: 15 }
+];
+
+const totalClicks = orders.reduce((sum, order) => sum + order.clicks, 0);
+console.log("Total Clicks:", totalClicks);
+`
+
+---
+
+Q8
+Question: Given an array of Zomato order objects with a clicks property, use reduce() to calculate the total number of clicks across all orders.  
+
+Answer: (Solved separately again)
+`javascript
+const orders = [
+  { id: 1, clicks: 50 },
+  { id: 2, clicks: 30 },
+  { id: 3, clicks: 20 }
+];
+
+const clicksSum = orders.reduce((acc, o) => acc + o.clicks, 0);
+console.log("Total Clicks:", clicksSum);
+`
+
+---
+
+Q9
+Question: Given an array of Instagram post objects with a likes property, use reduce() to calculate the total number of likes across all posts.  
+
+Answer:
+`javascript
+const posts = [
+  { id: 1, likes: 100 },
+  { id: 2, likes: 200 },
+  { id: 3, likes: 300 }
+];
+
+const totalLikes = posts.reduce((sum, post) => sum + post.likes, 0);
+console.log("Total Likes:", totalLikes);
+`
+
+---
+
+Q10
+Question: Given an array of YouTube video objects with a views property, use the find() method to get the first video that has more than 1 million views.  
+
+Answer:
+`javascript
+const videos = [
+  { title: "Video A", views: 500000 },
+  { title: "Video B", views: 1500000 },
+  { title: "Video C", views: 2000000 }
+];
+
+const popularVideo = videos.find(video => video.views > 1000000);
+console.log(popularVideo);
+`
+
+---
+
+Q11
+Question: Given an array of YouTube video objects with a views property, use the find() method to get the first video that has more than 1 million views.  
+
+Answer: (Solved separately again)
+`javascript
+const videos = [
+  { title: "Intro", views: 800000 },
+  { title: "Tutorial", views: 1200000 },
+  { title: "Review", views: 900000 }
+];
+
+const firstMillionViewVideo = videos.find(v => v.views > 1000000);
+console.log(firstMillionViewVideo);
+`
+
+---
+
+Q12
+Question: Given an array of Zomato restaurant objects, each with a cuisine property, use find() to get the first restaurant that serves 'Chinese' cuisine.  
+
+Answer:
+`javascript
+const restaurants = [
+  { name: "Spice Hub", cuisine: "Indian" },
+  { name: "Dragon Palace", cuisine: "Chinese" },
+  { name: "Pizza World", cuisine: "Italian" }
+];
+
+const chineseRestaurant = restaurants.find(r => r.cuisine === "Chinese");
+console.log(chineseRestaurant);
+`
+
+---
+
+Q13
+Question: Ask ChatGPT to suggest a one-liner using map() and reduce() that calculates the sum of all prices in an array of Myntra cart items, and then implement the suggested code in your editor.  
+
+Answer:
+`javascript
+const cartItems = [
+  { name: "T-shirt", price: 500 },
+  { name: "Jeans", price: 1200 },
+  { name: "Shoes", price: 2000 }
+];
+
+// One-liner using map() + reduce()
+const totalPrice = cartItems.map(item => item.price).reduce((sum, price) => sum + price, 0);
+console.log("Total Price:", totalPrice);
+`
+
+---
+
+Q14
+Question: Ask ChatGPT to suggest a one-liner using map() and reduce() that calculates the sum of all prices in an array of Myntra cart items, and then implement the suggested code in your editor.  
+
+Answer: (Solved separately again)
+`javascript
+const cart = [
+  { name: "Dress", price: 1500 },
+  { name: "Bag", price: 800 },
+  { name: "Sandals", price: 1200 }
+];
+
+const sumPrices = cart.map(c => c.price).reduce((acc, val) => acc + val, 0);
+console.log("Cart Total:", sumPrices);
+`
+
+---
+
+Q15
+Question: Use ChatGPT to suggest a one-liner alternative using map() and reduce() for calculating the total amount spent from an array of transactions (each with amount property), and then implement that one-liner in your code.  
+
+Answer:
+`javascript
+const transactions = [
+  { id: 1, amount: 1000 },
+  { id: 2, amount: 2500 },
+  { id: 3, amount: 1500 }
+];
+
+// One-liner using map() + reduce()
+const totalSpent = transactions.map(t => t.amount).reduce((sum, amt) => sum + amt, 0);
+console.log("Total Spent:", totalSpent);
