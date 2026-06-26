@@ -1,0 +1,222 @@
+📘 Session 20: Integration Testing & Polish
+
+---
+
+Q1
+Question: Manually test a Flipkart-style Add to Cart button in your React app: click the button multiple times and verify that the item is only added once and the cart count updates correctly.  
+
+Answer:  
+- Open your React app in the browser.  
+- Click the Add to Cart button for a product.  
+- Verify that the product appears in the cart.  
+- Click the button again multiple times.  
+- Confirm that the product is not duplicated in the cart.  
+- Check that the cart count updates correctly (e.g., increments only once).  
+- If duplication occurs, fix by checking if the item already exists in the cart before adding.  
+
+---
+
+Q2
+Question: Manually test a Flipkart-style Add to Cart button in your React app: click the button multiple times and verify that the item is only added once and the cart count updates correctly.  
+
+Answer:  
+- Perform the same test as Q1 but on a different product.  
+- Ensure that clicking multiple times does not add duplicates.  
+- Cart count should reflect the correct number of unique items.  
+- Bug fix: Use a condition like if (!cart.includes(item)) { cart.push(item) }.  
+
+---
+
+Q3
+Question: Manually test a Flipkart-style Add to Cart button in your React app: click the button multiple times and verify that the item is only added once and the cart count updates correctly.  
+
+Answer:  
+- Test with multiple products added one after another.  
+- Ensure each product is added only once.  
+- Cart count should equal the number of unique products.  
+- If cart count fails to update, fix by updating state correctly with setCart([...cart, newItem]).  
+
+---
+
+Q4
+Question: Create a login form with email and password fields and add basic UI validation: show an error message if either field is left empty when the user clicks the Login button.  
+
+Answer:
+`html
+<form id="loginForm">
+  <input type="email" id="email" placeholder="Email">
+  <span id="emailError"></span><br>
+  <input type="password" id="password" placeholder="Password">
+  <span id="passwordError"></span><br>
+  <button type="submit">Login</button>
+</form>
+
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let emailError = document.getElementById("emailError");
+    let passwordError = document.getElementById("passwordError");
+
+    emailError.textContent = "";
+    passwordError.textContent = "";
+
+    if (!email) emailError.textContent = "Email is required!";
+    if (!password) passwordError.textContent = "Password is required!";
+  });
+</script>
+`
+
+---
+
+Q5
+Question: Create a login form with email and password fields and add basic UI validation: show an error message if either field is left empty when the user clicks the Login button.  
+
+Answer:  
+(Solved separately again with slightly different wording)  
+- Add two input fields: Email and Password.  
+- On submit, check if either is empty.  
+- If empty, show error messages below the respective fields.  
+- Prevent form submission until both fields are filled.  
+
+---
+
+Q6
+Question: Create a simple form for adding a new playlist (name, description) like in Spotify. Test each field by leaving it empty and submitting, then add basic UI validation to show an error message if any field is left blank.  
+
+Answer:
+`html
+<form id="playlistForm">
+  <input type="text" id="playlistName" placeholder="Playlist Name">
+  <span id="nameError"></span><br>
+  <input type="text" id="playlistDesc" placeholder="Description">
+  <span id="descError"></span><br>
+  <button type="submit">Add Playlist</button>
+</form>
+
+<script>
+  document.getElementById("playlistForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let name = document.getElementById("playlistName").value;
+    let desc = document.getElementById("playlistDesc").value;
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("descError").textContent = "";
+
+    if (!name) document.getElementById("nameError").textContent = "Name is required!";
+    if (!desc) document.getElementById("descError").textContent = "Description is required!";
+  });
+</script>
+`
+
+---
+
+Q7
+Question: Find and fix a bug in this code: a Zomato-style Add Review form allows users to submit a review, but if the textarea is empty, it still submits. Update the code so it prevents submission and shows a message if the review is blank.  
+
+Answer:
+`html
+<form id="reviewForm">
+  <textarea id="reviewText" placeholder="Write your review"></textarea>
+  <span id="reviewError"></span><br>
+  <button type="submit">Submit Review</button>
+</form>
+
+<script>
+  document.getElementById("reviewForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let review = document.getElementById("reviewText").value;
+    document.getElementById("reviewError").textContent = "";
+
+    if (!review.trim()) {
+      document.getElementById("reviewError").textContent = "Review cannot be empty!";
+      return;
+    }
+
+    console.log("Review submitted:", review);
+  });
+</script>
+`
+
+---
+
+Q8
+Question: Find and fix a bug in this code: a Zomato-style Add Review form allows users to submit a review, but if the textarea is empty, it still submits. Update the code so it prevents submission and shows a message if the review is blank.  
+
+Answer:  
+(Solved separately again)  
+- Add a check: if (!review.trim()) { show error; return; }.  
+- Prevent submission if empty.  
+- Show error message below textarea.  
+
+---
+
+Q9
+Question: Find and fix a bug in this code: the function addFollower(name) is supposed to add a name to the followers array, but sometimes null or empty names get added. Update the function so only valid, non-empty names are added.  
+
+Answer:
+`javascript
+const followers = [];
+
+function addFollower(name) {
+  if (name && name.trim() !== "") {
+    followers.push(name);
+    console.log("Follower added:", name);
+  } else {
+    console.warn("Invalid follower name, not added.");
+  }
+}
+
+addFollower("Amit");   // Valid
+addFollower("");       // Invalid
+addFollower(null);     // Invalid
+`
+
+---
+
+Q10
+Question: Test all buttons and form fields in your React app's main screen by clicking each one and entering different values, then make a checklist of at least 5 common bugs (such as double adds, empty fields, or UI glitches) and describe how you would fix each.  
+
+Answer:  
+Checklist of Bugs & Fixes:  
+1. Double Adds: Prevent duplicate items by checking if item already exists before adding.  
+2. Empty Fields: Add validation checks before submission.  
+3. UI Glitches: Ensure proper CSS styling and responsive layout.  
+4. Cart Count Not Updating: Fix state updates with setState or useState correctly.  
+5. Buttons Not Working: Verify event handlers are correctly bound.  
+
+---
+
+Q11
+Question: Test all buttons and form fields in your React app's main screen by clicking each one and entering different values, then make a checklist of at least 5 common bugs (such as double adds, empty fields, or UI glitches) and describe how you would fix each.  
+
+Answer:  
+Checklist of Bugs & Fixes:  
+1. Form Submits with Empty Data: Add required field validation.  
+2. Cart Items Duplicate: Add condition to prevent duplicates.  
+3. Error Messages Not Clearing: Reset error state on new input.  
+4. Slow UI Updates: Optimize state management with React hooks.  
+5. Broken Buttons: Ensure correct onClick handlers are attached.  
+
+---
+
+Q12
+Question: Test a Zomato-style review form in your app: fill out all fields, submit, then try submitting with missing or invalid data (like empty review or rating above 5). List any bugs or missing validation you find and fix at least one.  
+
+Answer:  
+Testing Results:  
+- Bug 1: Empty review still submits.  
+- Bug 2: Rating above 5 is accepted.  
+- Bug 3: Error messages not shown properly.  
+
+Fix Example:  
+`javascript
+function validateReview(review, rating) {
+  if (!review.trim()) {
+    return "Review cannot be empty!";
+  }
+  if (rating < 1 || rating > 5) {
+    return "Rating must be between 1 and 5.";
+  }
+  return null;
+}
