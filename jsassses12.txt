@@ -1,0 +1,324 @@
+Session 12: Asynchronous JavaScript (Part 2) – Fetch API, GET & POST Requests
+
+Question 1
+Use fetch() to get a list of posts from https://jsonplaceholder.typicode.com/posts and display the first 5 post titles in the browser console.
+Solution
+HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 1</title>
+</head>
+<body>
+
+<script>
+fetch("https://jsonplaceholder.typicode.com/posts")
+.then(response => response.json())
+.then(data => {
+    data.slice(0,5).forEach(post => {
+        console.log(post.title);
+    });
+})
+.catch(error => console.log(error));
+</script>
+
+</body>
+</html>
+
+Question 2
+<!DOCTYPE html>
+<html>
+<head>
+<title>Question 2</title>
+</head>
+
+<body>
+
+<ul id="posts"></ul>
+
+<script>
+
+fetch("https://jsonplaceholder.typicode.com/posts")
+.then(response => response.json())
+.then(data => {
+
+let output="";
+
+data.slice(0,5).forEach(post=>{
+output += `<li>${post.title}</li>`;
+});
+
+document.getElementById("posts").innerHTML=output;
+
+})
+.catch(error=>console.log(error));
+
+</script>
+
+</body>
+</html>
+Use fetch() to get a list of posts from https://jsonplaceholder.typicode.com/posts and display the first 5 post titles in the browser.
+Solution
+HTML
+
+Question 3
+Use fetch() to GET a list of posts and display the first 5 post titles in the browser console.
+Solution
+fetch("https://jsonplaceholder.typicode.com/posts")
+.then(res => res.json())
+.then(posts => {
+    posts.slice(0,5).forEach(post => {
+        console.log(post.title);
+    });
+})
+.catch(err => console.log(err));
+
+Question 4
+Build a function fetchTopMovies() that uses fetch() to get movie data from https://api.tvmaze.com/shows, parses the JSON response, and logs the titles of the first 3 items.
+Solution
+function fetchTopMovies(){
+
+fetch("https://api.tvmaze.com/shows")
+.then(response => response.json())
+.then(data => {
+
+data.slice(0,3).forEach(movie=>{
+console.log(movie.name);
+});
+
+})
+.catch(error=>console.log(error));
+
+}
+
+fetchTopMovies();
+
+Question 5
+Build a function fetchTopMovies() that uses fetch() to get movie data from https://api.tvmaze.com/shows, parses the JSON response, and logs the titles of the first 3 items.
+Solution
+async function fetchTopMovies(){
+
+try{
+
+let response=await fetch("https://api.tvmaze.com/shows");
+
+let data=await response.json();
+
+data.slice(0,3).forEach(movie=>{
+console.log(movie.name);
+});
+
+}
+catch(error){
+console.log(error);
+}
+
+}
+
+fetchTopMovies();
+
+Question 6
+Send a POST request using fetch() to https://jsonplaceholder.typicode.com/posts with a JSON body containing a title and body. Check if the property is present in the response.
+Solution
+fetch("https://jsonplaceholder.typicode.com/posts",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+title:"My First Post",
+
+body:"Hello World",
+
+userId:1
+
+})
+
+})
+.then(response=>response.json())
+.then(data=>{
+console.log(data);
+})
+.catch(error=>console.log(error));
+
+Question 7
+Create a function addNewPlaylist() that sends a POST request using fetch() to https://jsonplaceholder.typicode.com/posts with a playlist object containing a name and description. Log the response JSON to the console.
+Solution
+function addNewPlaylist(){
+
+fetch("https://jsonplaceholder.typicode.com/posts",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:"Workout Songs",
+
+description:"Best Gym Playlist"
+
+})
+
+})
+.then(response=>response.json())
+.then(data=>{
+console.log(data);
+})
+.catch(error=>console.log(error));
+
+}
+
+addNewPlaylist();
+
+Question 8
+Create a function addNewPlaylist() using async/await that sends a POST request with a playlist object. Log the response JSON.
+Solution
+async function addNewPlaylist(){
+
+try{
+
+let response=await fetch("https://jsonplaceholder.typicode.com/posts",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:"Study Playlist",
+
+description:"Coding Songs"
+
+})
+
+});
+
+let data=await response.json();
+
+console.log(data);
+
+}
+
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+addNewPlaylist();
+
+Question 9
+Chain fetch() promises to fetch user data from https://jsonplaceholder.typicode.com/users, then display all user names in a single line separated by commas.
+Solution
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(response=>response.json())
+.then(users=>{
+
+let names=users.map(user=>user.name);
+
+console.log(names.join(", "));
+
+})
+.catch(error=>console.log(error));
+
+Question 10
+Chain two fetch() calls: first fetch users from /users, then fetch posts for userId=2, and display the user's name and the titles of their posts.
+Solution
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(response=>response.json())
+.then(users=>{
+
+let user=users.find(u=>u.id===2);
+
+console.log("User:",user.name);
+
+return fetch("https://jsonplaceholder.typicode.com/posts?userId=2");
+
+})
+.then(response=>response.json())
+.then(posts=>{
+
+posts.forEach(post=>{
+console.log(post.title);
+});
+
+})
+.catch(error=>console.log(error));
+Question 11
+Chain two fetch() calls: first fetch user id=2, then fetch their posts using userId=2, and finally log the user's name and post titles.
+Solution
+fetch("https://jsonplaceholder.typicode.com/users/2")
+.then(response=>response.json())
+.then(user=>{
+
+console.log(user.name);
+
+return fetch("https://jsonplaceholder.typicode.com/posts?userId=2");
+
+})
+.then(response=>response.json())
+.then(posts=>{
+
+posts.forEach(post=>{
+console.log(post.title);
+});
+
+})
+.catch(error=>console.log(error));
+
+Question 12
+Open the browser's Developer Tools, perform a fetch() GET request to https://jsonplaceholder.typicode.com/users, and observe the Network tab. Explain what you see.
+Answer
+A GET request appears in the Network tab.
+Status Code: 200 OK
+Request Method: GET
+Response Type: JSON
+The response contains an array of user objects.
+The Headers, Preview, and Response tabs show request and response details.
+
+Question 13
+Open the browser's Developer Tools, perform a fetch() GET request to https://jsonplaceholder.typicode.com/users, and briefly describe the request/response cycle.
+Answer
+Browser sends a GET request.
+Server receives the request.
+Server processes it.
+Server sends back JSON data.
+Browser receives the response.
+JavaScript converts JSON into objects using .json().
+
+Question 14
+Open the browser's Developer Tools, perform a fetch() GET request, and inspect the request and response details. Briefly describe what you observed.
+Answer
+URL of the request
+Request headers
+Response headers
+Status Code (200 OK)
+Response time
+JSON data received successfully
+
+Question 15
+Fetch a list of albums from https://jsonplaceholder.typicode.com/albums, filter the albums where userId = 2, and display only the album titles using fetch(), .then(), and array methods (no async/await).
+Solution
+fetch("https://jsonplaceholder.typicode.com/albums")
+.then(response=>response.json())
+.then(albums=>{
+
+let result=albums.filter(album=>album.userId===2);
+
+result.forEach(album=>{
+console.log(album.title);
+});
+
+})
+.catch(error=>console.log(error));
