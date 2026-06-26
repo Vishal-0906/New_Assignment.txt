@@ -1,0 +1,289 @@
+Session 11: Asynchronous JavaScript – Callbacks, Promises, Async/Await (Part 1)
+
+Question 1
+Create an HTML file with a <script> tag and use setTimeout() to display your name after 2 seconds, then replace it with "Feed loaded!" after another 2 seconds.
+Solution
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 1</title>
+</head>
+<body>
+
+<h2 id="output">Loading...</h2>
+
+<script>
+setTimeout(() => {
+    document.getElementById("output").innerHTML = "Vishal Rajput";
+
+    setTimeout(() => {
+        document.getElementById("output").innerHTML = "Feed Loaded!";
+    }, 2000);
+
+}, 2000);
+</script>
+
+</body>
+</html>
+HTML
+Question 2
+Create an HTML file with a <script> tag and use setTimeout() to display "Loading your feed..." after 2 seconds, then replace it with "Feed loaded!" after another 2 seconds.
+<!DOCTYPE html>
+<html>
+<head>
+<title>Question 2</title>
+</head>
+
+<body>
+
+<h2 id="msg">Please Wait...</h2>
+
+<script>
+
+setTimeout(() => {
+
+document.getElementById("msg").innerHTML="Loading your feed...";
+
+setTimeout(()=>{
+
+document.getElementById("msg").innerHTML="Feed Loaded!";
+
+},2000);
+
+},2000);
+
+</script>
+
+</body>
+</html>
+Solution
+HTML
+Question 3
+Create an HTML file with a <script> tag that logs "Loading..." to the console, then after 2 seconds logs "Content loaded!" using setTimeout().
+Solution
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Question 3</title>
+</head>
+
+<body>
+
+<script>
+
+console.log("Loading...");
+
+setTimeout(() => {
+    console.log("Content Loaded!");
+},2000);
+
+</script>
+
+</body>
+
+</html>
+HTML
+Question 4
+Simulate a Zomato order status updater using callbacks. Write a function placeOrder(item, callback) that takes a food item and a callback, waits 1 second using setTimeout(), then calls the callback with the message "Your [item] is being prepared".
+Solution
+function placeOrder(item, callback)
+{
+    setTimeout(() => {
+        callback("Your " + item + " is being prepared.");
+    },1000);
+}
+
+placeOrder("Pizza", function(message){
+    console.log(message);
+});
+Output
+Your Pizza is being prepared.
+Question 5
+Simulate a Zomato order status updater using callbacks. Write a function prepareOrder(item, callback) that takes a food item and a callback, waits 1 second using setTimeout(), then calls the callback with the message "Your [item] is being prepared".
+Solution
+function prepareOrder(item, callback)
+{
+    setTimeout(() => {
+        callback("Your " + item + " is being prepared.");
+    },1000);
+}
+
+prepareOrder("Burger", function(message){
+    console.log(message);
+});
+Output
+Your Burger is being prepared.
+Question 6
+Write a function fetchSongLyrics(song, callback) that simulates fetching lyrics from a server using setTimeout(), then calls the callback with the lyrics string. Test it by logging the lyrics.
+Solution
+function fetchSongLyrics(song, callback)
+{
+    setTimeout(() => {
+
+        let lyrics = "Lyrics of " + song;
+
+        callback(lyrics);
+
+    },2000);
+}
+
+fetchSongLyrics("Believer", function(result){
+    console.log(result);
+});
+Output
+Lyrics of Believer
+Question 7
+Build a Promise called getFollowersCount that resolves after 1 second with a random number between 1000 and 5000. Then use .then() to display "You have X new followers".
+Solution
+let getFollowersCount = new Promise((resolve, reject)=>{
+
+setTimeout(()=>{
+
+let followers = Math.floor(Math.random()*4001)+1000;
+
+resolve(followers);
+
+},1000);
+
+});
+
+getFollowersCount.then((count)=>{
+console.log("You have " + count + " new followers.");
+});
+Question 8
+Build a Promise called getFollowersCount that resolves after 1 second with a random number between 1000 and 5000, then use .then() to display "You have X new followers".
+Solution
+function getFollowersCount()
+{
+return new Promise((resolve,reject)=>{
+
+setTimeout(()=>{
+
+let count=Math.floor(Math.random()*4001)+1000;
+
+resolve(count);
+
+},1000);
+
+});
+}
+
+getFollowersCount()
+.then((count)=>{
+console.log("You have " + count + " new followers.");
+});
+Question 9
+Build a function getOrderStatus(orderId) that returns a Promise. Simulate a 1.5 second delay using setTimeout(), then resolve with "Order delivered" if the order ID is even, otherwise reject with "Order not found". Use .then() and .catch() to handle both cases.
+Solution
+function getOrderStatus(orderId)
+{
+return new Promise((resolve,reject)=>{
+
+setTimeout(()=>{
+
+if(orderId%2==0)
+{
+resolve("Order Delivered");
+}
+else
+{
+reject("Order Not Found");
+}
+
+},1500);
+
+});
+}
+
+getOrderStatus(10)
+.then((msg)=>{
+console.log(msg);
+})
+.catch((err)=>{
+console.log(err);
+});
+Question 10
+Build a Flipkart-style product search using both callbacks and Promises. Given an array of products, simulate a 1-second delay before returning all products whose names include the search term.
+Solution
+let products = [
+"Mobile",
+"Laptop",
+"Mouse",
+"Keyboard",
+"Smart Watch"
+];
+
+function searchProduct(search,callback)
+{
+setTimeout(()=>{
+
+let result=products.filter(item=>item.toLowerCase().includes(search.toLowerCase()));
+
+callback(result);
+
+},1000);
+}
+
+searchProduct("mo",(result)=>{
+console.log(result);
+});
+Output
+["Mobile","Mouse"]
+Question 11
+Rewrite a Flipkart-style product search using both a callback version and a Promise version.
+Solution
+let products=[
+"Mobile",
+"Laptop",
+"Mouse",
+"Keyboard",
+"Monitor"
+];
+
+function searchProduct(search)
+{
+return new Promise((resolve,reject)=>{
+
+setTimeout(()=>{
+
+let result=products.filter(item=>item.toLowerCase().includes(search.toLowerCase()));
+
+resolve(result);
+
+},1000);
+
+});
+}
+
+searchProduct("mo")
+.then((data)=>{
+console.log(data);
+});
+Question 12
+Refactor the callback-based code below to use Promises instead.
+Callback Code
+setTimeout(function () {
+    console.log("Payment successful");
+}, 1000);
+Solution
+function paymentSuccess()
+{
+return new Promise((resolve,reject)=>{
+
+setTimeout(()=>{
+
+resolve("Payment Successful");
+
+},1000);
+
+});
+}
+
+paymentSuccess()
+.then((message)=>{
+console.log(message);
+})
+.catch((error)=>{
+console.log(error);
+});
