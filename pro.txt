@@ -1,0 +1,158 @@
+@csrf_exempt
+def manage_expenses(request, user_id):
+    if request.method == "GET":
+        expenses = Expense.objects.filter(UserId_id=user_id).values(
+            "id", "ExpenseDate", "ExpenseItem", "ExpenseCost"
+        )
+
+        return JsonResponse(list(expenses), safe=False)
+
+
+# ===================== UPDATE EXPENSE =====================
+@csrf_exempt
+def update_expense(request, expense_id):
+    if request.method == "PUT":
+        data = json.loads(request.body)
+
+        expense = Expense.objects.get(id=expense_id)
+
+        expense.ExpenseItem = data.get("ExpenseItem", expense.ExpenseItem)
+        expense.ExpenseCost = data.get("ExpenseCost", expense.ExpenseCost)
+        expense.ExpenseDate = data.get("ExpenseDate", expense.ExpenseDate)
+
+        expense.save()
+
+        return JsonResponse({"message": "Updated successfully"})
+
+
+
+
+
+
+
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const ManageExpense = () => {
+    const navigate = useNavigate();
+
+    const [expenses, setExpenses] = useState([]);
+    const [editExpense, setEditExpense] = useState(null);
+
+    const userId = localStorage.getItem("userId");
+
+    // GET
+    const fetchExpenses = async () => {
+        const res = await fetch(
+            `http://127.0.0.1:8000/api/manage_expenses/${userId}/`
+        );
+        const data = await res.json();
+        setExpenses(data);
+    };
+
+    useEffect(() => {
+        if (!userId) navigate("/login");
+        fetchExpenses();
+    }, []);
+
+    // EDIT
+    const handleEdit = (exp) => {
+        setEditExpense({
+            id: exp.id,
+            ExpenseItem: exp.ExpenseItem,
+            ExpenseCost: exp.ExpenseCost,
+            ExpenseDate: exp.ExpenseDate
+        });
+    };
+
+    // CHANGE
+    const handleChange = (e) => {
+        setEditExpense({
+            ...editExpense,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    // UPDATE
+    const handleUpdate = async () => {
+        await fetch(
+            `http://127.0.0.1:8000/api/update_expense/${editExpense.id}/`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(editExpense)
+            }
+        );
+
+        setEditExpense(null);
+        fetchExpenses();
+    };
+
+    // DELETE
+    const handleDelete = async (id) => {
+        await fetch(
+            `http://127.0.0.1:8000/api/delete_expense/${id}/`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        fetchExpenses();
+    };
+
+    return (
+        <div>
+            <h2>Manage Expenses</h2>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Item</th>
+                        <th>Cost</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {expenses.map((e) => (
+                        <tr key={e.id}>
+                            <td>{e.ExpenseDate}</td>
+                            <td>{e.ExpenseItem}</td>
+                            <td>{e.ExpenseCost}</td>
+                            <td>
+                                <button onClick={() => handleEdit(e)}>Edit</button>
+                                <button onClick={() => handleDelete(e.id)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {editExpense && (
+                <div>
+                    <input
+                        name="ExpenseItem"
+                        value={editExpense.ExpenseItem}
+                        onChange={handleChange}
+                    />
+                    <input
+                        name="ExpenseCost"
+                        value={editExpense.ExpenseCost}
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="date"
+                        name="ExpenseDate"
+                        value={editExpense.ExpenseDate}
+                        onChange={handleChange}
+                    />
+
+                    <button onClick={handleUpdate}>Update</button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ManageExpense;
