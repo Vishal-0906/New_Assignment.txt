@@ -1,0 +1,123 @@
+
+Session 9 – React Router
+Question 1
+Install react-router-dom in your existing React app and set up BrowserRouter in your App.js file to enable routing.
+Install
+npm install react-router-dom
+main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+Question 2
+Create three components: HomePage.js, DealsPage.js, and CartPage.js. Configure Routes in App.js so that visiting "/", "/deals", or "/cart" shows the correct component.
+HomePage.jsx
+function HomePage() {
+  return <h2>Home Page</h2>;
+}
+
+export default HomePage;
+DealsPage.jsx
+function DealsPage() {
+  return <h2>Deals Page</h2>;
+}
+
+export default DealsPage;
+CartPage.jsx
+function CartPage() {
+  return <h2>Cart Page</h2>;
+}
+
+export default CartPage;
+App.jsx
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import DealsPage from "./DealsPage";
+import CartPage from "./CartPage";
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/deals" element={<DealsPage />} />
+      <Route path="/cart" element={<CartPage />} />
+    </Routes>
+  );
+}
+
+export default App;
+Question 3
+Add a navigation bar using NavLink that lets users switch between Home, Deals, and Cart pages, and highlight the active link with a different color.
+Answer
+import { NavLink } from "react-router-dom";
+
+function Navbar() {
+  return (
+    <nav>
+      <NavLink
+        to="/"
+        style={({ isActive }) => ({
+          color: isActive ? "red" : "black",
+          margin: "10px",
+        })}
+      >
+        Home
+      </NavLink>
+
+      <NavLink
+        to="/deals"
+        style={({ isActive }) => ({
+          color: isActive ? "red" : "black",
+          margin: "10px",
+        })}
+      >
+        Deals
+      </NavLink>
+
+      <NavLink
+        to="/cart"
+        style={({ isActive }) => ({
+          color: isActive ? "red" : "black",
+          margin: "10px",
+        })}
+      >
+        Cart
+      </NavLink>
+    </nav>
+  );
+}
+
+export default Navbar;
+Question 4
+Simulate a Flipkart-style navigation: add a NotFound.js component and configure a route so that any unknown path shows a "404 - Page Not Found" message.
+NotFound.jsx
+function NotFound() {
+  return <h2>404 - Page Not Found</h2>;
+}
+
+export default NotFound;
+App.jsx
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import DealsPage from "./DealsPage";
+import CartPage from "./CartPage";
+import NotFound from "./NotFound";
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/deals" element={<DealsPage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+}
+
+export default App;
