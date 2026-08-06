@@ -1,0 +1,133 @@
+Session 3 – Props
+Question 1
+Create a functional component named ProductCard that accepts props for productName and price, and displays them in a styled div.
+Answer
+ProductCard.jsx
+JSX
+import React from "react";
+
+function ProductCard({ productName, price }) {
+  return (
+    <div
+      style={{
+        border: "1px solid black",
+        padding: "20px",
+        width: "250px",
+        borderRadius: "10px",
+        margin: "20px",
+      }}
+    >
+      <h2>{productName}</h2>
+      <h3>₹{price}</h3>
+    </div>
+  );
+}
+
+export default ProductCard;
+App.jsx
+import ProductCard from "./ProductCard";
+
+function App() {
+  return (
+    <>
+      <ProductCard productName="Laptop" price={55000} />
+      <ProductCard productName="Mouse" price={1200} />
+    </>
+  );
+}
+
+export default App;
+Question 2
+Build a UserProfile component that takes username, followers, and profilePic as props and renders a mini Instagram-style profile card.
+import React from "react";
+
+function UserProfile({ username, followers, profilePic }) {
+  return (
+    <div
+      style={{
+        width: "250px",
+        border: "1px solid gray",
+        padding: "20px",
+        borderRadius: "10px",
+        textAlign: "center",
+      }}
+    >
+      <img
+        src={profilePic}
+        alt="profile"
+        width="100"
+        height="100"
+        style={{ borderRadius: "50%" }}
+      />
+
+      <h2>{username}</h2>
+
+      <p>Followers : {followers}</p>
+    </div>
+  );
+}
+
+export default UserProfile;
+Answer
+UserProfile.jsx
+JSX
+App.jsx
+import UserProfile from "./UserProfile";
+
+function App() {
+  return (
+    <UserProfile
+      username="Vishal"
+      followers={250}
+      profilePic="https://via.placeholder.com/100"
+    />
+  );
+}
+
+export default App;
+Question 3
+Set up default props for your UserProfile component so that if followers or profilePic is not provided, it shows 0 followers and a default image URL.
+Answer
+JSX
+import React from "react";
+
+function UserProfile({ username, followers, profilePic }) {
+  return (
+    <div>
+      <img src={profilePic} alt="" width="100" />
+      <h2>{username}</h2>
+      <p>Followers : {followers}</p>
+    </div>
+  );
+}
+
+UserProfile.defaultProps = {
+  followers: 0,
+  profilePic: "https://via.placeholder.com/100",
+};
+
+export default UserProfile;
+Question 4
+Add prop type validation to your ProductCard component using the prop-types package to ensure productName is a string and price is a number.
+Install
+npm install prop-types
+Answer
+JSX
+import React from "react";
+import PropTypes from "prop-types";
+
+function ProductCard({ productName, price }) {
+  return (
+    <div>
+      <h2>{productName}</h2>
+      <h3>₹{price}</h3>
+    </div>
+  );
+}
+
+ProductCard.propTypes = {
+  productName: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
+
+export default ProductCard;
