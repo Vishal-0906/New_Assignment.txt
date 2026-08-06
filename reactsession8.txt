@@ -1,0 +1,196 @@
+Session 8 – useRef & Controlled Forms
+Question 1
+Create a React component called SearchBar with an input field and a button. Use useRef to focus the input field automatically when the component mounts.
+Answer
+import React, { useEffect, useRef } from "react";
+
+function SearchBar() {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder="Search..."
+      />
+
+      <button>Search</button>
+    </div>
+  );
+}
+
+export default SearchBar;
+JSX
+import React, { useRef, useState } from "react";
+
+function LoginForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const inputRef = useRef();
+
+  const handleLogin = () => {
+    alert("Login Successful");
+
+    setUsername("");
+    setPassword("");
+
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+
+      <br /><br />
+
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+
+      <br /><br />
+
+      <button onClick={handleLogin}>
+        Login
+      </button>
+    </div>
+  );
+}
+
+export default LoginForm;
+Question 2
+Build a simple login form with two controlled input fields (username and password) using useState. After the user clicks the "Login" button, use useRef to clear and focus the username field.
+Answer
+JSX
+import React, { useRef, useState } from "react";
+
+function AddToPlaylist() {
+  const [song, setSong] = useState("");
+  const [playlist, setPlaylist] = useState([]);
+
+  const inputRef = useRef();
+
+  const addSong = () => {
+    if (song === "") return;
+
+    setPlaylist([...playlist, song]);
+    setSong("");
+
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        value={song}
+        onChange={(e) => setSong(e.target.value)}
+        placeholder="Song Name"
+      />
+
+      <button onClick={addSong}>
+        Add
+      </button>
+
+      <ul>
+        {playlist.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default AddToPlaylist;
+Question 3
+Make a React component called AddToPlaylist where users can enter a song name and click "Add". After adding, use useRef to focus the input again so users can quickly add another song.
+Answer
+JSX
+import React, { useRef, useState } from "react";
+
+function FeedbackForm() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const messageRef = useRef();
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+
+      <br /><br />
+
+      <textarea
+        ref={messageRef}
+        placeholder="Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={() => messageRef.current.focus()}>
+        Focus Message
+      </button>
+    </div>
+  );
+}
+
+export default FeedbackForm;
+Question 4
+Refactor an existing React form (for example, a feedback form with name and message fields) to use controlled components for both inputs, and add a button that, when clicked, focuses the message input using useRef.
+
+import React, { useRef, useState } from "react";
+
+function FeedbackForm() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const messageRef = useRef();
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+
+      <br /><br />
+
+      <textarea
+        ref={messageRef}
+        placeholder="Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={() => messageRef.current.focus()}>
+        Focus Message
+      </button>
+    </div>
+  );
+}
+
+export default FeedbackForm;
