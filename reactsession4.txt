@@ -1,0 +1,109 @@
+Session 4 – State & useState
+Question 1
+Create a new React component called LikeButton that displays a heart icon and a count starting at 0; use the useState hook to increment the count by 1 each time the button is clicked.
+Answer
+JSX
+import React, { useState } from "react";
+
+function LikeButton() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h2>❤️ {count}</h2>
+
+      <button onClick={() => setCount(count + 1)}>
+        Like
+      </button>
+    </div>
+  );
+}
+
+export default LikeButton;
+Question 2
+Build a Flipkart-style cart item quantity manager: in a CartItem component, display the item name and quantity, and add '+' and '-' buttons to increase or decrease the quantity using useState.
+Answer
+import React, { useState } from "react";
+
+function CartItem() {
+  const [quantity, setQuantity] = useState(1);
+
+  return (
+    <div>
+      <h2>Laptop</h2>
+
+      <button onClick={() => setQuantity(quantity - 1)} disabled={quantity === 0}>
+        -
+      </button>
+
+      <span> {quantity} </span>
+
+      <button onClick={() => setQuantity(quantity + 1)}>
+        +
+      </button>
+    </div>
+  );
+}
+
+export default CartItem;
+JSX
+Question 3
+Create a SongVote component for a Spotify playlist where users can upvote or downvote a song; display the current vote count and update it using useState when the up or down arrow is clicked. Prevent the vote count from going below zero.
+import React, { useState } from "react";
+
+function SongVote() {
+  const [vote, setVote] = useState(0);
+
+  return (
+    <div>
+      <h2>Votes : {vote}</h2>
+
+      <button onClick={() => setVote(vote + 1)}>
+        👍
+      </button>
+
+      <button
+        onClick={() => {
+          if (vote > 0) {
+            setVote(vote - 1);
+          }
+        }}
+      >
+        👎
+      </button>
+    </div>
+  );
+}
+
+export default SongVote;
+Answer
+JSX
+Question 4
+Build a Zomato-style rating selector: display 5 stars, and when a user clicks on a star, highlight all stars up to that one using useState to track the selected rating.
+import React, { useState } from "react";
+
+function Rating() {
+  const [rating, setRating] = useState(0);
+
+  return (
+    <div>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          onClick={() => setRating(star)}
+          style={{
+            fontSize: "35px",
+            cursor: "pointer",
+            color: star <= rating ? "gold" : "gray",
+          }}
+        >
+          ★
+        </span>
+      ))}
+
+      <h2>Selected Rating : {rating}</h2>
+    </div>
+  );
+}
+
+export default Rating;
