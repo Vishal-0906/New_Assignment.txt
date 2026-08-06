@@ -1,0 +1,134 @@
+Session 10 – Context API
+Question 1
+Create a React Context called UserContext in a new file UserContext.js and provide a default value with a username and a loggedIn status.
+UserContext.jsx
+import { createContext } from "react";
+
+const UserContext = createContext({
+  username: "Vishal",
+  loggedIn: true,
+});
+
+export default UserContext;
+Question 2
+Build a simple Navbar component that uses useContext to display the current username from UserContext.
+Navbar.jsx
+JSX
+import { useContext } from "react";
+import UserContext from "./UserContext";
+
+function Navbar() {
+  const user = useContext(UserContext);
+
+  return (
+    <div>
+      <h2>Welcome {user.username}</h2>
+    </div>
+  );
+}
+
+export default Navbar;
+Question 3
+Implement a toggle button in your app that switches between "light" and "dark" themes using Context API, and update the background color of the main div accordingly.
+ThemeContext.jsx
+import { createContext } from "react";
+
+const ThemeContext = createContext();
+
+export default ThemeContext;
+App.jsx
+JSX
+import { useState } from "react";
+import ThemeContext from "./ThemeContext";
+
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <Main />
+    </ThemeContext.Provider>
+  );
+}
+
+export default App;
+Main.jsx
+import { useContext } from "react";
+import ThemeContext from "./ThemeContext";
+
+function Main() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <div
+      style={{
+        background: theme === "light" ? "white" : "black",
+        color: theme === "light" ? "black" : "white",
+        height: "100vh",
+      }}
+    >
+      <button onClick={toggleTheme}>
+        Toggle Theme
+      </button>
+    </div>
+  );
+}
+
+export default Main;
+JSX
+Question 4
+Refactor an existing component that passes theme as a prop through multiple levels; instead, use useContext to access the theme directly in the deepest child component.
+Child.jsx
+JSX
+import { useContext } from "react";
+import ThemeContext from "./ThemeContext";
+
+function Child() {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <h2>Current Theme: {theme}</h2>
+  );
+}
+
+export default Child;
+Question 5
+Use ChatGPT or GitHub Copilot to generate a code snippet for a React context that manages notification count, then integrate it into a small demo component that displays the count.
+NotificationContext.jsx
+import { createContext, useState } from "react";
+
+export const NotificationContext = createContext();
+
+export function NotificationProvider({ children }) {
+  const [count, setCount] = useState(5);
+
+  return (
+    <NotificationContext.Provider value={{ count, setCount }}>
+      {children}
+    </NotificationContext.Provider>
+  );
+}
+Notification.jsx
+JSX
+import { useContext } from "react";
+import { NotificationContext } from "./NotificationContext";
+
+function Notification() {
+  const { count, setCount } = useContext(NotificationContext);
+
+  return (
+    <div>
+      <h2>Notifications: {count}</h2>
+
+      <button onClick={() => setCount(count + 1)}>
+        Add Notification
+      </button>
+    </div>
+  );
+}
+
+export default Notification;
