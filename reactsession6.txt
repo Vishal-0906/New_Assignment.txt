@@ -1,0 +1,102 @@
+Session 6 – Lists & Conditional Rendering
+Question 1
+Create a React component called Playlist that takes an array of song objects (with title and artist) as a prop and uses map() to render each song in an unordered list.
+Answer
+JSX
+import React from "react";
+
+function Playlist({ songs }) {
+  return (
+    <ul>
+      {songs.map((song, index) => (
+        <li key={index}>
+          {song.title} - {song.artist}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default Playlist;
+App.jsx
+import Playlist from "./Playlist";
+
+function App() {
+  const songs = [
+    { title: "Believer", artist: "Imagine Dragons" },
+    { title: "Shape of You", artist: "Ed Sheeran" },
+    { title: "Perfect", artist: "Ed Sheeran" },
+  ];
+
+  return <Playlist songs={songs} />;
+}
+
+export default App;
+Question 2
+Build a React component called OrderStatus that receives a prop isDelivered (boolean) and conditionally renders "Order Delivered 🎉" if true, or "Order on the way 🚚" if false, using a ternary operator.
+Answer
+JSX
+import React from "react";
+
+function OrderStatus({ isDelivered }) {
+  return (
+    <h2>
+      {isDelivered
+        ? "Order Delivered 🎉"
+        : "Order on the way 🚚"}
+    </h2>
+  );
+}
+
+export default OrderStatus;
+Question 3
+In a React component called FollowerList, render a list of followers (array of usernames). If the array is empty, display "No followers yet" instead of the list.
+Answer
+JSX
+import React from "react";
+
+function FollowerList({ followers }) {
+  return (
+    <div>
+      {followers.length === 0 ? (
+        <h3>No followers yet</h3>
+      ) : (
+        <ul>
+          {followers.map((user, index) => (
+            <li key={index}>{user}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default FollowerList;
+Question 4
+Create a React component called CartSummary that takes an array of cart items (each with name and price). Use map() to display each item, and show "Cart is empty" if there are no items. Add a button that only appears if there are 3 or more items, labeled "Checkout Now".
+Answer
+import React from "react";
+
+function CartSummary({ items }) {
+  return (
+    <div>
+      {items.length === 0 ? (
+        <h2>Cart is empty</h2>
+      ) : (
+        <>
+          {items.map((item, index) => (
+            <p key={index}>
+              {item.name} - ₹{item.price}
+            </p>
+          ))}
+
+          {items.length >= 3 && (
+            <button>Checkout Now</button>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+export default CartSummary;
