@@ -1,8 +1,10 @@
-Part 5 – Session 11 (Axios & API Integration) & Session 12 (Error Handling)
 Session 11 – Axios & API Integration
 Question 1
 Install Axios in your React project and fetch a list of users from https://jsonplaceholder.typicode.com/users. Display each user's name in a list.
 Install
+npm install axios
+Answer
+JSX
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -31,11 +33,10 @@ function UserList() {
 }
 
 export default UserList;
-npm install axios
-Answer
-JSX
 Question 2
 Create a ProductList component that fetches products from https://fakestoreapi.com/products using Axios and displays the product title and price.
+Answer
+JSX
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -63,9 +64,10 @@ function ProductList() {
 }
 
 export default ProductList;
+Question 3
+Create a Todo App that fetches todos from an API using Axios and displays only completed tasks.
 Answer
 JSX
-Question 3
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -98,50 +100,10 @@ function TodoApp() {
 }
 
 export default TodoApp;
-Create a Todo App that fetches todos from an API using Axios and displays only completed tasks.
-Answer
-JSX
-import React, { useState } from "react";
-import axios from "axios";
-
-function SearchUser() {
-  const [id, setId] = useState("");
-  const [user, setUser] = useState(null);
-
-  const searchUser = () => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((response) => {
-        setUser(response.data);
-      });
-  };
-
-  return (
-    <div>
-      <input
-        type="number"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        placeholder="Enter ID"
-      />
-
-      <button onClick={searchUser}>Search</button>
-
-      {user && (
-        <div>
-          <h3>{user.name}</h3>
-          <p>{user.email}</p>
-          <p>{user.phone}</p>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default SearchUser;
 Question 4
 Build a Search User component where a user enters an ID (1–10), clicks Search, and Axios fetches that user's details from JSONPlaceholder.
 Answer
+JSX
 import React, { useState } from "react";
 import axios from "axios";
 
